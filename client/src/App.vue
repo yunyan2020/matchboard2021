@@ -1,21 +1,15 @@
 <template>
   <div class="container">
-    <div class="navigation">
-      <router-link to="/GymnasticsOperator">GymnasticsOperator</router-link>
-    </div>
-    <div class="navigation">
-      <router-link to="/GymnasticsScoreBoard">GymnasticsScoreBoard</router-link>
-    </div>
-    <div class="navigation">
-      <router-link to="/HandballOperator">HandballOperator</router-link>
-    </div>
-    <div class="navigation">
-      <router-link to="/HandballScoreBoard">HandballScoreBoard</router-link>
-    </div>
+    <!-- <Home /> -->
+    <HandballScoreBoard />
+    <!-- <router-view /> -->
   </div>
 </template>
 
 <script setup>
+import Home from './views/Home.vue'
+import HandballScoreBoard from './views/HandballScoreBoard.vue'
+
 
 
 // This starter template is using Vue 3 experimental <script setup> SFCs
@@ -29,16 +23,9 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 
-.container {
-  width: 50%;
-  margin: 0 auto;
-}
-
-.navigation {
-  padding: 10px;
-  float: left;
+body {
+  margin: 0;
 }
 </style>
