@@ -1,9 +1,7 @@
 <template>
   <div class="score">
     <h1>{{calcHomeTeamScore}} - {{calcAwayTeamScore}}</h1>
-    <h4>{{matchEvents}}</h4>
-    <button @click="homeTeamScore">console.log</button>
-    
+    <span>{{matchEvents}}</span>  
   </div>
 </template>
 

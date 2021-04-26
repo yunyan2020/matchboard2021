@@ -4,10 +4,19 @@ export default createStore({
   state: {
     match: {
       id: 1,
-      homeTeam: "Lugi",
-      awayTeam: "H43",
-      homeTeamScore: 33,
-      awayTeamScore: 13,
+
+      teams: [
+        {
+          id: 1,
+          name: 'Lugi',
+          logo: "src/assets/logo_lugi.png"
+        },
+        {
+          id: 2,
+          name: 'H43',
+          logo: "src/assets/logo_h43.png"
+        },
+      ],
       matchEvents: [
         {
           id: 1,

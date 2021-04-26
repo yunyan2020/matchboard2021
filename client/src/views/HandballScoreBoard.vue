@@ -2,7 +2,7 @@
   <div class="container">
     <div class="x left">
       <div class="logo-left">
-        <img src="../assets/logo_lugi.png" />
+        <img :src="homeTeamLogo" alt="1" />
       </div>
       <div class="penalty-left">
         <h3 class="penalty-time">00:23</h3>
@@ -28,6 +28,11 @@ import PeriodTimer from '../components/PeriodTimer.vue'
 import TeamSportScoring from '../components/TeamSportScoring.vue'
 
 export default {
+  computed: {
+    homeTeamLogo() {
+      return this.$store.state.match.teams[0].logo;
+    },
+  },
   components: {PeriodTimer, TeamSportScoring}
 }
 </script>
