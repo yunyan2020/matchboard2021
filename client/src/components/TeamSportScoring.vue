@@ -1,7 +1,7 @@
 <template>
   <div class="score">
     <h1>{{calcHomeTeamScore}} - {{calcAwayTeamScore}}</h1>
-    <span>{{matchEvents}}</span>  
+    <!-- <span>{{matchEvents}}</span>   -->
   </div>
 </template>
 
@@ -28,14 +28,6 @@ export default {
   },
 
   methods: {
-    // calcHomeTeamScore() {
-    //   let match = this.matchScore;
-    //   let scores = match.matchEvents[0].score;
-    //   this.homeTeamScore = scores.filter(hometeam => hometeam.teamId == 1).length;
-    //   /* return scores.filter(hometeam => hometeam.teamId == 1).length; */
-    //   console.log(homeTeamScore);
-    // },
-    
   }
 }
 </script>

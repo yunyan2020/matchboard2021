@@ -2,10 +2,10 @@
   <div class="container">
     <div class="x left">
       <div class="logo-left">
-        <img :src="homeTeamLogo" alt="1" />
+        <img :src="homeTeamLogo" alt="Home Team" />
       </div>
       <div class="penalty-left">
-        <h3 class="penalty-time">00:23</h3>
+        <h3 class="penalty-time">{{calcHomeTeamPenalty}}</h3>
       </div>
     </div>
     <div class="middle">
@@ -14,7 +14,7 @@
     </div>
     <div class="x right">
       <div class="logo-right">
-        <img src="../assets/logo_h43.png" />
+        <img :src="awayTeamLogo" alt="Away Team" />
       </div>
       <div class="penalty-right">
         <h3 class="penalty-time">01:02</h3>
@@ -29,9 +29,27 @@ import TeamSportScoring from '../components/TeamSportScoring.vue'
 
 export default {
   computed: {
+    match() {
+      return this.$store.state.match
+    },
+    matchEvents() {
+      return this.$store.state.match.matchEvents[0].name
+    },
+
     homeTeamLogo() {
       return this.$store.state.match.teams[0].logo;
     },
+    awayTeamLogo() {
+      return this.$store.state.match.teams[1].logo;
+    },
+    calcHomeTeamPenalty() { 
+      let match = this.match;
+      let penalties = match.matchEvents[0].penalties;
+      this.homeTeamPenalty = penalties.filter(hometeam => hometeam.teamId == 1);
+      console.log(this.homeTeamPenalty[0], 'penalty');
+      return this.homeTeamPenalty[0].penaltyTime;
+
+      },
   },
   components: {PeriodTimer, TeamSportScoring}
 }
@@ -43,10 +61,10 @@ div {
   border: 1px solid green;
 }
   .container {
-    /* width: 1850px;
-    height: 975px; */
-    width: 95vw;
-    height: 95vh;
+    width: 1850px;
+    height: 975px; 
+    /* width: 95vw;
+    height: 95vh; */
     background-image: url('../assets/handball_bg.png');
     background-repeat: no-repeat;
     display: grid;

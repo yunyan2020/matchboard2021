@@ -59,7 +59,24 @@ export default createStore({
               player: "Karl Johan",
               time: "14:33"
             }
-          ]
+          ],
+          penalties: [
+            {
+              teamId: 1,
+              playerId: '11',
+              matchTime: '10:24',
+              penaltyTime: '1:00',
+              type: 'Gult kort',
+            },
+            {
+              teamId: 1,
+              playerId: '11',
+              matchTime: '10:24',
+              penaltyTime: '2:00',
+              type: 'Gult kort',
+            },
+
+          ],
         },
         {
 
