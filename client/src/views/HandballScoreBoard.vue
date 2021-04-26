@@ -5,7 +5,9 @@
         <img :src="homeTeamLogo" alt="Home Team" />
       </div>
       <div class="penalty-left">
-        <h3 class="penalty-time">{{calcHomeTeamPenalty}}</h3>
+        <div v-for="(penalty, i) in homeTeamPenalties" :key="i">
+          <h3 class="penalty-time">{{penalty.penaltyTime}}</h3>
+        </div>
       </div>
     </div>
     <div class="middle">
@@ -17,7 +19,9 @@
         <img :src="awayTeamLogo" alt="Away Team" />
       </div>
       <div class="penalty-right">
-        <h3 class="penalty-time">01:02</h3>
+        <div v-for="(penalty, i) in awayTeamPenalties" :key="i">
+          <h3 class="penalty-time">{{penalty.penaltyTime}}</h3>
+        </div>
       </div>
     </div>
   </div>
@@ -42,12 +46,20 @@ export default {
     awayTeamLogo() {
       return this.$store.state.match.teams[1].logo;
     },
-    calcHomeTeamPenalty() { 
+    homeTeamPenalties() { 
       let match = this.match;
       let penalties = match.matchEvents[0].penalties;
       this.homeTeamPenalty = penalties.filter(hometeam => hometeam.teamId == 1);
-      console.log(this.homeTeamPenalty[0], 'penalty');
-      return this.homeTeamPenalty[0].penaltyTime;
+    
+      return this.homeTeamPenalty;
+
+      },
+    awayTeamPenalties() { 
+      let match = this.match;
+      let penalties = match.matchEvents[0].penalties;
+      this.awayTeamPenalty = penalties.filter(awayteam => awayteam.teamId == 2);
+      
+      return this.awayTeamPenalty;
 
       },
   },

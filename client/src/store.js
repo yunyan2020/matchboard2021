@@ -75,6 +75,13 @@ export default createStore({
               penaltyTime: '2:00',
               type: 'Gult kort',
             },
+            {
+              teamId: 2,
+              playerId: '8',
+              matchTime: '8:14',
+              penaltyTime: '1:00',
+              type: 'Gult kort',
+            },
 
           ],
         },
