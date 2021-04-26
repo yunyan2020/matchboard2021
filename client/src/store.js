@@ -21,10 +21,28 @@ export default createStore({
               time: "17:45"
             },
             {
+              teamId: 1,
+              points: 1,
+              player: "Karl Johan",
+              time: "09:45"
+            },
+            {
+              teamId: 1,
+              points: 1,
+              player: "Karl Johan",
+              time: "07:45"
+            },
+            {
               teamId: 2,
               points: 1,
               player: "Johan Karl",
               time: "15:45"
+            },
+            {
+              teamId: 2,
+              points: 1,
+              player: "Johan Karl",
+              time: "18:21"
             },
             {
               teamId: 1,
