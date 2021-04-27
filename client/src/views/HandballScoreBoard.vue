@@ -70,7 +70,7 @@ export default {
 <style>
 
 div {
-  border: 1px solid green;
+  border: 0px solid green;
 }
   .container {
     width: 1850px;
