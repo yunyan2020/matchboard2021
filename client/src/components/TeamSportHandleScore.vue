@@ -59,9 +59,14 @@ export default {
 
 .score-container {
   width: 100%;
-  /* height: 100px; */
   display: flex;
   justify-content: center;
+  
+}
+
+.home-score {
+  height: 200px;
+  
 }
 
 .away-score {

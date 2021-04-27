@@ -1,12 +1,16 @@
 <template>
   <div class="time">
-    <h1>23:44</h1>
+    <h1>{{ time }}</h1>
   </div>
 </template>
 
 <script>
 export default {
-
+    computed: {
+    time() {
+      return this.$store.state.match.time
+    }
+  }
 }
 </script>
 

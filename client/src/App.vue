@@ -7,11 +7,17 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import Home from './views/Home.vue'
 import HandballScoreBoard from './views/HandballScoreBoard.vue'
 import HandballOperator from './views/HandballOperator.vue'
 
+export default { 
+  // created() {
+  //   this.$store.commit('updatePenaltiesHash')
+  // }, 
+  components: {Home, HandballScoreBoard, HandballOperator }
+}
 
 
 </script>

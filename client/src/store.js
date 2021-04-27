@@ -2,9 +2,10 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
+    penaltiesHash: {},
     match: {
       id: 1,
-
+      time: '18:32',
       teams: [
         {
           id: 1,
@@ -96,6 +97,7 @@ export default createStore({
           ],
           penalties: [
             {
+              id: 1,
               teamId: 1,
               playerId: '11',
               matchTime: '10:24',
@@ -103,6 +105,7 @@ export default createStore({
               type: 'Gult kort',
             },
             {
+              id: 2,
               teamId: 1,
               playerId: '11',
               matchTime: '10:24',
@@ -110,6 +113,7 @@ export default createStore({
               type: 'Gult kort',
             },
             {
+              id: 3,
               teamId: 2,
               playerId: '8',
               matchTime: '8:14',
@@ -119,13 +123,22 @@ export default createStore({
 
           ],
         },
-        {
-
-        }
+        
       ]
     }
   },
   mutations: {
+    // updatePenaltiesHash(state) {
+    //   state.penaltiesHash = {}
+    //   for (let matchEvent of state.match.matchEvents) {
+    //     for (let penalty of matchEvent.penalties) {
+    //       state.penaltiesHash[penalty.id] = penalty
+    //       state.penaltiesHash[penalty.id].matchEvent = matchEvent
+
+          
+    //     }
+    //   }
+    // },
   },
   actions: {
   },

@@ -49,20 +49,19 @@ export default {
     homeTeamPenalties() { 
       let match = this.match;
       let penalties = match.matchEvents[0].penalties;
+      console.log(penalties, 'penalties');
+      console.log(this.$store.state.penaltiesHash);
       this.homeTeamPenalty = penalties.filter(hometeam => hometeam.teamId == 1);
-    
       return this.homeTeamPenalty;
-
       },
     awayTeamPenalties() { 
       let match = this.match;
       let penalties = match.matchEvents[0].penalties;
       this.awayTeamPenalty = penalties.filter(awayteam => awayteam.teamId == 2);
-      
       return this.awayTeamPenalty;
-
       },
   },
+
   components: {PeriodTimer, TeamSportScoring}
 }
 </script>
@@ -73,14 +72,13 @@ div {
   border: 0px solid green;
 }
   .preview-container {
-    width: 900px;
+    width: 870px;
     height: 485px; 
     background-image: url('src/assets/handball_bg.png');
     background-repeat: no-repeat;
     display: grid;
     grid-template-columns: 25% 50% 25%;
     margin: 0 auto;
-    margin-top: 
   }
 
   .left {

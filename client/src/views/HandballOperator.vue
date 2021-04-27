@@ -3,7 +3,7 @@
     <div class="score">
       <TeamSportHandleScore />
     </div>
-    <div class="preview">
+    <div class="scoreboard-preview">
       <HandballScoreBoardPreview />
     </div>
   </div>
@@ -31,7 +31,7 @@ export default {
     /* grid-template-columns: 25% 50% 25%; */
   }
 
-  .preview {
+  .scoreboard-preview {
     width: 100%;
     text-align: center;
   }
