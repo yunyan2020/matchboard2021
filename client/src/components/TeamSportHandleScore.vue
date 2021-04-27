@@ -7,8 +7,8 @@
     </div>
 
     <div class="away-score">
-      <button class="addScore" @click="addHomeTeamScore">+</button>
-      <button class="removeScore" @click="removeHomeTeamScore">-</button>
+      <button class="addScore" @click="addAwayTeamScore">+</button>
+      <button class="removeScore" @click="removeAwayTeamScore">-</button>
     </div>
 
   </div>
@@ -30,13 +30,23 @@ export default {
   },
   methods: {
     addHomeTeamScore() {
-      this.$store.state.match.matchEvents[0].score.push(this.test);
-      console.log(this.$store.state.match.matchEvents[0].score);
+      this.$store.state.match.matchEvents[0].homeTeamScore.push(this.test);
+      console.log(this.$store.state.match.matchEvents[0].homeTeamScore);
     },
 
     removeHomeTeamScore() {
-      this.$store.state.match.matchEvents[0].score.pop();
-      console.log(this.$store.state.match.matchEvents[0].score);
+      this.$store.state.match.matchEvents[0].homeTeamScore.pop();
+      console.log(this.$store.state.match.matchEvents[0].homeTeamScore);
+
+    },
+    addAwayTeamScore() {
+      this.$store.state.match.matchEvents[0].homeTeamScore.push(this.test);
+      console.log(this.$store.state.match.matchEvents[0].homeTeamScore);
+    },
+
+    removeAwayTeamScore() {
+      this.$store.state.match.matchEvents[0].awayTeamScore.pop();
+      console.log(this.$store.state.match.matchEvents[0].awayTeamScore);
 
     },
 

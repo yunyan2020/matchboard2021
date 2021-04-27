@@ -24,7 +24,7 @@ export default createStore({
           id: 1,
           name: "Första halvlek",
           length: 30,
-          score: [
+          homeTeamScore: [
             {
               teamId: 1,
               points: 1,
@@ -44,13 +44,13 @@ export default createStore({
               time: "07:45"
             },
             {
-              teamId: 2,
+              teamId: 1,
               points: 1,
               player: "Johan Karl",
               time: "15:45"
             },
             {
-              teamId: 2,
+              teamId: 1,
               points: 1,
               player: "Johan Karl",
               time: "18:21"
@@ -61,6 +61,38 @@ export default createStore({
               player: "Karl Johan",
               time: "14:33"
             }
+          ],
+          awayTeamScore: [
+            {
+              teamId: 1,
+              points: 1,
+              player: "Karl Johan",
+              time: "17:45"
+            },
+            {
+              teamId: 1,
+              points: 1,
+              player: "Karl Johan",
+              time: "09:45"
+            },
+            {
+              teamId: 1,
+              points: 1,
+              player: "Karl Johan",
+              time: "07:45"
+            },
+            {
+              teamId: 1,
+              points: 1,
+              player: "Johan Karl",
+              time: "15:45"
+            },
+            {
+              teamId: 1,
+              points: 1,
+              player: "Johan Karl",
+              time: "18:21"
+            },
           ],
           penalties: [
             {
