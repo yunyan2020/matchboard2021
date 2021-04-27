@@ -40,8 +40,8 @@ export default {
 
     },
     addAwayTeamScore() {
-      this.$store.state.match.matchEvents[0].homeTeamScore.push(this.test);
-      console.log(this.$store.state.match.matchEvents[0].homeTeamScore);
+      this.$store.state.match.matchEvents[0].awayTeamScore.push(this.test);
+      console.log(this.$store.state.match.matchEvents[0].awayTeamScore);
     },
 
     removeAwayTeamScore() {
