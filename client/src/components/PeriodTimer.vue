@@ -30,7 +30,8 @@ export default {
   data() {
     return {
       timer: null,
-      totalTime: 25 * 60,
+      totalTime: 58,
+      // totalTime: 25 * 60,
       resetButton: false,
       title: "Let the countdown begin!!",
     };
@@ -61,7 +62,7 @@ export default {
       this.title = "Never quit, keep going!!";
     },
     resetTimer: function () {
-      this.totalTime = 25 * 60;
+      this.totalTime = 0;
       clearInterval(this.timer);
       this.timer = null;
       this.resetButton = false;
@@ -71,10 +72,10 @@ export default {
       return (time < 10 ? "0" : "") + time;
     },
     countdown: function () {
-      if (this.totalTime >= 1) {
-        this.totalTime--;
+      if (this.totalTime <= 30* 60) {
+        this.totalTime++;
       } else {
-        this.totalTime = 0;
+        this.totalTime = 30;
         this.resetTimer();
       }
     },
