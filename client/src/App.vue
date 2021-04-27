@@ -2,7 +2,7 @@
   <div class="container">
     <!-- <Home /> -->
     
-    <!-- <HandballScoreBoard /> -->
+    <HandballScoreBoard /> 
     <!-- <router-view /> -->
   </div>
 </template>
