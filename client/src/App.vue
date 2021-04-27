@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <!-- <Home /> -->
-    <HandballScoreBoard />
+    <!-- <HandballScoreBoard /> -->
+    <GymnasticsScoreBoard /> 
     <!-- <router-view /> -->
   </div>
 </template>
@@ -9,6 +10,7 @@
 <script setup>
 import Home from './views/Home.vue'
 import HandballScoreBoard from './views/HandballScoreBoard.vue'
+import GymnasticsScoreBoard from './views/GymnasticsScoreBoard.vue'
 
 
 
