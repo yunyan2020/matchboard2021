@@ -24,7 +24,7 @@ export default {
     background-image: url('src/assets/handball_operator_bg.png');
     background-repeat: no-repeat;
     display: grid;
-    grid-template-columns: 25% 50% 25%;
+    /* grid-template-columns: 25% 50% 25%; */
   }
 
 </style>

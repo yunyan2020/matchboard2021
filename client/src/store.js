@@ -8,11 +8,13 @@ export default createStore({
       teams: [
         {
           id: 1,
+          homeTeam: true,
           name: 'Lugi',
           logo: "src/assets/logo_lugi.png"
         },
         {
           id: 2,
+          homeTeam: false,
           name: 'H43',
           logo: "src/assets/logo_h43.png"
         },

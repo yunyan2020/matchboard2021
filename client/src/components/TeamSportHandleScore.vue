@@ -1,8 +1,16 @@
 <template>
-  <div class="">
-    <button class="homeTeamScore" @click="addScore">+</button>
-    <button class="removeScore" @click="removeScore">-</button>
-    <!-- <div>{{viewScore}}</div> -->
+
+  <div class="score-container">
+    <div class="home-score">
+      <button class="addScore" @click="addHomeTeamScore">+</button>
+      <button class="removeScore" @click="removeHomeTeamScore">-</button>
+    </div>
+
+    <div class="away-score">
+      <button class="addScore" @click="addHomeTeamScore">+</button>
+      <button class="removeScore" @click="removeHomeTeamScore">-</button>
+    </div>
+
   </div>
 </template>
 
@@ -21,13 +29,12 @@ export default {
   computed: {
   },
   methods: {
-        addScore() {
-
+    addHomeTeamScore() {
       this.$store.state.match.matchEvents[0].score.push(this.test);
       console.log(this.$store.state.match.matchEvents[0].score);
-
     },
-    removeScore() {
+
+    removeHomeTeamScore() {
       this.$store.state.match.matchEvents[0].score.pop();
       console.log(this.$store.state.match.matchEvents[0].score);
 
@@ -40,14 +47,31 @@ export default {
 
 <style scoped>
 
-.homeTeamScore {
-  width: 100px;
-  height: 100px;
-  margin: 10px;
+.score-container {
+  width: 100%;
+  /* height: 100px; */
+  display: flex;
+  justify-content: center;
+}
+
+.away-score {
+  margin-left: 100px;
+}
+
+
+.addScore {
+  width: 50px;
+  height: 50px;
+  background-color: orange;
+  display: block;
+  padding: 0;
+  
 }
 .removeScore {
-  width: 100px;
-  height: 100px;
+  width: 50px;
+  height: 50px;
+  background-color: orange;
+  padding: 0;
 }
 
 </style>
