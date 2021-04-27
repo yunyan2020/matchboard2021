@@ -34,6 +34,7 @@ export default {
   .scoreboard-preview {
     width: 100%;
     text-align: center;
+    background: red;
   }
 
   .score {
