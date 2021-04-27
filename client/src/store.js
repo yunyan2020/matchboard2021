@@ -89,6 +89,29 @@ export default createStore({
 
         }
       ]
+    },
+    gpymnasticsMatch: {
+      id: 1,
+      name: "WOMEN's VAULT 2021",
+      matchEvent: [{
+        id: 1,
+        name: "vault",
+        numberOfRounds: 2,
+        id: 2,
+        name: "uneven bar",
+        numberOfRounds: 1,
+        participant: [{
+          id: 1,
+          firstName: "Simon",
+          lastName: "Herik",
+          affilication: [{
+            id:1,
+            name: "American",
+            abbrevName: "USA",
+            logo:"USA-Flag.png"            
+          }]
+        }]
+      }]
     }
   },
   mutations: {
