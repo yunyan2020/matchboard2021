@@ -4,6 +4,8 @@
     <HandballOperator />
     <!-- <HandballScoreBoard />  -->
         <!-- <router-view /> -->
+    
+ 
   </div>
 </template>
 
