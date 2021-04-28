@@ -37,31 +37,43 @@ export default {
       return this.$store.state.match
     },
     matchEvents() {
-      return this.$store.state.match.matchEvents[0].name
+      return this.$store.state.matchEvents[0]
+     // return this.$store.state.match.matchEvents[0].name
     },
-
+    teams(){
+      return this.$store.state.teams
+    },
     homeTeamLogo() {
-      return this.$store.state.match.teams[0].logo;
+      let homeTeam = this.$store.state.teams.filter((t) => t.homeTeam == true)[0]
+      return homeTeam.logo;
+     // return this.$store.state.match.teams[0].logo;
     },
     awayTeamLogo() {
-      return this.$store.state.match.teams[1].logo;
+      let awayTeam = this.$store.state.teams.filter((t) => t.homeTeam == false)[0]
+      return awayTeam.logo;
+
+     // return this.$store.state.match.teams[1].logo;
     },
     homeTeamPenalties() { 
-      let match = this.match;
+      /* let match = this.match;
       let penalties = match.matchEvents[0].penalties;
-      this.homeTeamPenalty = penalties.filter(hometeam => hometeam.teamId == 1);
-    
+      this.homeTeamPenalty = penalties.filter(hometeam => hometeam.teamId == 1); */
+      let penalties = this.matchEvents.penalties;
+      let homeTeam = this.teams.filter((t) => t.homeTeam == true)      
+      this.homeTeamPenalty = penalties.filter(hometeam => hometeam.teamId == homeTeam[0].id);
       return this.homeTeamPenalty;
 
       },
     awayTeamPenalties() { 
-      let match = this.match;
+      /* let match = this.match;
       let penalties = match.matchEvents[0].penalties;
-      this.awayTeamPenalty = penalties.filter(awayteam => awayteam.teamId == 2);
-      
-      return this.awayTeamPenalty;
+      this.awayTeamPenalty = penalties.filter(awayteam => awayteam.teamId == 2); */
+     let penalties = this.matchEvents.penalties;
+     let awayTeam = this.teams.filter((t) => t.homeTeam == false)
+     this.awayTeamPenalty = penalties.filter(awayteam => awayteam.teamId == awayTeam[0].id);
+     return this.awayTeamPenalty;
 
-      },
+    },
   },
   components: {PeriodTimer, TeamSportScoring}
 }

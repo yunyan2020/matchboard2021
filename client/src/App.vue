@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <!-- <Home /> -->
-    <HandballOperator />
-    <!-- <HandballScoreBoard />  -->
+   <!-- <HandballOperator />-->
+     <HandballScoreBoard />  
         <!-- <router-view /> -->
     
  
