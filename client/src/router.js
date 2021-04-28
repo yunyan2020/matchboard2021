@@ -3,7 +3,7 @@ import {createRouter, createWebHistory} from 'vue-router'
 import GymansticsOperator from './views/GymnasticsOperator.vue'
 import GymansticsScoreBoard from './views/GymnasticsScoreBoard.vue'
 import HandballOperator from './views/HandballOperator.vue'
-import HandballScoreBoard from './views/HandballScoreBoard.vue'
+import HandballUserView from './views/HandballUserView.vue'
 
 const routes = [
   {
@@ -22,9 +22,9 @@ const routes = [
     component: HandballOperator
   },
   {
-    name: 'HandballScoreBoard',
-    path: '/HandballScoreBoard',
-    component: HandballScoreBoard
+    name: 'HandballUserView',
+    path: '/HandballUserView',
+    component: HandballUserView
   }
 ]
 

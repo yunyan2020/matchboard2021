@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <div class="x left">
+  <div class="sb-container">
+    <div class="cont left">
       <div class="logo-left">
         <img :src="homeTeamLogo" alt="Home Team" />
       </div>
@@ -14,7 +14,7 @@
       <TeamSportScoring />
       <PeriodTimer />
     </div>
-    <div class="x right">
+    <div class="cont right">
       <div class="logo-right">
         <img :src="awayTeamLogo" alt="Away Team" />
       </div>
@@ -28,8 +28,8 @@
 </template>
 
 <script>
-import PeriodTimer from '../components/PeriodTimer.vue'
-import TeamSportScoring from '../components/TeamSportScoring.vue'
+import PeriodTimer from './PeriodTimer.vue'
+import TeamSportScoring from './TeamSportScoring.vue'
 
 
 export default {
@@ -73,11 +73,7 @@ export default {
 div {
   border: 0px solid green;
 }
-  .container {
-    width: 1850px;
-    height: 975px; 
-    /* width: 95vw;
-    height: 95vh; */
+  .sb-container {
     background-image: url('../assets/handball_bg.png');
     background-repeat: no-repeat;
     display: grid;
@@ -102,20 +98,23 @@ div {
     margin: 0;
   }
 
-  .logo-left {
-    margin-top: 20px;
+  .logo-left img{
+    margin-top: 2vh;
+    width: 10vw;
   }
 
-  .logo-right {
-    margin-top: 5px;
+  .logo-right img{
+    margin-top: 2vh;
+    width: 10vw;
   }
 
   .penalty-time {
     font-size: 6em;
-    color: rgba(255, 0, 0, 0.527);
+    color: rgb(255, 0, 0);
+    margin-bottom: 2vh;
   }
 
-  .x {
+  .cont {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -124,16 +123,15 @@ div {
   .score {
     /* float: left; */
     color: lightgreen;
-    font-size: 100px;
+    font-size: 7em;
     padding: 0;
-    margin-top: 30px;
+    margin-top: 2vh;
   }
   
-  .time {
+  /* .time {
     color: white;
     font-size: 170px;
-    /* float: left; */
     padding: 0;
     margin-top: 100px;
-  }
+  } */
 </style>

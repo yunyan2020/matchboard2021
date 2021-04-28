@@ -20,7 +20,7 @@ export default {
   data() {
     return {
       timer: null,
-      totalTime: 58,
+      totalTime: 0,
       resetButton: false,
     };
   },
@@ -74,7 +74,6 @@ export default {
 .timer {
   color: white;
   font-size: 2em;
-  /* float: left; */
   padding: 0;
   margin-top: 100px;
 }
