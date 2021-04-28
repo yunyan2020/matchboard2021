@@ -25,9 +25,9 @@ export default {
     };
   },
   computed: {
-    time() {
-      return this.$store.state.match.time;
-    },
+    // time() {
+    //   return this.$store.state.match.time;
+    // },
     minutes: function () {
       const minutes = Math.floor(this.totalTime / 60);
       return this.padTime(minutes);

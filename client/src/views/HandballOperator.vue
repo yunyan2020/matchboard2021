@@ -22,7 +22,7 @@ export default {
 <style scoped>
 
   .container {
-    width: 80vw;
+    width: 75vw;
     height: 80vh; 
     background-image: url('src/assets/handball_operator_bg.png');
     background-repeat: no-repeat;
