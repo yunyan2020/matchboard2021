@@ -22,7 +22,7 @@ export default {
 <style scoped>
 
   .container {
-    width: 95vw;
+    width: 80vw;
     height: 80vh; 
     background-image: url('src/assets/handball_operator_bg.png');
     background-repeat: no-repeat;
@@ -33,7 +33,7 @@ export default {
   }
 
   .scoreboard-preview {
-    width: 40vw;
+    width: 35vw;
     height: 15vh;
     text-align: center;
     background: red;
@@ -53,9 +53,14 @@ export default {
     height: 50px;
   }
   :deep(.penalty-time) {
-    font-size: 4em;
+    font-size: 3em;
     margin-bottom: 2vh;
-    margin-top: 8vh;
+  }
+  :deep(.penalty-left) {
+    margin-top: 14vh;
+  }
+  :deep(.penalty-right) {
+    margin-top: 14vh;
   }
 
 </style>
