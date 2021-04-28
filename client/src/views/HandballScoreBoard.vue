@@ -37,7 +37,7 @@ export default {
       return this.$store.state.match
     },
     matchEvents() {
-      return this.$store.state.matchEvents[0]
+      return this.$store.state.matchEvents.filter((matchEvent) => matchEvent == this.match.id)
      // return this.$store.state.match.matchEvents[0].name
     },
     teams(){
@@ -58,7 +58,11 @@ export default {
       /* let match = this.match;
       let penalties = match.matchEvents[0].penalties;
       this.homeTeamPenalty = penalties.filter(hometeam => hometeam.teamId == 1); */
-      let penalties = this.matchEvents.penalties;
+      
+     /*  let penalties = this.matchEvents.penalties;
+      let homeTeam = this.teams.filter((t) => t.homeTeam == true)      
+      this.homeTeamPenalty = penalties.filter(hometeam => hometeam.teamId == homeTeam[0].id); */
+      let penalties = this.$store.state.penalties;
       let homeTeam = this.teams.filter((t) => t.homeTeam == true)      
       this.homeTeamPenalty = penalties.filter(hometeam => hometeam.teamId == homeTeam[0].id);
       return this.homeTeamPenalty;
@@ -68,9 +72,14 @@ export default {
       /* let match = this.match;
       let penalties = match.matchEvents[0].penalties;
       this.awayTeamPenalty = penalties.filter(awayteam => awayteam.teamId == 2); */
-     let penalties = this.matchEvents.penalties;
+    // let penalties = this.matchEvents.penalties;
+     let penalties = this.$store.state.penalties;
+     console.log("penalties",penalties)
+     console.log("this.teams",this.teams)
      let awayTeam = this.teams.filter((t) => t.homeTeam == false)
+     console.log("awayTeam",awayTeam)
      this.awayTeamPenalty = penalties.filter(awayteam => awayteam.teamId == awayTeam[0].id);
+     console.log("this.awayTeamPenalty",this.awayTeamPenalty)
      return this.awayTeamPenalty;
 
     },
