@@ -156,6 +156,10 @@ export default createStore({
     }
   },
   mutations: {
+    addPenalty(state, penalty) {
+      state.match.matchEvents.penalties.push(penalty)
+      
+    }
     // updatePenaltiesHash(state) {
     //   state.penaltiesHash = {}
     //   for (let matchEvent of state.match.matchEvents) {

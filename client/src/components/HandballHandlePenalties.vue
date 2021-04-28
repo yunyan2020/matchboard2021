@@ -1,9 +1,9 @@
 <template>
-  <div class="hej">hej
+  
   <select v-model="listPlayers" name="" id="">
-    <option v-for="(player, i) in listPlayers" v-bind:key="i">{{ player.name }} </option>
+    <option v-for="(player, i) in listPlayers" v-bind:key="i" @change="addPenalty">{{ player.name }} </option>
   </select>
-  </div>
+  
 </template>
 
 <script>
@@ -26,6 +26,12 @@ export default {
       // return this.$store.state.match.teams[0].players
     }
   },
+  addPenalty() {
+    let match = this.match;
+    let player = match.team.players[i]
+    store.commit('addPenalty',)
+
+  }
 
 }
 
