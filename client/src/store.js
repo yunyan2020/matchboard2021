@@ -11,13 +11,41 @@ export default createStore({
           id: 1,
           homeTeam: true,
           name: 'Lugi',
-          logo: "src/assets/logo_lugi.png"
+          logo: "src/assets/logo_lugi.png",
+          players: [
+            {
+            id: 1,  
+            name: 'Bengt'    
+            },
+            {
+              id: 2,
+              name: 'Lasse'
+            },
+            {
+              id: 3,
+              name: 'Urban'
+            },
+          ]
         },
         {
           id: 2,
           homeTeam: false,
           name: 'H43',
-          logo: "src/assets/logo_h43.png"
+          logo: "src/assets/logo_h43.png",
+          players: [
+            {
+              id: 1,
+              name: 'Lisa'
+            },
+            {
+              id: 2,
+              name: 'Ulla'
+            },
+            {
+              id: 3,
+              name: 'Inger'
+            },
+          ]
         },
       ],
       matchEvents: [
