@@ -1,6 +1,6 @@
 <template>
   <select v-model="listPlayers" name="" id="">
-    <!-- <option disabled selected value="''">Utvisning</option> -->
+    <option disabled selected value="''">Utvisning</option>
     <option v-for="(player, i) in listPlayers" :key="i" @click="addPenalty">
       {{ i }} - {{ player.name }}
     </option>
@@ -41,9 +41,8 @@ export default {
 
   methods: {
     addPenalty() {
-      console.log(this.$store.state.match.matchEvents[0].penalties, 'before');
       this.$store.state.match.matchEvents[0].penalties.push(this.test)
-      console.log(this.$store.state.match.matchEvents[0].penalties, 'after');
+      console.log(this.$store.state.match.matchEvents[0].penalties, 'penalties');
       // store.commit("addPenalty");
     },
   },

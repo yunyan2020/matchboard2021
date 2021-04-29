@@ -69,6 +69,7 @@ export default {
 </script>
 
 <style scoped>
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap'); */
 
 div {
   border: 0px solid green;
@@ -109,8 +110,9 @@ div {
   }
 
   .penalty-time {
-    font-size: 6em;
-    color: rgb(255, 0, 0);
+    font-family: 'Roboto Slab', serif;
+    text-shadow: 0.05em 0.05em black;
+    color: rgb(223, 24, 24);
     margin-bottom: 2vh;
   }
 
