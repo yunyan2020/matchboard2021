@@ -1,30 +1,74 @@
 import { createStore } from 'vuex'
 
 const state = {
+  penaltiesHash: {},
   match: {
     id: 1,
     time: '18:32',
-    teamID: [1, 2]
+    teamId: [1, 2]
   },
   teams: [{
     id: 1,
-    matchID:1,
+    matchId:1,
     homeTeam: true,
     name: 'Lugi',
-    logo: "src/assets/logo_lugi.png"
+    logo: "src/assets/logo_lugi.png",    
     },
     {
     id: 2,
-    matchID: 1,
+    matchId: 1,
     homeTeam: false,
     name: 'H43',
     logo: "src/assets/logo_h43.png"
     },
   ],
+  players: [{
+    id: 1,
+    teamId: 1,
+    firstName: "Carl Johan",
+    lastName: "Anderson",
+    playNumber:"5"
+  },
+    {
+      id: 2,
+      teamId: 1,
+      firstName: "Jack",
+      lastName: "Anderson",
+      playNumber: "6"
+    },
+    {
+      id: 3,
+      teamId: 1,
+      firstName: "Anton",
+      lastName: "Anderson",
+      playNumber: "10"
+    },
+    {
+      id: 11,
+      teamId: 2,
+      firstName: "Erik",
+      lastName: "Svenson",
+      playNumber: "5"
+    },
+    {
+      id: 12,
+      teamId: 2,
+      firstName: "Stefone",
+      lastName: "Anderson",
+      playNumber: "6"
+    },
+    {
+      id: 13,
+      teamId: 2,
+      firstName: "Ben",
+      lastName: "Kulson",
+      playNumber: "10"
+    },
+  ],
   matchEvents: [
     {
       id: 1,
-      matchID:1,
+      matchId:1,
       name: "Första halvlek",
       length: 30,
       currentMatchEvent: true,
@@ -40,7 +84,7 @@ const state = {
   scores: [    
     {
       id:1,
-      matchEventsID: 1,
+      matchEventsId: 1,
       teamId: 1,
       points: 1,
       player: "Karl Johan",
@@ -48,7 +92,7 @@ const state = {
     },
     {
       id: 2,
-      matchEventsID: 1,
+      matchEventsId: 1,
       teamId: 1,
       points: 1,
       player: "Karl Anderson",
@@ -56,7 +100,7 @@ const state = {
     },
     {
       id: 3,
-      matchEventsID: 1,
+      matchEventsId: 1,
       teamId: 1,
       points: 1,
       player: "Karl Johan",
@@ -64,7 +108,7 @@ const state = {
     },
     {
       id: 4,
-      matchEventsID: 1,
+      matchEventsId: 1,
       teamId: 1,
       points: 1,
       player: "Johan Karl",
@@ -72,7 +116,7 @@ const state = {
     },
     {
       id: 5,
-      matchEventsID: 1,
+      matchEventsId: 1,
       teamId: 1,
       points: 1,
       player: "Johan Karl",
@@ -80,7 +124,7 @@ const state = {
     },
     {
       id: 6,
-      matchEventsID: 1,
+      matchEventsId: 1,
       teamId: 1,
       points: 1,
       player: "Karl Johan",
@@ -88,7 +132,7 @@ const state = {
     },  
     {
       id: 7,
-      matchEventsID: 1,
+      matchEventsId: 1,
       teamId: 2,
       points: 1,
       player: "Karl Johan",
@@ -96,7 +140,7 @@ const state = {
     },
     {
       id: 8,
-      matchEventsID: 1,
+      matchEventsId: 1,
       teamId: 2,
       points: 1,
       player: "Karl Johan",
@@ -104,7 +148,7 @@ const state = {
     },
     {
       id: 9,
-      matchEventsID: 1,
+      matchEventsId: 1,
       teamId: 2,
       points: 1,
       player: "Karl Johan",
@@ -112,7 +156,7 @@ const state = {
     },
     {
       id: 10,
-      matchEventsID: 1,
+      matchEventsId: 1,
       teamId: 2,
       points: 1,
       player: "Johan Karl",
@@ -120,7 +164,7 @@ const state = {
     },
     {
       id: 11,
-      matchEventsID: 1,
+      matchEventsId: 1,
       teamId: 2,
       points: 1,
       player: "Johan Karl",
@@ -131,8 +175,8 @@ const state = {
     {      
       id: 1,
       teamId: 1,
-      matchEventsID: 1,
-      playerId: '11',
+      matchEventsId: 1,
+      playerId: 1,
       matchTime: '10:24',
       penaltyTime: '1:00',
       type: 'Gult kort',
@@ -140,8 +184,8 @@ const state = {
     {
       id: 2,
       teamId: 1,
-      matchEventsID: 1,
-      playerId: '11',
+      matchEventsId: 1,
+      playerId: 2,
       matchTime: '10:24',
       penaltyTime: '2:00',
       type: 'Gult kort',
@@ -149,8 +193,8 @@ const state = {
     {
       id: 3,
       teamId: 2,
-      matchEventsID: 1,
-      playerId: '8',
+      matchEventsId: 1,
+      playerId: 11,
       matchTime: '8:14',
       penaltyTime: '1:00',
       type: 'Gult kort',
@@ -161,7 +205,7 @@ const state = {
 
 //matates state
 const mutations = {
- 
+  
 }
 
 //async network requests
