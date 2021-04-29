@@ -156,7 +156,7 @@ export default createStore({
             {
               id: 1,
               teamId: 1,
-              playerId: '11',
+              playerId: 11,
               matchTime: '10:24',
               penaltyTime: '1:00',
               type: 'Gult kort',
@@ -164,7 +164,7 @@ export default createStore({
             {
               id: 2,
               teamId: 1,
-              playerId: '11',
+              playerId: 11,
               matchTime: '10:24',
               penaltyTime: '2:00',
               type: 'Gult kort',
@@ -172,7 +172,7 @@ export default createStore({
             {
               id: 3,
               teamId: 2,
-              playerId: '8',
+              playerId: 8,
               matchTime: '8:14',
               penaltyTime: '1:00',
               type: 'Gult kort',

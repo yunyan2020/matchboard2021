@@ -14,7 +14,7 @@ export default {
       test: {
         id: 4,
         teamId: 2,
-        playerId: "8",
+        playerId: 8,
         matchTime: "8:14",
         penaltyTime: "1:00",
         type: "Gult kort",
