@@ -1,5 +1,5 @@
 <template>
-  <div class="participantInformation">
+  <!-- <div class="participantInformation">
     <div class="matchEvent">
       <img src="src/assets/vault.png" alt="" class="matchEvent" />
     </div>
@@ -15,15 +15,32 @@
     <div class="participantName">
       <p >Simone Heles</p>
     </div>
+  </div> -->
+  <div class="participant">
+    <div class="matchEvent section">
+      <img src="src/assets/vault.png" alt="" class="matchEvent-icon" />
+    </div>
+    <div class="ranking section">
+      <p>1</p>
+    </div>
+    <div class="abbrevName section">
+      <p class="nationality">USA</p>
+    </div>
+    <div class="flag section">
+      <img src="src/assets/usa-flag.png" alt="" class="flag-icon" />
+    </div>
+    <div class="participantName section">
+      <p class="name">Simone Heles</p>
+    </div>
   </div>
 </template>
 
-<script scoped>
+<script>
 export default {};
 </script>
 
 <style scoped>
-.participantInformation {
+/* .participantInformation {
   width: 700px;
   height: 50px;
   display: flex;
@@ -54,6 +71,54 @@ export default {};
 .flag{
   max-width:95px;
   text-align: center;
+} */
 
+* {
+  margin: 0;
 }
+
+.participant {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 50%;
+  border: 1px solid lightblue;
+  border-radius: 9999px;
+  background-color: white;
+  padding-right: 40px;
+}
+
+.flag-icon {
+  /* max-width: 95px; */
+  height: 50%;
+  text-align: center;
+}
+
+.section {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ranking {
+  font-size: 25px;
+  font-weight: 900;
+}
+
+.matchEvent-icon {
+  height: 50%;
+}
+
+.nationality {
+  font-size: 25px;
+  font-weight: 900;
+}
+
+.name {
+  font-size: 20px;
+  font-weight: 900;
+}
+
 </style>
