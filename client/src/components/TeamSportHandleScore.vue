@@ -1,0 +1,92 @@
+<template>
+
+  <div class="score-container">
+    <div class="home-score">
+      <button class="addScore" @click="addHomeTeamScore">+</button>
+      <button class="removeScore" @click="removeHomeTeamScore">-</button>
+    </div>
+
+    <div class="away-score">
+      <button class="addScore" @click="addAwayTeamScore">+</button>
+      <button class="removeScore" @click="removeAwayTeamScore">-</button>
+    </div>
+
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      test: {
+        teamId: 1,
+        points: 1,
+        player: "Karl Henrik",
+        time: "11:15"
+      }
+    }
+  },
+  computed: {
+  },
+  methods: {
+    addHomeTeamScore() {
+      this.$store.state.match.matchEvents[0].homeTeamScore.push(this.test);
+      console.log(this.$store.state.match.matchEvents[0].homeTeamScore);
+    },
+
+    removeHomeTeamScore() {
+      this.$store.state.match.matchEvents[0].homeTeamScore.pop();
+      console.log(this.$store.state.match.matchEvents[0].homeTeamScore);
+
+    },
+    addAwayTeamScore() {
+      this.$store.state.match.matchEvents[0].awayTeamScore.push(this.test);
+      console.log(this.$store.state.match.matchEvents[0].awayTeamScore);
+    },
+
+    removeAwayTeamScore() {
+      this.$store.state.match.matchEvents[0].awayTeamScore.pop();
+      console.log(this.$store.state.match.matchEvents[0].awayTeamScore);
+
+    },
+
+  }
+
+}
+</script>
+
+<style scoped>
+
+.score-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  
+}
+
+.home-score {
+  height: 200px;
+  
+}
+
+.away-score {
+  margin-left: 100px;
+}
+
+
+.addScore {
+  width: 50px;
+  height: 50px;
+  background-color: orange;
+  display: block;
+  padding: 0;
+  
+}
+.removeScore {
+  width: 50px;
+  height: 50px;
+  background-color: orange;
+  padding: 0;
+}
+
+</style>

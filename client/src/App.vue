@@ -1,25 +1,28 @@
 <template>
-  <div class="container">
-    <div class="navigation">
-      <router-link to="/GymnasticsOperator">GymnasticsOperator</router-link>
-    </div>
-    <div class="navigation">
-      <router-link to="/GymnasticsScoreBoard">GymnasticsScoreBoard</router-link>
-    </div>
-    <div class="navigation">
-      <router-link to="/HandballOperator">HandballOperator</router-link>
-    </div>
-    <div class="navigation">
-      <router-link to="/HandballScoreBoard">HandballScoreBoard</router-link>
-    </div>
+  <div class="app-container">
+    <!-- <Home /> -->
+    <HandballOperator />
+    <!-- <HandballUserView />  -->
+        <!-- <router-view /> -->
+    
+ 
   </div>
 </template>
 
-<script setup>
+<script>
+import Home from './views/Home.vue'
+import HandballScoreBoard from './views/HandballUserView.vue'
+import HandballOperator from './views/HandballOperator.vue'
+import HandballUserView from './views/HandballUserView.vue'
+
+export default { 
+  // created() {
+  //   this.$store.commit('updatePenaltiesHash')
+  // }, 
+  components: {Home, HandballScoreBoard, HandballOperator, HandballUserView }
+}
 
 
-// This starter template is using Vue 3 experimental <script setup> SFCs
-// Check out https://github.com/vuejs/rfcs/blob/script-setup-2/active-rfcs/0000-script-setup.md
 </script>
 
 <style>
@@ -29,16 +32,9 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 
-.container {
-  width: 50%;
-  margin: 0 auto;
-}
-
-.navigation {
-  padding: 10px;
-  float: left;
+body {
+  margin: 0;
 }
 </style>
