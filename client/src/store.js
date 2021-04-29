@@ -2,10 +2,38 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    penaltiesHash: {},
+    // penaltiesHash: {},
+    players: [
+      {
+        id: 1,
+        name: 'Bengt'
+      },
+      {
+        id: 2,
+        name: 'Lasse'
+      },
+      {
+        id: 3,
+        name: 'Urban'
+      },
+      {
+        id: 4,
+        name: 'Lisa'
+      },
+      {
+        id: 5,
+        name: 'Ulla'
+      },
+      {
+        id: 6,
+        name: 'Inger'
+      },
+
+    ],
     match: {
       id: 1,
       time: '18:32',
+
       teams: [
         {
           id: 1,
@@ -25,6 +53,7 @@ export default createStore({
               id: 3,
               name: 'Urban'
             },
+
           ]
         },
         {
