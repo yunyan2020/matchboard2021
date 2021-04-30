@@ -1,7 +1,6 @@
 import { createStore } from 'vuex'
 
 const state = {
-  penaltiesHash: {},
   match: {
     id: 1,
     time: '18:32',

@@ -3,7 +3,7 @@
   <div class="inputContainer">
     <div class="inputWrap" v-for ="index in 8" :key = "index">
       <div class="title">{{title(index)}}</div>
-      <input type="number" min="0" max="10"  class = "Execution1">
+      <input type="number" min="0" max="10"  class = "inputField">
         <select>
           <option v-for= "index in 9" :key = "index">{{index}}</option>        
         </select>    
@@ -61,6 +61,9 @@ export default {
 <style scoped>
 .inputContainer {
   display:flex;
+}
+.title .inputField{
+  margin:10px;
 }
 .button {
   width:100px;
