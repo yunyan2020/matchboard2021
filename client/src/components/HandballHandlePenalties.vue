@@ -1,6 +1,6 @@
 <template>
   <!-- <select v-model="listPlayers" name="" id="">
-    <option disabled selected value="''">Utvisning</option>
+    <option disabled selected value="">Utvisning</option>
     <option v-for="(player, i) in listPlayers" :key="i" @click="addPenalty">
       {{ i }} - {{ player.name }}
     </option>
@@ -8,6 +8,7 @@
   <div>
     <!-- <select id="penaltySelection" v-model="selected" :change="addPenalty()"> -->
   <select id="penaltySelection" v-model="selected" >
+    <!-- <option selected>Utvisning</option> -->
   <option v-for="player in listPlayers" :value="player" :key="player">{{ player.name }}</option>
 </select>
   <button v-on:click="addPenalty()">Add Penalty </button>

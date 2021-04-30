@@ -37,13 +37,16 @@ export default {
 <style>
   .score {
     /* float: left; */
-    color: lightgreen;
+    color: rgb(95, 216, 95);
     font-size: 100px;
     padding: 0;
     margin-top: 30px;
   }
 
   h1 {
+    font-family: 'Roboto Slab', serif;
+    text-shadow: 0.06em 0.06em black;
+    color: rgb(87, 255, 87);
     margin: 0;
     padding: 0;
   }
