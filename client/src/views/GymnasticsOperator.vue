@@ -1,12 +1,16 @@
 <template>
   <div>
-    hej
+    <GymnasticsStats/>
+    <GymnasticsScoreInput/>    
   </div>
 </template>
 
 <script>
-export default {
+import GymnasticsScoreInput from "../components/gymnastics/gymnasticsScoreInput.vue"
+import GymnasticsStats from "../components/gymnastics/gymnasticsStats.vue"
 
+export default {
+components:{GymnasticsScoreInput,GymnasticsStats}
 }
 </script>
 

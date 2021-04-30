@@ -247,7 +247,7 @@ const state = {
       id: 1,
       gpymnasticsMatchEventId: 1,
       participantId: 1,
-      description: "",
+      description: "Did not start within 30 seconds",
       deduction:0.2
     }
   ],
@@ -280,12 +280,12 @@ const state = {
     lastName: "Anderson",
     affliationId:1
   },
-    [{
-      id: 2,
-      firstName: "Erik",
-      lastName: "Svenson",
-      affliationId: 1
-    }
+  {
+    id: 2,
+    firstName: "Erik",
+    lastName: "Svenson",
+    affliationId: 1
+  }
   ]
 
 }

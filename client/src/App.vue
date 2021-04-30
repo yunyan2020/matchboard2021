@@ -1,7 +1,8 @@
 <template>
   <div class="app-container">
     <!-- <Home /> -->
-    <HandballOperator />
+    <!-- <HandballOperator /> -->
+    <GymnasticsOperator />
     <!-- <HandballUserView />  -->
         <!-- <router-view /> -->
     
@@ -14,12 +15,13 @@ import Home from './views/Home.vue'
 import HandballScoreBoard from './views/HandballUserView.vue'
 import HandballOperator from './views/HandballOperator.vue'
 import HandballUserView from './views/HandballUserView.vue'
+import GymnasticsOperator from './views/GymnasticsOperator.vue'
 
 export default { 
   // created() {
   //   this.$store.commit('updatePenaltiesHash')
   // }, 
-  components: {Home, HandballScoreBoard, HandballOperator, HandballUserView }
+  components: {Home, HandballScoreBoard, HandballOperator, HandballUserView,GymnasticsOperator }
 }
 
 
