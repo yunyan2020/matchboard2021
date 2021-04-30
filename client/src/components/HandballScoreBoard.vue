@@ -12,7 +12,7 @@
     </div>
     <div class="middle">
       <TeamSportScoring />
-      <PeriodTimer />
+      <PeriodTimer /> 
     </div>
     <div class="cont right">
       <div class="logo-right">
@@ -69,11 +69,7 @@ export default {
 </script>
 
 <style scoped>
-/* @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap'); */
 
-div {
-  border: 0px solid green;
-}
   .sb-container {
     background-image: url('../assets/handball_bg.png');
     background-repeat: no-repeat;
@@ -128,6 +124,11 @@ div {
     font-size: 7em;
     padding: 0;
     margin-top: 2vh;
+  }
+
+  .middle {
+    /* background: red; */
+    /* margin-top: 15vh; */
   }
   
   /* .time {

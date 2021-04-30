@@ -26,28 +26,33 @@ export default {
 
   .container {
     width: 75vw;
-    height: 80vh; 
+    height: 75vh; 
     background-image: url('src/assets/handball_operator_bg.png');
     background-repeat: no-repeat;
+    background-size: contain;
     }
   .handle-score {
     padding-top: 3vh;
   }
   .scoreboard-preview {
     width: 30vw;
-    height: 40vh;
+    height: 35vh;
     text-align: center;
     margin: 0 auto;
     outline: #000000 solid 2px; 
     margin-top: 5vh; 
     box-shadow: 0px 0px 10px 7px rgb(74, 213, 255);
   }
+  :deep(.sb-container) {
+     /* height: 40vh;  */
+  }
+
   :deep(.logo-left img){
-    margin-top: 2vh;
+    /* margin-top: 2vh; */
     width: 6vw;
   }
   :deep(.logo-right img){
-    margin-top: 2vh;
+    /* margin-top: 2vh; */
     width: 6vw;
   }
   :deep(.score) { 
@@ -59,14 +64,14 @@ export default {
     margin-bottom: 2vh;
   }
   :deep(.penalty-left) {
-    margin-top: 14vh;
+    /* margin-top: 14vh; */
   }
   :deep(.penalty-right) {
     margin-top: 14vh;
   }
 
   .handle-penalties {
-    margin-top: 3vh;
+    margin-top: 5vh;
   }
 
 </style>
