@@ -4,7 +4,8 @@ const state = {
   match: {
     id: 1,
     time: '18:32',
-    teamId: [1, 2]
+    teamId: [1, 2],
+    team:{},
   },
   teams: [{
     id: 1,
@@ -86,7 +87,8 @@ const state = {
       matchEventsId: 1,
       teamId: 1,
       points: 1,
-      player: "Karl Johan",
+      playerId: 1,
+      player: {},
       time: "17:45"
     },
     {
@@ -94,7 +96,8 @@ const state = {
       matchEventsId: 1,
       teamId: 1,
       points: 1,
-      player: "Karl Anderson",
+      playerId: 1,
+      player: {},
       time: "09:45"
     },
     {
@@ -102,7 +105,8 @@ const state = {
       matchEventsId: 1,
       teamId: 1,
       points: 1,
-      player: "Karl Johan",
+      playerId: 1,
+      player: {},
       time: "07:45"
     },
     {
@@ -110,7 +114,8 @@ const state = {
       matchEventsId: 1,
       teamId: 1,
       points: 1,
-      player: "Johan Karl",
+      playerId: 1,
+      player: {},
       time: "15:45"
     },
     {
@@ -118,7 +123,8 @@ const state = {
       matchEventsId: 1,
       teamId: 1,
       points: 1,
-      player: "Johan Karl",
+      playerId: 1,
+      player: {},
       time: "18:21"
     },
     {
@@ -126,7 +132,8 @@ const state = {
       matchEventsId: 1,
       teamId: 1,
       points: 1,
-      player: "Karl Johan",
+      playerId: 1,
+      player: {},
       time: "14:33"
     },
     {
@@ -134,7 +141,8 @@ const state = {
       matchEventsId: 1,
       teamId: 2,
       points: 1,
-      player: "Karl Johan",
+      playerId: 1,
+      player: {},
       time: "17:45"
     },
     {
@@ -142,7 +150,8 @@ const state = {
       matchEventsId: 1,
       teamId: 2,
       points: 1,
-      player: "Karl Johan",
+      playerId: 1,
+      player: {},
       time: "09:45"
     },
     {
@@ -150,7 +159,8 @@ const state = {
       matchEventsId: 1,
       teamId: 2,
       points: 1,
-      player: "Karl Johan",
+      playerId: 1,
+      player: {},
       time: "07:45"
     },
     {
@@ -158,7 +168,8 @@ const state = {
       matchEventsId: 1,
       teamId: 2,
       points: 1,
-      player: "Johan Karl",
+      playerId: 1,
+      player: {},
       time: "15:45"
     },
     {
@@ -166,7 +177,8 @@ const state = {
       matchEventsId: 1,
       teamId: 2,
       points: 1,
-      player: "Johan Karl",
+      playerId: 1,
+      player: {} ,
       time: "18:21"
     },
   ],
@@ -204,7 +216,7 @@ const state = {
     name: "WOMEN's VAULT 2021",
     judgesId:[1,2,3,4,5,6]
   },
-  gpymnasticsMatchEvent: [{
+  gymnasticsMatchEvent: [{
     id: 1,
     name: "vault",
     numberOfRounds: 2,
@@ -234,17 +246,17 @@ const state = {
   gymnasticsScore: [
     {
       id:1,
-      gpymnasticsMatchEventId: 1,
+      gymnasticsMatchEventId: 1,
       participantId:1,
       difficulty: 7.10,
       penaltiesScore: 0.2,
-      judesScore:8.50
+      judesScore:0.0
     }     
   ],
   gymnasticsPenalties: [
     {
       id: 1,
-      gpymnasticsMatchEventId: 1,
+      gymnasticsMatchEventId: 1,
       participantId: 1,
       description: "Did not start within 30 seconds",
       deduction:0.2
