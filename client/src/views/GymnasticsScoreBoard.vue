@@ -1,24 +1,7 @@
 <template>
   <div class="container">
-    <!-- <div class="matchName">
-      <h1>WOMEN's VAULT 2021</h1>
-    </div>
-    <div class="gymnasticsScore">
-      <h3>DIFFICULTY</h3>
-      <h3>EXCUTION</h3>
-      <h3>ROUND</h3>
-    </div>
-     <div class="participant">
-      <Participant />     
-    </div>
-    <div class="finalScore">
-      <h3>VAULT1</h3>
-      <h3>VAULT2</h3>
-      <h3>SCORE</h3>
-    </div> -->
-
     <div class="event-container">
-      <h1 class="title">Womens vault 2021</h1>
+      <h1 class="title">{{gymnasticsMatch.name}}</h1>
     </div>
     <div class="stats-container">
       <div class="wrap1">
@@ -34,13 +17,15 @@
       <div class="wrap2">
         <div class="stat">
           <h3 class="stat-detail">Round</h3>
-          <h3 class="stat-detail">2/2</h3>
+          <h3 class="stat-detail">{{gymnasticsMatchEvent[0].currentRoundSeq}}</h3>
+          <h3 class="stat-detail">/</h3>
+          <h3 class="stat-detail">{{gymnasticsMatchEvent[0].numberOfRounds}}</h3>
         </div>
       </div>  
     </div>
     <div class="participant-container">
-      <Participant />
-    </div>
+      <Participant :currentParticipant="currentParticipant" :matchEventName ="matchEventName" />
+    </div>"
     <div class="stats-container">
       <div class="left-wrap">
         <div class="stat">
@@ -64,7 +49,26 @@
 
 <script>
 export default {
-  components:{Participant}
+  components:{Participant},
+  computed:{
+    gymnasticsMatch(){
+      return  this.$store.state.gymnasticsMatch
+    },
+    gymnasticsMatchEvent(){
+      return this.$store.state.gymnasticsMatchEvents.filter((m)=>m.gymnasticsMatchId = this.gymnasticsMatch.id && m.currentMatchEvent == true )
+    },
+    currentParticipant(){
+      let participants = this.gymnasticsMatchEvent[0].participants
+      return  participants.filter((p)=>p.showOnMatchBorad === "showing")
+    },
+    matchEventName(){
+      console.log("this.gymnasticsMatchEvent[0].name",this.gymnasticsMatchEvent[0].name)
+      return this.gymnasticsMatchEvent[0].name
+    },
+    gymnasticsScore(){
+      return this.$store.state.gymnasticsScore.filter((s) =>s.gymnasticsMatchEventId == this.gymnasticsMatchEvent[0].id)
+    }
+  }
 };
 
 import Participant from '../components/gymnastics/participant.vue'
@@ -74,27 +78,6 @@ import Participant from '../components/gymnastics/participant.vue'
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
-
-  /* .container {
-    width: 1850px;
-    height: 970px;    
-
-    background-repeat: no-repeat;
-    display: grid;
-    grid-template-rows: 10% 40% 10% 40%;
-  }
-  .matchName{
-    font-size:60px;
-    color:lightgreen;
-  }
-  .gymnasticsScore {
-    font-size:50px ;
-    color:orange;
-  }
-  .finalScore{
-    color:orange;
-    font-size:50px ;
-  } */
   * {
     margin: 0;
   }
@@ -112,7 +95,7 @@ import Participant from '../components/gymnastics/participant.vue'
   }
 
   .title {
-    font-size: 75px;
+    font-size: 60px;
   }
 
   .event-container {

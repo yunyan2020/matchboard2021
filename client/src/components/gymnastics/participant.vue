@@ -18,25 +18,46 @@
   </div> -->
   <div class="participant">
     <div class="matchEvent section">
-      <img src="src/assets/vault.png" alt="" class="matchEvent-icon" />
+      <img :src="'/src/assets/' + matchEventName.toLowerCase() + '.png'" alt="" class="matchEvent-icon" />
     </div>
     <div class="ranking section">
-      <p>1</p>
+      <p class="participant"> {{ranking}}</p>
     </div>
     <div class="abbrevName section">
-      <p class="nationality">USA</p>
+      <p class="nationality">{{affilication[0].abbrevName}}</p>
     </div>
     <div class="flag section">
-      <img src="src/assets/usa-flag.png" alt="" class="flag-icon" />
+      <img :src="'/src/assets/'+ affilication[0].abbrevName.toLowerCase + '-flag.png'" alt="" class="flag-icon" />
     </div>
     <div class="participantName section">
-      <p class="name">Simone Heles</p>
+      <p class="firstName">{{participant[0].firstName}}</p>
+      <p class="lastName">{{participant[0].lastName}}</p>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props:['currentParticipant','matchEventName'],
+  computed:{    
+    ranking(){
+      console.log("preliminariesRanking",this.currentParticipant[0].preliminariesRanking)
+      return this.currentParticipant[0].preliminariesRanking
+    },
+    participant(){    
+      return this.$store.state.participants.filter((p)=>p.id === this.currentParticipant[0].id)
+    },
+    affilication(){
+      
+      return this.$store.state.affilications.filter(a=>(a.id === this.participant[0].affilicationId))
+    },
+    matchEventName(){
+      console.log("matchEventName",this.matchEventName)
+      return this.matchEventName
+    }
+  },
+  
+};
 </script>
 
 <style scoped>
@@ -116,9 +137,15 @@ export default {};
   font-weight: 900;
 }
 
-.name {
+.firstName {
   font-size: 20px;
   font-weight: 900;
+}
+
+.lastName {
+  font-size: 20px;
+  font-weight: 900;
+  margin-left:5px;
 }
 
 </style>
