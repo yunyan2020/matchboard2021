@@ -235,47 +235,14 @@ const state = {
     id: 1,
     firstName: "Simon",
     lastName: "Herik",
-    number: 351,
-    runningOrder:2,
     affilicationId:1
-  },
-    { id: 2,
-    firstName: "Ting",
-      lastName: "Huang",
-      number: 366,
-      runningOrder: 3,
-    affilicationId: 2
-    },   
-    {
-      id: 3,
-      firstName: "Sahara",
-      lastName: "Karmark",
-      number: 260,
-      runningOrder:1,
-      affilicationId: 2
-    },
-  ],
-
-  affilication: [
-    {
-      id: 1,
-      name: "American",
-      abbrevName: "USA",
-      logo: "USA-Flag.png"
-    },
-    {
+  }],
+  affilication: [{
     id: 2,
     name: "China",
     abbrevName: "CHN",
     logo: "CHN-Flag.png"
-    },
-    {
-      id: 3,
-      name: "India",
-      abbrevName: "IND",
-      logo: "IND-Flag.png"
-    },
-  ],
+  }],
   gymnasticsScore: [
     {
       id:1,
