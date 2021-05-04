@@ -231,18 +231,51 @@ const state = {
     participantId: [1, 2, 3, 4, 5, 6, 11, 12, 13, 14]
   }    
   ],
-  participant: [{
-    id: 1,
-    firstName: "Simon",
-    lastName: "Herik",
-    affilicationId:1
-  }],
-  affilication: [{
-    id: 2,
-    name: "China",
-    abbrevName: "CHN",
-    logo: "CHN-Flag.png"
-  }],
+  participant: [
+    {
+      id: 1,
+      firstName: "Simon",
+      lastName: "Herik",
+      number: 120,
+      affilicationId:1
+    },
+    { 
+      id: 2,
+      firstName: "Ting",
+      lastName: "Huang",
+      number: 366,
+      runningOrder: 3,
+      affilicationId: 2
+    },
+    {
+      id: 3,
+      firstName: "Sahara",
+      lastName: "Karmark",
+      number: 260,
+      runningOrder:1,
+      affilicationId: 2
+    }
+  ],
+  affilication: [
+    {
+      id: 1,
+      name: "American",
+      abbrevName: "USA",
+      logo: "USA-Flag.png"
+    },
+    {
+      id: 2,
+      name: "China",
+      abbrevName: "CHN",
+      logo: "CHN-Flag.png"
+    },
+    {
+      id: 3,
+      name: "India",
+      abbrevName: "IND",
+      logo: "IND-Flag.png"
+    }
+  ],
   gymnasticsScore: [
     {
       id:1,
