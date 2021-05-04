@@ -161,14 +161,19 @@ import Participant from '../components/gymnastics/participant.vue'
  
   .Round-container{
     border: 1px solid blue;
-    display: flex;    
+    display: flex;
+    justify-content: flex-end;    
     font-size: 40px;
+    width: 50%;
+    margin: 0 auto;
   } 
   .Round{
-    align-items:flex-end;
+    display: flex;
+    /* float: right; */
   }
+
   .Round-detail{
-    display:inline-flex;    
+    /* isplay:inline-flex;  */   
   } 
 
   .stat {
