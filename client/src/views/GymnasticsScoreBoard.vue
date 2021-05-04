@@ -3,8 +3,19 @@
     <div class="event-container">
       <h1 class="title">{{gymnasticsMatch.name}}</h1>
     </div>
+    <div class="participant-container">
+      <Participant :currentParticipant="currentParticipant" :matchEventName ="matchEventName" />
+    </div>
+    <div class="Round-container">
+      <div class="Round">
+        <h3 class="Round-detail">Round</h3>
+        <h3 class="Round-detail">{{gymnasticsMatchEvent[0].currentRoundSeq}}</h3>
+        <h3 class="Round-detail">/</h3>
+        <h3 class="Round-detail">{{gymnasticsMatchEvent[0].numberOfRounds}}</h3>  
+      </div>            
+    </div>    
     <div class="stats-container">
-      <div class="wrap1">
+      <div class="wrap2">
         <div class="stat">
           <h3 class="stat-detail">Difficulty</h3>
           <h3 class="stat-detail">{{difficulty.toFixed(3)}}</h3>
@@ -17,19 +28,8 @@
           <h3 class="stat-detail">Penalties</h3>
           <h3 class="stat-detail">{{penalties.toFixed(3)}}</h3>
         </div>
-      </div>
-      <div class="wrap2">
-        <div class="stat">
-          <h3 class="stat-detail">Round</h3>
-          <h3 class="stat-detail">{{gymnasticsMatchEvent[0].currentRoundSeq}}</h3>
-          <h3 class="stat-detail">/</h3>
-          <h3 class="stat-detail">{{gymnasticsMatchEvent[0].numberOfRounds}}</h3>
-        </div>
-      </div>  
-    </div>
-    <div class="participant-container">
-      <Participant :currentParticipant="currentParticipant" :matchEventName ="matchEventName" />
-    </div>"
+      </div>      
+    </div>    
     <div class="stats-container">
       <div class="left-wrap">
         <div class="stat">
@@ -124,14 +124,14 @@ import Participant from '../components/gymnastics/participant.vue'
     width: 100%;
     height: 100vh;
     border: 1px solid lightgray;
-    display: grid;
+    /*display: grid;  */
     gap: 4em;
     grid-template-rows: 10% 40% 10% 40%;
     font-family: 'Orbitron', sans-serif;
   }
 
   .title {
-    font-size: 60px;
+    font-size: 50px;
   }
 
   .event-container {
@@ -158,11 +158,18 @@ import Participant from '../components/gymnastics/participant.vue'
     width: 50%;
     margin: 0 auto;
   }
-
-  .wrap1, .wrap2 {
+ 
+  .Round-container{
     border: 1px solid blue;
-    /* padding: 1em; */
+    display: flex;    
+    font-size: 40px;
+  } 
+  .Round{
+    align-items:flex-end;
   }
+  .Round-detail{
+    display:inline-flex;    
+  } 
 
   .stat {
     border: 1px solid lightgray;
@@ -172,7 +179,7 @@ import Participant from '../components/gymnastics/participant.vue'
   }
 
   .stat-detail {
-    font-size: 45px;
+    font-size: 40px;
     /* margin: 1em; */
   }
 
