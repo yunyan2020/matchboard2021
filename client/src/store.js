@@ -319,7 +319,7 @@ const state = {
       gymnasticsMatchEventId: 1,
       roundSeq:1,
       participantId: 1,
-      difficulty: 7.10,
+      difficulty: 6.100,
       penaltiesScore: 0.2,
       judesScore: 0.0
     }
@@ -327,9 +327,9 @@ const state = {
   gymnasticsPenalties: [
     {
       id: 1,
-      gymnasticsMatchEventId: 1,
-      roundSeq: 1,
-      participantId: 1,
+      gymnasticsMatchEventId:1,
+      roundSeq:1,
+      participantId:1,
       description: "Did not start within 30 seconds",
       deduction: 0.2
     }
@@ -337,7 +337,7 @@ const state = {
   judesScore: [
     {
       id: 1,
-      gpymnasticsMatchEventId: 1,
+      gymnasticsMatchEventId: 1,
       roundSeq: 1,
       participantId: 1,
       judeId: 1,
@@ -345,20 +345,44 @@ const state = {
     },
     {
       id: 2,
-      gpymnasticsMatchEventId: 1,
+      gymnasticsMatchEventId: 1,
       roundSeq: 1,
       participantId: 1,
       judeId: 2,
       executionPoints: 8.20,
     },
     {
-      id: 2,
-      gpymnasticsMatchEventId: 1,
+      id: 3,
+      gymnasticsMatchEventId: 1,
       roundSeq: 1,
       participantId: 1,
       judeId: 3,
       executionPoints: 8.30,
-    }
+    },
+    {
+      id: 4,
+      gymnasticsMatchEventId: 1,
+      roundSeq: 1,
+      participantId: 1,
+      judeId: 4,
+      executionPoints: 8.40,
+    },
+    {
+      id: 5,
+      gymnasticsMatchEventId: 1,
+      roundSeq: 1,
+      participantId: 1,
+      judeId: 5,
+      executionPoints: 8.20,
+    },
+    {
+      id: 6,
+      gymnasticsMatchEventId: 1,
+      roundSeq: 1,
+      participantId: 1,
+      judeId: 6,
+      executionPoints: 8.50,
+    },
   ],
   judges: [{
     id: 1,

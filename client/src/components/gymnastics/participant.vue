@@ -27,7 +27,7 @@
       <p class="nationality">{{affilication[0].abbrevName}}</p>
     </div>
     <div class="flag section">
-      <img :src="'/src/assets/'+ affilication[0].abbrevName.toLowerCase + '-flag.png'" alt="" class="flag-icon" />
+      <img :src="'/src/assets/'+ affilication[0].abbrevName.toLowerCase() + '-flag.png'" alt="" class="flag-icon" />
     </div>
     <div class="participantName section">
       <p class="firstName">{{participant[0].firstName}}</p>
@@ -41,7 +41,6 @@ export default {
   props:['currentParticipant','matchEventName'],
   computed:{    
     ranking(){
-      console.log("preliminariesRanking",this.currentParticipant[0].preliminariesRanking)
       return this.currentParticipant[0].preliminariesRanking
     },
     participant(){    
@@ -52,7 +51,6 @@ export default {
       return this.$store.state.affilications.filter(a=>(a.id === this.participant[0].affilicationId))
     },
     matchEventName(){
-      console.log("matchEventName",this.matchEventName)
       return this.matchEventName
     }
   },

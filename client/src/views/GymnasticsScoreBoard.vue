@@ -7,11 +7,15 @@
       <div class="wrap1">
         <div class="stat">
           <h3 class="stat-detail">Difficulty</h3>
-          <h3 class="stat-detail">6.000</h3>
+          <h3 class="stat-detail">{{difficulty.toFixed(3)}}</h3>
         </div>
         <div class="stat">
           <h3 class="stat-detail">Execution</h3>
-          <h3 class="stat-detail">8.500</h3>
+          <h3 class="stat-detail">{{executionScore.toFixed(3)}}</h3>
+        </div>
+        <div class="stat">
+          <h3 class="stat-detail">Penalties</h3>
+          <h3 class="stat-detail">{{penalties.toFixed(3)}}</h3>
         </div>
       </div>
       <div class="wrap2">
@@ -40,7 +44,7 @@
       <div class="right-wrap">
         <div class="stat">
           <h3 class="stat-detail">Score</h3>
-          <h3 class="stat-detail">14.250</h3>
+          <h3 class="stat-detail">{{score}}</h3>
         </div>
       </div>
     </div>
@@ -55,19 +59,51 @@ export default {
       return  this.$store.state.gymnasticsMatch
     },
     gymnasticsMatchEvent(){
-      return this.$store.state.gymnasticsMatchEvents.filter((m)=>m.gymnasticsMatchId = this.gymnasticsMatch.id && m.currentMatchEvent == true )
+      return this.$store.state.gymnasticsMatchEvents.filter((m)=>m.gymnasticsMatchId = this.gymnasticsMatch.id && m.currentMatchEvent === true )
     },
     currentParticipant(){
       let participants = this.gymnasticsMatchEvent[0].participants
       return  participants.filter((p)=>p.showOnMatchBorad === "showing")
     },
     matchEventName(){
-      console.log("this.gymnasticsMatchEvent[0].name",this.gymnasticsMatchEvent[0].name)
       return this.gymnasticsMatchEvent[0].name
     },
     gymnasticsScore(){
-      return this.$store.state.gymnasticsScore.filter((s) =>s.gymnasticsMatchEventId == this.gymnasticsMatchEvent[0].id)
-    }
+      return this.$store.state.gymnasticsScore.filter((s) =>s.gymnasticsMatchEventId == this.gymnasticsMatchEvent[0].id 
+      && s.roundSeq == this.gymnasticsMatchEvent[0].currentRoundSeq
+      && s.participantId == this.currentParticipant[0].id )
+    },
+    difficulty(){
+      return this.gymnasticsScore[0].difficulty
+    },
+    executionScore(){
+      let judesScore = this.$store.state.judesScore.filter((s) =>s.gymnasticsMatchEventId == this.gymnasticsMatchEvent[0].id
+      && s.roundSeq == this.gymnasticsMatchEvent[0].currentRoundSeq
+      && s.participantId == this.currentParticipant[0].id )  
+      judesScore.sort(function(a,b){ return a.executionPoints - b.executionPoints})
+      judesScore.shift()
+      judesScore.pop()
+      let executionScore = 0
+      let i =0
+      for(let score of judesScore) {
+        i += 1
+        executionScore += score.executionPoints
+      }
+      return (executionScore/i)
+    },
+    penalties(){      
+      let penalties = this.$store.state.gymnasticsPenalties.filter((p) =>p.gymnasticsMatchEventId == this.gymnasticsMatchEvent[0].id
+      && p.roundSeq == this.gymnasticsMatchEvent[0].currentRoundSeq
+      && p.participantId == this.currentParticipant[0].id )  
+      let penaltyPoint = 0
+      for(let penalty of penalties){
+        penaltyPoint += penalty.deduction
+      }
+      return penaltyPoint
+    },
+    score(){
+      return this.difficulty + this.executionScore - this.penalties
+    } 
   }
 };
 
