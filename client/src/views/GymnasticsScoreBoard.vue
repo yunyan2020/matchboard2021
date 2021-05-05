@@ -6,45 +6,33 @@
     <div class="participant-container">
       <Participant :currentParticipant="currentParticipant" :matchEventName ="matchEventName" />
     </div>
-    <div class="Round-container">
-      <div class="Round">
-        <h3 class="Round-detail">Round</h3>
-        <h3 class="Round-detail">{{gymnasticsMatchEvent[0].currentRoundSeq}}</h3>
-        <h3 class="Round-detail">/</h3>
-        <h3 class="Round-detail">{{gymnasticsMatchEvent[0].numberOfRounds}}</h3>  
-      </div>            
-    </div>    
+    <div class="Round-container" v-if="numberOfRounds > 1">
+      <Round :currentRoundSeq="currentRoundSeq" :numberOfRounds="numberOfRounds"  />
+    </div>
     <div class="stats-container">
       <div class="wrap2">
         <div class="stat">
           <h3 class="stat-detail">Difficulty</h3>
-          <h3 class="stat-detail">{{difficulty.toFixed(3)}}</h3>
+          <h3 class="stat-detail">{{difficulty().toFixed(3)}}</h3>
         </div>
         <div class="stat">
           <h3 class="stat-detail">Execution</h3>
-          <h3 class="stat-detail">{{executionScore.toFixed(3)}}</h3>
+          <h3 class="stat-detail">{{execution().toFixed(3)}}</h3>
         </div>
         <div class="stat">
           <h3 class="stat-detail">Penalties</h3>
-          <h3 class="stat-detail">{{penalties.toFixed(3)}}</h3>
+          <h3 class="stat-detail">{{penalties().toFixed(3)}}</h3>  
         </div>
       </div>      
     </div>    
     <div class="stats-container">
-      <div class="left-wrap">
-        <div class="stat">
-          <h3 class="stat-detail">Vault 1</h3>
-          <h3 class="stat-detail">14.000</h3>
-        </div>
-        <div class="stat">
-          <h3 class="stat-detail">Vault 2</h3>
-          <h3 class="stat-detail">14.500</h3>
-        </div>
+      <div class="left-wrap" v-if="(numberOfRounds > 1) && (matchEventName = 'vault')">
+        <VaultRoundScore :gymnasticsScores="gymnasticsScores" :judesScores ="judesScores" :penalties="penaltiesData" /> 
       </div>
-      <div class="right-wrap">
+      <div class="right-wrap" v-if="numberOfRounds == 1">
         <div class="stat">
           <h3 class="stat-detail">Score</h3>
-          <h3 class="stat-detail">{{score}}</h3>
+          <h3 class="stat-detail">{{score.toFixed(3)}}</h3>
         </div>
       </div>
     </div>
@@ -53,7 +41,7 @@
 
 <script>
 export default {
-  components:{Participant},
+  components:{Participant,Round,VaultRoundScore},
   computed:{
     gymnasticsMatch(){
       return  this.$store.state.gymnasticsMatch
@@ -65,20 +53,30 @@ export default {
       let participants = this.gymnasticsMatchEvent[0].participants
       return  participants.filter((p)=>p.showOnMatchBorad === "showing")
     },
+    currentRoundSeq(){    
+      return this.gymnasticsMatchEvent[0].currentRoundSeq
+    },
+    numberOfRounds(){
+      console.log("numberOfRounds",this.gymnasticsMatchEvent[0].numberOfRounds)
+      return this.gymnasticsMatchEvent[0].numberOfRounds
+    },
     matchEventName(){
       return this.gymnasticsMatchEvent[0].name
     },
-    gymnasticsScore(){
-      return this.$store.state.gymnasticsScore.filter((s) =>s.gymnasticsMatchEventId == this.gymnasticsMatchEvent[0].id 
-      && s.roundSeq == this.gymnasticsMatchEvent[0].currentRoundSeq
+    
+    /* gymnasticsScore(){
+      return this.$store.state.gymnasticsScore.
+      filter((s) =>s.gymnasticsMatchEventId == this.gymnasticsMatchEvent[0].id 
+      && s.roundSeq == this.currentRoundSeq
       && s.participantId == this.currentParticipant[0].id )
-    },
+    }, 
     difficulty(){
       return this.gymnasticsScore[0].difficulty
     },
     executionScore(){
-      let judesScore = this.$store.state.judesScore.filter((s) =>s.gymnasticsMatchEventId == this.gymnasticsMatchEvent[0].id
-      && s.roundSeq == this.gymnasticsMatchEvent[0].currentRoundSeq
+      let judesScore = this.$store.state.judesScore.
+      filter((s) =>s.gymnasticsMatchEventId == this.gymnasticsMatchEvent[0].id
+      && s.roundSeq == this.currentRoundSeq
       && s.participantId == this.currentParticipant[0].id )  
       judesScore.sort(function(a,b){ return a.executionPoints - b.executionPoints})
       judesScore.shift()
@@ -100,14 +98,46 @@ export default {
         penaltyPoint += penalty.deduction
       }
       return penaltyPoint
+    }, */
+    gymnasticsScores(){
+      return this.$store.state.gymnasticsScore.
+      filter((s) =>s.gymnasticsMatchEventId == this.gymnasticsMatchEvent[0].id 
+      && s.participantId == this.currentParticipant[0].id )
+    }, 
+    judesScores(){
+      return this.$store.state.judesScore.
+      filter((s) =>s.gymnasticsMatchEventId == this.gymnasticsMatchEvent[0].id
+      && s.participantId == this.currentParticipant[0].id )  
     },
+    penaltiesData(){      
+      return this.$store.state.gymnasticsPenalties.filter((p) =>p.gymnasticsMatchEventId == this.gymnasticsMatchEvent[0].id
+      && p.participantId == this.currentParticipant[0].id )        
+    }, 
     score(){
-      return this.difficulty + this.executionScore - this.penalties
-    } 
+      return this.difficulty() + this.execution() - this.penalties()
+    }     
+  },
+  methods:{
+    calculateScore(){
+      return  new CalculteGymnasticsScore(this.gymnasticsScores,this.judesScores,this.penaltiesData,this.currentRoundSeq)
+    } ,
+    difficulty(){
+      return this.calculateScore().getDifficulty()
+    },
+    execution(){
+      return this.calculateScore().calculateExecution()
+    },
+    penalties(){
+       return this.calculateScore().calculatePenalties()
+    },
   }
 };
 
 import Participant from '../components/gymnastics/participant.vue'
+import Round from '../components/gymnastics/round.vue'
+import VaultRoundScore from '../components/gymnastics/vaultRoundScore.vue'
+import CalculteGymnasticsScore from '../calculateGymnasticsScore.js'
+
 </script>
 
 
@@ -157,24 +187,8 @@ import Participant from '../components/gymnastics/participant.vue'
     border: 1px solid red;
     width: 50%;
     margin: 0 auto;
-  }
- 
-  .Round-container{
-    border: 1px solid blue;
-    display: flex;
-    justify-content: flex-end;    
-    font-size: 40px;
-    width: 50%;
-    margin: 0 auto;
   } 
-  .Round{
-    display: flex;
-    /* float: right; */
-  }
-
-  .Round-detail{
-    /* isplay:inline-flex;  */   
-  } 
+  
 
   .stat {
     border: 1px solid lightgray;
@@ -193,6 +207,15 @@ import Participant from '../components/gymnastics/participant.vue'
     justify-content: center; 
     height: 4em;   
   }
+
+  .Round-container{
+    border: 1px solid blue;
+    display: flex;
+    justify-content: flex-end;    
+    font-size: 40px;
+    width: 50%;
+    margin: 0 auto;
+  } 
 
 
 </style>

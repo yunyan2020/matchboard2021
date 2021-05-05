@@ -322,6 +322,15 @@ const state = {
       difficulty: 6.100,
       penaltiesScore: 0.2,
       judesScore: 0.0
+    },
+    {
+      id: 2,
+      gymnasticsMatchEventId: 1,
+      roundSeq: 2,
+      participantId: 1,
+      difficulty: 6.300,
+      penaltiesScore: 0.0,
+      judesScore: 0.0
     }
   ],
   gymnasticsPenalties: [
@@ -332,7 +341,23 @@ const state = {
       participantId:1,
       description: "Did not start within 30 seconds",
       deduction: 0.2
-    }
+    },
+    {
+      id: 1,
+      gymnasticsMatchEventId: 1,
+      roundSeq: 1,
+      participantId: 1,
+      description: "test",
+      deduction: 0.1
+    },
+    {
+      id: 1,
+      gymnasticsMatchEventId: 1,
+      roundSeq: 2,
+      participantId: 1,
+      description: "Did not start within 30 seconds",
+      deduction: 0.1
+    },
   ],
   judesScore: [
     {
@@ -378,10 +403,58 @@ const state = {
     {
       id: 6,
       gymnasticsMatchEventId: 1,
-      roundSeq: 1,
+      roundSeq: 2,
       participantId: 1,
       judeId: 6,
-      executionPoints: 8.50,
+      executionPoints: 7.30,
+    },
+    {
+      id: 7,
+      gymnasticsMatchEventId: 1,
+      roundSeq: 2,
+      participantId: 1,
+      judeId: 1,
+      executionPoints: 7.60,
+    },
+    {
+      id: 8,
+      gymnasticsMatchEventId: 1,
+      roundSeq: 2,
+      participantId: 1,
+      judeId: 2,
+      executionPoints: 7.20,
+    },
+    {
+      id: 9,
+      gymnasticsMatchEventId: 1,
+      roundSeq: 2,
+      participantId: 1,
+      judeId: 3,
+      executionPoints: 7.50,
+    },
+    {
+      id: 10,
+      gymnasticsMatchEventId: 1,
+      roundSeq: 2,
+      participantId: 1,
+      judeId: 4,
+      executionPoints: 7.40,
+    },
+    {
+      id: 11,
+      gymnasticsMatchEventId: 1,
+      roundSeq: 2,
+      participantId: 1,
+      judeId: 5,
+      executionPoints: 7.80,
+    },
+    {
+      id: 12,
+      gymnasticsMatchEventId: 1,
+      roundSeq: 2,
+      participantId: 1,
+      judeId: 6,
+      executionPoints: 7.60,
     },
   ],
   judges: [{
