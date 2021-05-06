@@ -4,37 +4,35 @@
       <h1 class="title">{{gymnasticsMatch.name}}</h1>
     </div>
     <div class="participant-container">
-      <Participant :currentParticipant="currentParticipant" :matchEventName ="matchEventName" />
+      <Participant :currentParticipant="currentParticipant" :matchEventLogo ="matchEventLogo" />
     </div>
-    <div class="Round-container" v-if="numberOfRounds > 1">
+    <div class="Round-container" v-if="((numberOfRounds > 1) && (gymnasticsScores.length > 0))" >
       <Round :currentRoundSeq="currentRoundSeq" :numberOfRounds="numberOfRounds"  />
     </div>
-    <div class="stats-container">
+    <div class="stats-container" v-if="gymnasticsScores.length > 0">
       <div class="wrap2">
         <div class="stat">
-          <h3 class="stat-detail">Difficulty</h3>
+          <h3 class="stat-title">Difficulty</h3>
           <h3 class="stat-detail">{{difficulty().toFixed(3)}}</h3>
         </div>
         <div class="stat">
-          <h3 class="stat-detail">Execution</h3>
+          <h3 class="stat-title">Execution</h3>
           <h3 class="stat-detail">{{execution().toFixed(3)}}</h3>
         </div>
         <div class="stat">
-          <h3 class="stat-detail">Penalties</h3>
+          <h3 class="stat-title">Penalties</h3>
           <h3 class="stat-detail">{{penalties().toFixed(3)}}</h3>  
         </div>
+        <div class="stat" v-if="(currentRoundSeq == 1)">
+          <h3 class="stat-title-score">Score</h3>
+          <h3 class="stat-detail">{{score.toFixed(3)}}</h3>
+       </div>
       </div>      
     </div>    
-    <div class="stats-container">
-      <div class="left-wrap" v-if="(numberOfRounds > 1) && (matchEventName = 'vault')">
+    <div class="stats-container">      
+      <div class="stat" v-if="(numberOfRounds > 1) && (matchEventName = 'vault') && (currentRoundSeq > 1)">
         <VaultRoundScore :gymnasticsScores="gymnasticsScores" :judesScores ="judesScores" :penalties="penaltiesData" /> 
-      </div>
-      <div class="right-wrap" v-if="numberOfRounds == 1">
-        <div class="stat">
-          <h3 class="stat-detail">Score</h3>
-          <h3 class="stat-detail">{{score.toFixed(3)}}</h3>
-        </div>
-      </div>
+      </div>      
     </div>
   </div>
 </template>
@@ -63,42 +61,9 @@ export default {
     matchEventName(){
       return this.gymnasticsMatchEvent[0].name
     },
-    
-    /* gymnasticsScore(){
-      return this.$store.state.gymnasticsScore.
-      filter((s) =>s.gymnasticsMatchEventId == this.gymnasticsMatchEvent[0].id 
-      && s.roundSeq == this.currentRoundSeq
-      && s.participantId == this.currentParticipant[0].id )
-    }, 
-    difficulty(){
-      return this.gymnasticsScore[0].difficulty
+    matchEventLogo(){
+      return this.gymnasticsMatchEvent[0].logo
     },
-    executionScore(){
-      let judesScore = this.$store.state.judesScore.
-      filter((s) =>s.gymnasticsMatchEventId == this.gymnasticsMatchEvent[0].id
-      && s.roundSeq == this.currentRoundSeq
-      && s.participantId == this.currentParticipant[0].id )  
-      judesScore.sort(function(a,b){ return a.executionPoints - b.executionPoints})
-      judesScore.shift()
-      judesScore.pop()
-      let executionScore = 0
-      let i =0
-      for(let score of judesScore) {
-        i += 1
-        executionScore += score.executionPoints
-      }
-      return (executionScore/i)
-    },
-    penalties(){      
-      let penalties = this.$store.state.gymnasticsPenalties.filter((p) =>p.gymnasticsMatchEventId == this.gymnasticsMatchEvent[0].id
-      && p.roundSeq == this.gymnasticsMatchEvent[0].currentRoundSeq
-      && p.participantId == this.currentParticipant[0].id )  
-      let penaltyPoint = 0
-      for(let penalty of penalties){
-        penaltyPoint += penalty.deduction
-      }
-      return penaltyPoint
-    }, */
     gymnasticsScores(){
       return this.$store.state.gymnasticsScore.
       filter((s) =>s.gymnasticsMatchEventId == this.gymnasticsMatchEvent[0].id 
@@ -162,6 +127,7 @@ import CalculteGymnasticsScore from '../calculateGymnasticsScore.js'
 
   .title {
     font-size: 50px;
+    color:lightskyblue
   }
 
   .event-container {
@@ -184,7 +150,7 @@ import CalculteGymnasticsScore from '../calculateGymnasticsScore.js'
     justify-content: space-between;
     margin: 50px;
     gap: 4em;
-    border: 1px solid red;
+    border: 2px solid red;
     width: 50%;
     margin: 0 auto;
   } 
@@ -196,9 +162,16 @@ import CalculteGymnasticsScore from '../calculateGymnasticsScore.js'
     justify-content: space-between;
     gap: 2em;
   }
-
+  .stat-title {
+    font-size :35px;
+    color:orange;
+  }
+  .stat-title-score{
+    font-size :35px;
+    color:purple;
+  }
   .stat-detail {
-    font-size: 40px;
+    font-size: 35px;
     /* margin: 1em; */
   }
 
@@ -212,7 +185,7 @@ import CalculteGymnasticsScore from '../calculateGymnasticsScore.js'
     border: 1px solid blue;
     display: flex;
     justify-content: flex-end;    
-    font-size: 40px;
+    font-size: 35px;
     width: 50%;
     margin: 0 auto;
   } 

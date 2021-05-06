@@ -26,7 +26,10 @@ export default {
 
 <style scoped>
 
-.Round{
+.Round{  
     display: flex;
+     justify-content: space-between;
+    border:3px solid green;
+    justify-content: flex-end;  
   }
 </style>

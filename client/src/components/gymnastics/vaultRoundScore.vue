@@ -2,15 +2,13 @@
  <div class="vaultScore-container">
   <div class="stat" >
     <h3 class="stat-title" >Vault 1</h3>
-    <h3 class="stat-detail">{{vault1.toFixed(3)}}</h3> 
-  </div>
-  <div class="stat" >
+    <h3 class="stat-detail">{{vault1.toFixed(3)}}</h3>
     <h3 class="stat-title" >Vault 2</h3>
-    <h3 class="stat-detail">{{vault2.toFixed(3)}}</h3>     
-  </div>     
-   <div class="stat">
-    <h3 class="stat-title">Score</h3>
-    <h3 class="stat-detail">{{score.toFixed(3)}}</h3> 
+    <h3 class="stat-detail">{{vault2.toFixed(3)}}</h3>  
+    <div class="stat">
+      <h3 class="stat-title">Score</h3>
+      <h3 class="stat-detail">{{score.toFixed(3)}}</h3> 
+    </div>
   </div>   
  </div>  
 </template>
@@ -57,7 +55,8 @@ import CalculteGymnasticsScore from '/src/calculateGymnasticsScore.js'
 
 <style scoped>
   .stat{
-    display:flex
+    display:flex;
+    justify-items: self-end;
   }
   .stat-title{
     color:orange;
@@ -65,6 +64,7 @@ import CalculteGymnasticsScore from '/src/calculateGymnasticsScore.js'
   }
   .stat-detail{
     margin-left:10px;
+    font-size: 35px;
   }
 
 </style>

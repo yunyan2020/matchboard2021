@@ -220,6 +220,7 @@ const state = {
     {
       id: 1,
       name: "vault",
+      logo:"vault.png",
       numberOfRounds: 2,
       currentRoundSeq: 1,
       gymnasticsMatchId: 1,
@@ -245,7 +246,8 @@ const state = {
     },
     {
       id: 2,
-      name: "uneven bar",
+      name: "Uneven Bars",
+      logo: "unevenBars.png",
       numberOfRounds: 1,
       currentRoundSeq:1,
       gymnasticsMatchId: 1,
@@ -312,6 +314,12 @@ const state = {
       abbrevName: "IND",
       logo: "IND-Flag.png"
     },
+    {
+      id: 4,
+      name: "Russia",
+      abbrevName: "RUS",
+      logo: "RUS-Flag.png"
+    },
   ],
   gymnasticsScore: [
     {
@@ -327,6 +335,15 @@ const state = {
       id: 2,
       gymnasticsMatchEventId: 1,
       roundSeq: 2,
+      participantId: 1,
+      difficulty: 6.300,
+      penaltiesScore: 0.0,
+      judesScore: 0.0
+    },
+    {
+      id: 3,
+      gymnasticsMatchEventId: 2,
+      roundSeq: 1,
       participantId: 1,
       difficulty: 6.300,
       penaltiesScore: 0.0,

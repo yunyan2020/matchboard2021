@@ -14,7 +14,6 @@ export default class calculateGymnasticsScore{
   }
 
   calculateExecution() {
-    console.log("this.judesScore", this.judesScore)
     let judesScores = this.judesScores.filter((s) =>s.roundSeq == this.currentRoundSeq)
     judesScores.sort(function (a, b) { return a.executionPoints - b.executionPoints })
     judesScores.shift()
@@ -25,12 +24,14 @@ export default class calculateGymnasticsScore{
       i += 1
       executionScore += score.executionPoints
     }
-    return (executionScore / i)
+    if (executionScore !== 0) {
+      return (executionScore / i)
+    }
+    else return executionScore    
   }
 
   calculatePenalties() {
     let penaltyPoint = 0
-    console.log("this.penalties i class", this.penalties)
     let penalties = this.penalties.filter((p) => p.roundSeq == this.currentRoundSeq)
     console.log("penalties i class", penalties)
     if (penalties.length > 0) {

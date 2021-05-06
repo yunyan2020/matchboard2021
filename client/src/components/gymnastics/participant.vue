@@ -1,24 +1,7 @@
 <template>
-  <!-- <div class="participantInformation">
-    <div class="matchEvent">
-      <img src="src/assets/vault.png" alt="" class="matchEvent" />
-    </div>
-    <div class="Ranking">
-      <p>1</p>
-    </div>
-    <div class="abbrevName">
-      <p>USA</p>
-    </div>
-    <div class="flag">
-      <img src="src/assets/usa-flag.png" alt="" class="flag" />
-    </div>
-    <div class="participantName">
-      <p >Simone Heles</p>
-    </div>
-  </div> -->
   <div class="participant">
     <div class="matchEvent section">
-      <img :src="'/src/assets/' + matchEventName.toLowerCase() + '.png'" alt="" class="matchEvent-icon" />
+      <img :src="'/src/assets/' + matchEventLogo" alt="" class="matchEvent-icon" />
     </div>
     <div class="ranking section">
       <p class="participant"> {{ranking}}</p>
@@ -27,7 +10,7 @@
       <p class="nationality">{{affilication[0].abbrevName}}</p>
     </div>
     <div class="flag section">
-      <img :src="'/src/assets/'+ affilication[0].abbrevName.toLowerCase() + '-flag.png'" alt="" class="flag-icon" />
+      <img :src="'/src/assets/'+ affilication[0].logo" alt="" class="flag-icon" />
     </div>
     <div class="participantName section">
       <p class="firstName">{{participant[0].firstName}}</p>
@@ -38,7 +21,7 @@
 
 <script>
 export default {
-  props:['currentParticipant','matchEventName'],
+  props:['currentParticipant','matchEventLogo'],
   computed:{    
     ranking(){
       return this.currentParticipant[0].preliminariesRanking
