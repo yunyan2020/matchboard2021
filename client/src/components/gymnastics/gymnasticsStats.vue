@@ -3,11 +3,11 @@
     <div class="wrap">
       <div class="difficult">
         <h3 class="difficult">Difficult</h3>
-        <h3 class="difficultScore">7.10</h3>
+        <h3 class="difficultScore">{{currentScore.difficulty}}</h3>
       </div>
       <div class="excution">
         <h3 class="excution">Excution</h3>
-        <h3 class="excutionScore">14.15</h3>
+        <h3 class="excutionScore"></h3>
       </div>
     </div>   
     <div class="wrap"> 
@@ -28,6 +28,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      currentScore: this.$store.state.gymnasticsScore
+    }
+  }
 
 }
 </script>
