@@ -1,9 +1,21 @@
 <template>
   <div>
-  <select id="penaltySelection" v-model="selected" >
-  <option v-for="player in listPlayers" :value="player" :key="player">{{ player.name }}</option>
-</select>
-  <button v-on:click="addPenalty()">Add Penalty </button>
+    <button v-on:click="modalOpen = !modalOpen && console.log(this.$store.state.match.matchEvents[0].penalties.length)"> Penalty</button>
+    <div class="penaltyModal" v-if="modalOpen==false">
+      <div class="penaltyModalContent">
+      <select id="penaltySelection" v-model="selected">
+        <option v-for="player in listPlayers" :value="player" :key="player">
+          {{ player.name }}
+        </option>
+      </select>
+      <select id="penaltyType" v-model="selectedtype">
+        <option v-for="type in penaltyTypes" :value="type" :key="type">
+          {{ type }}
+        </option>
+      </select>
+      <button v-on:click="addPenalty()">Add penalty</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -20,13 +32,13 @@ export default {
       //   type: "Gult kort",
       // }
       selected: " ",
-       players: [],
-       modalOpen: true
-    }
+      selectedType: " ",
+      penaltyTypes: ["Gult kort","Rött kort", "Svart kort"],
+      players: [],
+      modalOpen: true,
+    };
   },
   computed: {
-
-
     // getPlayerId() {
     //   let player = this.$store.state.match.teams[0].players[i].id;
     //   console.log(player);
@@ -40,17 +52,39 @@ export default {
       return allPlayers;
       // return this.$store.state.match.teams[0].players
     },
-    
   },
   methods: {
-    addPenalty: function() {
-      this.$store.state.match.matchEvents[0].penalties.push(this.test)
-      console.log(this.$store.state.match.matchEvents[0].penalties, 'penalties');
+    addPenalty: function () {
+      this.$store.state.match.matchEvents[0].penalties.push(this.mockData);
+      console.log(
+        this.$store.state.match.matchEvents[0].penalties,
+        "penalties"
+      );
+    
       // store.commit("addPenalty");
     },
+    fullPenalty(){
+      return {
+        id: this.$store.state.match.matchEvents[0].penalties.length + 1,
+        
+      }
+    },
+    simpleLog: function(){
+      console.log(this.$store.state.match.matchEvents[0].penalties.length)
+    }
+    
   },
 };
 </script>
 
-<style>
+<style scoped>
+.penaltyModal{
+  background-color: gray;
+  height: 150px;
+  width: 200px;
+  margin: 0 auto;
+}
+.penaltyModalContent{
+  padding-top: 10px;
+}
 </style>
