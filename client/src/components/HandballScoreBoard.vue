@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <div class="x left">
+  <div class="sb-container">
+    <div class="cont left">
       <div class="logo-left">
         <img :src="homeTeamLogo" alt="Home Team" />
       </div>
@@ -14,9 +14,9 @@
     </div>
     <div class="middle">
       <TeamSportScoring />
-      <PeriodTimer />
+      <PeriodTimer /> 
     </div>
-    <div class="x right">
+    <div class="cont right">
       <div class="logo-right">
         <img :src="awayTeamLogo" alt="Away Team" />
       </div>
@@ -31,8 +31,9 @@
 </template>
 
 <script>
-import PeriodTimer from '../components/PeriodTimer.vue'
-import TeamSportScoring from '../components/TeamSportScoring.vue'
+import PeriodTimer from './PeriodTimer.vue'
+import TeamSportScoring from './TeamSportScoring.vue'
+
 
 export default {
   computed: {
@@ -108,14 +109,7 @@ export default {
 
 <style scoped>
 
-div {
-  border: 0px solid green;
-}
-  .container {
-    width: 1850px;
-    height: 975px; 
-    /* width: 95vw;
-    height: 95vh; */
+  .sb-container {
     background-image: url('../assets/handball_bg.png');
     background-repeat: no-repeat;
     display: grid;
@@ -140,12 +134,14 @@ div {
     margin: 0;
   }
 
-  .logo-left {
-    margin-top: 20px;
+  .logo-left img{
+    margin-top: 2vh;
+    width: 10vw;
   }
 
-  .logo-right {
-    margin-top: 5px;
+  .logo-right img{
+    margin-top: 2vh;
+    width: 10vw;
   }
 
   .penalty-time {
@@ -175,9 +171,13 @@ div {
     margin-left:10px;
     justify-content:left;
     color:orangered;
+    font-family: 'Roboto Slab', serif;
+    text-shadow: 0.05em 0.05em black;
+    color: rgb(223, 24, 24);
+    margin-bottom: 2vh;
   }
 
-  .x {
+  .cont {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -186,16 +186,20 @@ div {
   .score {
     /* float: left; */
     color: lightgreen;
-    font-size: 100px;
+    font-size: 7em;
     padding: 0;
-    margin-top: 30px;
+    margin-top: 2vh;
+  }
+
+  .middle {
+    /* background: red; */
+    /* margin-top: 15vh; */
   }
   
-  .time {
+  /* .time {
     color: white;
     font-size: 170px;
-    /* float: left; */
     padding: 0;
     margin-top: 100px;
-  }
+  } */
 </style>
