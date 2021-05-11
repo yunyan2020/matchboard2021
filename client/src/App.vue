@@ -1,11 +1,9 @@
 <template>
   <div class="container">
-    <!-- <Home /> -->
-   <!-- <HandballOperator />-->
-     <HandballScoreBoard />  
-        <!-- <router-view /> -->
-    
- 
+    <Home />
+    <!-- <HandballScoreBoard /> -->
+    <!-- <GymnasticsScoreBoard /> -->
+    <router-view /> 
   </div>
 </template>
 
@@ -13,6 +11,7 @@
 import Home from './views/Home.vue'
 import HandballScoreBoard from './views/HandballScoreBoard.vue'
 import HandballOperator from './views/HandballOperator.vue'
+import GymnasticsScoreBoard from './views/GymnasticsScoreBoard.vue'
 
 export default { 
   // created() {
@@ -25,6 +24,10 @@ export default {
 </script>
 
 <style>
+* {
+  box-sizing: border-box;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
