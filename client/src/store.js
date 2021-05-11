@@ -5,7 +5,7 @@ const state = {
     id: 1,
     time: '18:32',
     teamId: [1, 2],
-    team:{},
+    team: {},
   },
   teams: [{
     id: 1,
@@ -178,7 +178,7 @@ const state = {
       teamId: 2,
       points: 1,
       playerId: 1,
-      player: {} ,
+      player: {},
       time: "18:21"
     },
   ],
@@ -212,51 +212,90 @@ const state = {
     },
   ],
   gymnasticsMatch: {
-    id:1,
-    name: "WOMEN's VAULT 2021",
-    judgesId:[1,2,3,4,5,6]
-  },
-  gymnasticsMatchEvent: [{
     id: 1,
-    name: "vault",
-    numberOfRounds: 2,
-    gymnasticsMatchId: 1,
-    participantId:[1,2,3,4,5,6,7,8,9,10]
+    name: "WOMEN's VAULT 2021",
+    judgesId: [1, 2, 3, 4, 5, 6]
   },
-  {
-    id: 2,
-    name: "uneven bar",
-    numberOfRounds: 1,
-    gymnasticsMatchId: 1,
-    participantId: [1, 2, 3, 4, 5, 6, 11, 12, 13, 14]
-  }    
-  ],
-  participant: [
+  gymnasticsMatchEvents: [
     {
       id: 1,
-      firstName: "Simon",
-      lastName: "Herik",
-      number: 120,
-      affilicationId:1
-    },
-    { 
-      id: 2,
-      firstName: "Ting",
-      lastName: "Huang",
-      number: 366,
-      runningOrder: 3,
-      affilicationId: 2
+      name: "vault",
+      logo:"vault.png",
+      numberOfRounds: 2,
+      currentRoundSeq: 1,
+      gymnasticsMatchId: 1,
+      currentMatchEvent: true,
+      participants: [{
+        id: 1,
+        runningOrder: 2,
+        preliminariesRanking: 1,
+        showOnMatchBorad: "showing"
+      },
+      {
+        id: 2,
+        runningOrder: 3,
+        preliminariesRanking: 2,
+        showOnMatchBorad: ""
+      },
+      {
+        id: 3,
+        runningOrder: 1,
+        preliminariesRanking: 3,
+        showOnMatchBorad: "showed"
+      }]
     },
     {
-      id: 3,
-      firstName: "Sahara",
-      lastName: "Karmark",
-      number: 260,
-      runningOrder:1,
-      affilicationId: 2
-    }
+      id: 2,
+      name: "Uneven Bars",
+      logo: "unevenBars.png",
+      numberOfRounds: 1,
+      currentRoundSeq:1,
+      gymnasticsMatchId: 1,
+      currentMatchEvent: false,
+      participants: [{
+        id: 1,
+        runningOrder: 2,
+        preliminariesRanking: 1,
+        showOnMatchBorad: "showing"
+      },
+      {
+        id: 2,
+        runningOrder: 3,
+        preliminariesRanking: 2,
+        showOnMatchBorad: ""
+      },
+      {
+        id: 3,
+        runningOrder: 1,
+        preliminariesRanking: 3,
+        showOnMatchBorad: "showed"
+      }],
+    },
   ],
-  affilication: [
+  participants: [{
+    id: 1,
+    firstName: "Simon",
+    lastName: "Herik",
+    number: 351,
+    affilicationId: 1
+  },
+  {
+    id:2,
+    firstName: "Ting",
+    lastName: "Zhang",
+    number: 366,
+    affilicationId: 2
+  },
+  {
+    id: 3,
+    firstName: "Sahara",
+    lastName: "Karmark",
+    number: 260,
+    affilicationId: 3
+  },
+  ],
+
+  affilications: [
     {
       id: 1,
       name: "American",
@@ -274,55 +313,172 @@ const state = {
       name: "India",
       abbrevName: "IND",
       logo: "IND-Flag.png"
-    }
+    },
+    {
+      id: 4,
+      name: "Russia",
+      abbrevName: "RUS",
+      logo: "RUS-Flag.png"
+    },
   ],
   gymnasticsScore: [
     {
-      id:1,
+      id: 1,
       gymnasticsMatchEventId: 1,
-      participantId:1,
-      difficulty: 7.10,
+      roundSeq:1,
+      participantId: 1,
+      difficulty: 6.100,
       penaltiesScore: 0.2,
-      judesScore:0.0
-    }     
+      judesScore: 0.0
+    },
+    {
+      id: 2,
+      gymnasticsMatchEventId: 1,
+      roundSeq: 2,
+      participantId: 1,
+      difficulty: 6.300,
+      penaltiesScore: 0.0,
+      judesScore: 0.0
+    },
+    {
+      id: 3,
+      gymnasticsMatchEventId: 2,
+      roundSeq: 1,
+      participantId: 1,
+      difficulty: 6.300,
+      penaltiesScore: 0.0,
+      judesScore: 0.0
+    }
   ],
   gymnasticsPenalties: [
     {
       id: 1,
+      gymnasticsMatchEventId:1,
+      roundSeq:1,
+      participantId:1,
+      description: "Did not start within 30 seconds",
+      deduction: 0.2
+    },
+    {
+      id: 1,
       gymnasticsMatchEventId: 1,
+      roundSeq: 1,
+      participantId: 1,
+      description: "test",
+      deduction: 0.1
+    },
+    {
+      id: 1,
+      gymnasticsMatchEventId: 1,
+      roundSeq: 2,
       participantId: 1,
       description: "Did not start within 30 seconds",
-      deduction:0.2
-    }
+      deduction: 0.1
+    },
   ],
   judesScore: [
     {
       id: 1,
-      gpymnasticsMatchEventId: 1,
+      gymnasticsMatchEventId: 1,
+      roundSeq: 1,
       participantId: 1,
       judeId: 1,
-      executionPoints:8.10,
+      executionPoints: 8.10,
     },
     {
       id: 2,
-      gpymnasticsMatchEventId: 1,
+      gymnasticsMatchEventId: 1,
+      roundSeq: 1,
       participantId: 1,
       judeId: 2,
       executionPoints: 8.20,
     },
     {
-      id: 2,
-      gpymnasticsMatchEventId: 1,
+      id: 3,
+      gymnasticsMatchEventId: 1,
+      roundSeq: 1,
       participantId: 1,
       judeId: 3,
       executionPoints: 8.30,
-    }
+    },
+    {
+      id: 4,
+      gymnasticsMatchEventId: 1,
+      roundSeq: 1,
+      participantId: 1,
+      judeId: 4,
+      executionPoints: 8.40,
+    },
+    {
+      id: 5,
+      gymnasticsMatchEventId: 1,
+      roundSeq: 1,
+      participantId: 1,
+      judeId: 5,
+      executionPoints: 8.20,
+    },
+    {
+      id: 6,
+      gymnasticsMatchEventId: 1,
+      roundSeq: 2,
+      participantId: 1,
+      judeId: 6,
+      executionPoints: 7.30,
+    },
+    {
+      id: 7,
+      gymnasticsMatchEventId: 1,
+      roundSeq: 2,
+      participantId: 1,
+      judeId: 1,
+      executionPoints: 7.60,
+    },
+    {
+      id: 8,
+      gymnasticsMatchEventId: 1,
+      roundSeq: 2,
+      participantId: 1,
+      judeId: 2,
+      executionPoints: 7.20,
+    },
+    {
+      id: 9,
+      gymnasticsMatchEventId: 1,
+      roundSeq: 2,
+      participantId: 1,
+      judeId: 3,
+      executionPoints: 7.50,
+    },
+    {
+      id: 10,
+      gymnasticsMatchEventId: 1,
+      roundSeq: 2,
+      participantId: 1,
+      judeId: 4,
+      executionPoints: 7.40,
+    },
+    {
+      id: 11,
+      gymnasticsMatchEventId: 1,
+      roundSeq: 2,
+      participantId: 1,
+      judeId: 5,
+      executionPoints: 7.80,
+    },
+    {
+      id: 12,
+      gymnasticsMatchEventId: 1,
+      roundSeq: 2,
+      participantId: 1,
+      judeId: 6,
+      executionPoints: 7.60,
+    },
   ],
-  judges:[{
+  judges: [{
     id: 1,
     firstName: "Karl",
     lastName: "Anderson",
-    affliationId:1
+    affliationId: 1
   },
   {
     id: 2,
