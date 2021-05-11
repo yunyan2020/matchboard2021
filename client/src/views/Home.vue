@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-home">
     <div class="navigation">
       <router-link to="/GymnasticsOperator">GymnasticsOperator</router-link>
     </div>
@@ -22,12 +22,13 @@ export default {
 </script>
 
 <style scoped>
-  .container {
+  .container-home {
     width: 75%;
     margin: 0 auto;
   }
 
   .navigation {
+    margin:20px,20px,20px,20px;
     padding: 10px;
     float: left;
   }

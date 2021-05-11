@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-    <!-- <Home /> -->
+    <Home />
     <!-- <HandballScoreBoard /> -->
-    <GymnasticsScoreBoard /> 
-    <!-- <router-view /> -->
+    <!-- <GymnasticsScoreBoard /> -->
+    <router-view /> 
   </div>
 </template>
 
