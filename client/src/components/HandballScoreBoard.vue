@@ -5,7 +5,7 @@
         <img :src="homeTeamLogo" alt="Home Team" />
       </div>
       <div class="penalty-left">
-        <div v-for="(penalty, i) in homeTeamPenalties" :key="i">
+        <div v-for="(penalty, i) in homeTeamPenalties()" :key="i">
           <h3 class="penalty-time">{{penalty.penaltyTime}}</h3>
           <h3 class="penalty-type">{{penalty.type}}</h3>
           <h3 class="penalty-player">{{penalty.playerFirstName}}</h3>
@@ -21,10 +21,11 @@
         <img :src="awayTeamLogo" alt="Away Team" />
       </div>
       <div class="penalty-right">
-        <div v-for="(penalty, i) in awayTeamPenalties" :key="i">
+        <div v-for="(penalty, i) in awayTeamPenalties1()" :key="i">
           <h3 class="penalty-detail">{{penalty.penaltyTime}}</h3>
-          <h3 class="penalty-detail">{{penalty.type}}</h3>
-        </div>
+          <h3 class="penalty-detail">{{penalty.type}}</h3> 
+          <h3 class="penalty-player">{{penalty.playerFirstName}}</h3>
+        </div>        
       </div>
     </div>
   </div>
@@ -41,8 +42,9 @@ export default {
       return this.$store.state.match
     },
     matchEvents() {     
-      return this.$store.state.matchEvents.filter((matchEvent) => matchEvent.id == this.match.id && matchEvent.currentMatchEvent == true )
-     // return this.$store.state.match.matchEvents[0].name
+      return this.$store.state.matchEvents.
+      filter((matchEvent) => matchEvent.id == this.match.id 
+      && matchEvent.currentMatchEvent == true )
     },
     teams(){
       return this.$store.state.teams
@@ -54,26 +56,21 @@ export default {
     homeTeamLogo() {
       let homeTeam = this.$store.state.teams.filter((t) => t.homeTeam == true)[0]
       return homeTeam.logo;
-     // return this.$store.state.match.teams[0].logo;
     },
     awayTeamLogo() {
       let awayTeam = this.$store.state.teams.filter((t) => t.homeTeam == false)[0]
       return awayTeam.logo;
-
-     // return this.$store.state.match.teams[1].logo;
     },
     penalties(){
       return  this.$store.state.penalties;
+    },   
+    homeTeamPenaltiesPlayers(){
+      return this.players.filter((p) => p.id = this.homeTeamPenalties.playId )
     },
-
-    homeTeamPenalties() { 
-      /* let match = this.match;
-      let penalties = match.matchEvents[0].penalties;
-      this.homeTeamPenalty = penalties.filter(hometeam => hometeam.teamId == 1); */
-      
-     /*  let penalties = this.matchEvents.penalties;
-      let homeTeam = this.teams.filter((t) => t.homeTeam == true)      
-      this.homeTeamPenalty = penalties.filter(hometeam => hometeam.teamId == homeTeam[0].id); */
+    
+  },
+  methods:{
+     homeTeamPenalties() { 
       let penalties = this.penalties;
       let homeTeam = this.teams.filter((t) => t.homeTeam == true)      
       let homeTeamPenalty = penalties.filter(hometeam => hometeam.teamId == homeTeam[0].id); 
@@ -84,23 +81,25 @@ export default {
         let playerFirstName =""
         let player = this.players.filter((p)=>p.id == penalty.playerId && p.matchEventsId == this.matchEvents.id)
         playerFirstName = player[0].firstName
-        homeTeamPenaltyInfo.push({penaltyTime:penalty.penaltyTime,type:penalty.type,playerFirstName:playerFirstName})
-        console.log("homeTeamPenaltyInfo",homeTeamPenaltyInfo)      
+        homeTeamPenaltyInfo.push({penaltyTime:penalty.penaltyTime,type:penalty.type,playerFirstName:playerFirstName})         
       }
      return homeTeamPenaltyInfo;
-      },   
-    homeTeamPenaltiesPlayers(){
-      return this.players.filter((p) => p.id = this.homeTeamPenalties.playId )
     },
-    awayTeamPenalties() { 
-      /* let match = this.match;
-      let penalties = match.matchEvents[0].penalties;
-      this.awayTeamPenalty = penalties.filter(awayteam => awayteam.teamId == 2); */
-    // let penalties = this.matchEvents.penalties;
+    awayTeamPenalties1() { 
      let penalties = this.$store.state.penalties;
      let awayTeam = this.teams.filter((t) => t.homeTeam == false)
-     this.awayTeamPenalty = penalties.filter(awayteam => awayteam.teamId == awayTeam[0].id);    
-     return this.awayTeamPenalty;
+     let awayTeamPenalty = penalties.filter(awayteam => awayteam.teamId == awayTeam[0].id);  
+     console.log('awayTeamPenalty 1',awayTeamPenalty)
+     let awayTeamPenaltyInfo = []
+      for (let penalty of awayTeamPenalty){
+        let playerFirstName =""
+        let player = this.players.filter((p)=>p.id == penalty.playerId && p.matchEventsId == this.matchEvents.id)
+        playerFirstName = player[0].firstName
+        awayTeamPenaltyInfo.push({penaltyTime:penalty.penaltyTime,type:penalty.type,playerFirstName:playerFirstName})
+             
+      }  
+     console.log("awayTeamPenaltyInfo 1",awayTeamPenaltyInfo) 
+     return awayTeamPenaltyInfo;
     },
   },
   components: {PeriodTimer, TeamSportScoring}
