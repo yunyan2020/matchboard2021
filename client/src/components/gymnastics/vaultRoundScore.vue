@@ -6,7 +6,7 @@
     <h3 class="stat-title" >Vault 2</h3>
     <h3 class="stat-detail">{{vault2.toFixed(3)}}</h3>  
     <div class="stat">
-      <h3 class="stat-title">Score</h3>
+      <h3 class="stat-title-score">Score</h3>
       <h3 class="stat-detail">{{score.toFixed(3)}}</h3> 
     </div>
   </div>   
@@ -60,6 +60,10 @@ import CalculteGymnasticsScore from '/src/calculateGymnasticsScore.js'
   }
   .stat-title{
     color:orange;
+    margin-left:10px;
+  }
+  .stat-title-score{
+    color:purple;
     margin-left:10px;
   }
   .stat-detail{

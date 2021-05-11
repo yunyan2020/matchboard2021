@@ -222,7 +222,7 @@ const state = {
       name: "vault",
       logo:"vault.png",
       numberOfRounds: 2,
-      currentRoundSeq: 1,
+      currentRoundSeq: 2,
       gymnasticsMatchId: 1,
       currentMatchEvent: true,
       participants: [{
