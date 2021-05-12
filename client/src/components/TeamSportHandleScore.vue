@@ -17,37 +17,92 @@
 <script>
 export default {
   data() {
-    return {
-      test: {
-        teamId: 1,
-        points: 1,
-        player: "Karl Henrik",
-        time: "11:15"
-      }
+    return {      
+      homeTeamScore:{
+      matchEventsId: 1,
+      teamId: 1,
+      points: 1,
+      playerId: 1,
+      time: "14:39"
+    },
+    awayTeamScore:{
+      matchEventsId: 1,
+      teamId: 2,
+      points: 1,
+      playerId: 3,
+      time: "15:39"
+    },
     }
   },
   computed: {
+    match() {
+      return this.$store.state.match
+    },
+    matchEvents() { 
+      console.log('matchEvents',this.$store.state.matchEvents.
+      filter((matchEvent) => matchEvent.id == this.match.id 
+      && matchEvent.currentMatchEvent == true ))    
+      return this.$store.state.matchEvents.
+      filter((matchEvent) => matchEvent.id == this.match.id 
+      && matchEvent.currentMatchEvent == true )
+      
+    },
+    teams(){
+      return this.$store.state.teams
+    },
+    players(){
+      return this.$store.state.players
+    },
+    homeTeam() {
+      return this.$store.state.teams.filter((t) => t.homeTeam == true)[0]
+    },
+    awayTeam() {
+      return this.$store.state.teams.filter((t) => t.homeTeam == false)[0]
+    },
   },
   methods: {
-    addHomeTeamScore() {
-      this.$store.state.match.matchEvents[0].homeTeamScore.push(this.test);
-      console.log(this.$store.state.match.matchEvents[0].homeTeamScore);
+    addHomeTeamScore() {      
+      this.$store.state.scores.push(this.homeTeamScore);
+      console.log(this.$store.state.scores);
     },
 
     removeHomeTeamScore() {
-      this.$store.state.match.matchEvents[0].homeTeamScore.pop();
-      console.log(this.$store.state.match.matchEvents[0].homeTeamScore);
+      let indices = [];
+      let scores   =  this.$store.state.scores;
+      console.log('homeTeam id',this.homeTeam)
+      let element = this.homeTeam.id;
+      let idx = scores.indexOf(element);
+      while (idx != -1) {
+        indices.push(idx);
+        idx = scores.indexOf(element, idx + 1);
+      } 
+      let lastInx = indices[indices.length-1] 
+      this.$store.state.scores.splice(lastInx, 1); 
+      console.log(this.$store.state.scores);
 
     },
+
     addAwayTeamScore() {
-      this.$store.state.match.matchEvents[0].awayTeamScore.push(this.test);
-      console.log(this.$store.state.match.matchEvents[0].awayTeamScore);
+      this.$store.state.scores.push(this.awayTeamScore);
+      console.log(this.$store.state.scores);
     },
 
     removeAwayTeamScore() {
-      this.$store.state.match.matchEvents[0].awayTeamScore.pop();
-      console.log(this.$store.state.match.matchEvents[0].awayTeamScore);
-
+      let indices = [];
+      let scores   =  this.$store.state.scores;
+      console.log('awayTeam id',this.awayTeam)
+      let element = this.awayTeam.id;
+      console.log('element of away team',element)
+      let idx = scores.indexOf(element);
+      console.log('idx',idx)
+      while (idx != -1) {
+        indices.push(idx);
+        idx = scores.indexOf(element, idx + 1);
+      } 
+      console.log('indices',indices)
+      let lastInx = indices[indices.length-1] 
+      this.$store.state.scores.splice(lastInx, 1); 
+      console.log(this.$store.state.scores);
     },
 
   }
