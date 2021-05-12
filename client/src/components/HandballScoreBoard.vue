@@ -5,11 +5,13 @@
         <img :src="homeTeamLogo" alt="Home Team" />
       </div>
       <div class="penalty-left">
-        <div v-for="(penalty, i) in homeTeamPenalties()" :key="i">
-          <h3 class="penalty-time">{{penalty.penaltyTime}}</h3>
-          <h3 class="penalty-type">{{penalty.type}}</h3>
-          <h3 class="penalty-player">{{penalty.playerFirstName}}</h3>
-        </div>
+        <div class="penalty-wrap">
+          <div v-for="(penalty, i) in homeTeamPenalties()" :key="i" class="penalty-detail">
+            <h3 class="penalty-time">{{penalty.penaltyTime}}</h3>
+            <h3 class="penalty-type">{{penalty.type}}</h3> 
+            <h3 class="penalty-player">{{penalty.playerFirstName}}</h3>
+          </div>
+       </div> 
       </div>
     </div>
     <div class="middle">
@@ -21,11 +23,13 @@
         <img :src="awayTeamLogo" alt="Away Team" />
       </div>
       <div class="penalty-right">
-        <div v-for="(penalty, i) in awayTeamPenalties1()" :key="i">
-          <h3 class="penalty-detail">{{penalty.penaltyTime}}</h3>
-          <h3 class="penalty-detail">{{penalty.type}}</h3> 
-          <h3 class="penalty-player">{{penalty.playerFirstName}}</h3>
-        </div>        
+         <div class="penalty-wrap">
+          <div v-for="(penalty, i) in awayTeamPenalties1()" :key="i">
+            <h3 class="penalty-time">{{penalty.penaltyTime}}</h3>
+            <h3 class="penalty-type">{{penalty.type}}</h3> 
+            <h3 class="penalty-player">{{penalty.playerFirstName}}</h3>
+          </div>  
+         </div>       
       </div>
     </div>
   </div>
@@ -74,8 +78,6 @@ export default {
       let penalties = this.penalties;
       let homeTeam = this.teams.filter((t) => t.homeTeam == true)      
       let homeTeamPenalty = penalties.filter(hometeam => hometeam.teamId == homeTeam[0].id); 
-      console.log("players",this.players)
-      console.log("matchEvents",this.matchEvents)
       let homeTeamPenaltyInfo = []
       for (let penalty of homeTeamPenalty){
         let playerFirstName =""
@@ -89,7 +91,6 @@ export default {
      let penalties = this.$store.state.penalties;
      let awayTeam = this.teams.filter((t) => t.homeTeam == false)
      let awayTeamPenalty = penalties.filter(awayteam => awayteam.teamId == awayTeam[0].id);  
-     console.log('awayTeamPenalty 1',awayTeamPenalty)
      let awayTeamPenaltyInfo = []
       for (let penalty of awayTeamPenalty){
         let playerFirstName =""
@@ -98,7 +99,6 @@ export default {
         awayTeamPenaltyInfo.push({penaltyTime:penalty.penaltyTime,type:penalty.type,playerFirstName:playerFirstName})
              
       }  
-     console.log("awayTeamPenaltyInfo 1",awayTeamPenaltyInfo) 
      return awayTeamPenaltyInfo;
     },
   },
@@ -111,12 +111,13 @@ export default {
   .sb-container {
     background-image: url('../assets/handball_bg.png');
     background-repeat: no-repeat;
+    width: 60vw;
     display: grid;
     grid-template-columns: 25% 50% 25%;
   }
 
   .left {
-    float: left;
+    float: left;   
   }
 
   .right {
@@ -142,40 +143,32 @@ export default {
     margin-top: 2vh;
     width: 10vw;
   }
-
-  .penalty-time {
-    font-size: 3em;
-    display:inline-block;
-    margin-left:10px;
-    justify-content:left;
-    color: rgba(255, 30, 0, 0.527);
-  }
-  .penalty-type {
-    font-size: 3em;
-    display:inline-block;
-    margin-left:10px;
-    justify-content:left;
-    color: orangered;
-  }
-   .penalty-player {
-    font-size: 3em;
-    display:inline-block;
-    margin-left:10px;
-    justify-content:left;
-    color:rgb(60, 11, 238);
-  }
-  .penalty-detail {
-    font-size: 3em;
-    display:inline-block;
-    margin-left:10px;
-    justify-content:left;
-    color:orangered;
+  .penalty-wrap{
+    text-align:left;    
+    font-size: 2em;       
     font-family: 'Roboto Slab', serif;
     text-shadow: 0.05em 0.05em black;
-    color: rgb(223, 24, 24);
     margin-bottom: 2vh;
   }
-
+  .penalty-detail{
+    display: inline-block;
+  }
+  .penalty-time {       
+    float:left;
+    margin-left:10px;
+    color:orangered;    
+  }
+  .penalty-type {    
+    float:left;
+    margin-left:10px;
+    color: rgb(255, 153, 0);
+  }
+   .penalty-player {
+    display:inline-block;
+    margin-left:10px;
+    color:rgb(60, 11, 238);
+  }
+  
   .cont {
     display: flex;
     flex-direction: column;

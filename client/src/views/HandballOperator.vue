@@ -35,9 +35,10 @@ export default {
     padding-top: 3vh;
   }
   .scoreboard-preview {
-    width: 30vw;
-    height: 35vh;
+    width: 50vw;
+    height: 45vh;
     text-align: center;
+    justify-content: left;
     margin: 0 auto;
     outline: #000000 solid 2px; 
     margin-top: 5vh; 
