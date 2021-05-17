@@ -18,20 +18,13 @@
 export default {
   data() {
     return {      
-      homeTeamScore:{
-      matchEventsId: 1,
+     /*  homeTeamScore:{
+      matchEventsId:1,
       teamId: 1,
       points: 1,
       playerId: 1,
-      time: "14:39"
-    },
-    awayTeamScore:{
-      matchEventsId: 1,
-      teamId: 2,
-      points: 1,
-      playerId: 3,
-      time: "15:39"
-    },
+      time: "15:28"
+    }, */
     }
   },
   computed: {
@@ -50,24 +43,36 @@ export default {
     teams(){
       return this.$store.state.teams
     },
+    matchEventsId(){
+     return this.matchEvents[0].id
+    },
+    homeTeamId() {
+      return this.$store.state.teams.filter((t) => t.homeTeam == true)[0].id
+    },
+    awayTeamId() {
+      return this.$store.state.teams.filter((t) => t.homeTeam == false)[0].id
+    },
     players(){
       return this.$store.state.players
-    },
-    homeTeam() {
-      return this.$store.state.teams.filter((t) => t.homeTeam == true)[0]
-    },
-    awayTeam() {
-      return this.$store.state.teams.filter((t) => t.homeTeam == false)[0]
-    },
+    },   
+    currentTime(){
+      let today = new Date()
+      let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      return time
+    }
   },
   methods: {
-    addHomeTeamScore() {      
-      this.$store.state.scores.push(this.homeTeamScore);
+    addHomeTeamScore() {    
+      let homeTeamScore =({matchEventsId:this.matchEventsId,teamId:this.homeTeamId,points:1,playerId:1,time:this.currentTime}) 
+      this.$store.state.scores.push(homeTeamScore);
       console.log(this.$store.state.scores);
     },
 
     removeHomeTeamScore() {
-      let indices = [];
+      console.log('home team score',this.$store.state.scores.filter(s=>s.teamId === 1));
+       this.$store.state.scores.filter(s=>s.teamId === 1).pop();
+       console.log('scores after remove home team score',this.$store.state.scores);
+     /*  let indices = [];
       let scores   =  this.$store.state.scores;
       console.log('homeTeam id',this.homeTeam)
       let element = this.homeTeam.id;
@@ -78,17 +83,24 @@ export default {
       } 
       let lastInx = indices[indices.length-1] 
       this.$store.state.scores.splice(lastInx, 1); 
-      console.log(this.$store.state.scores);
+      console.log(this.$store.state.scores); */
 
     },
 
     addAwayTeamScore() {
-      this.$store.state.scores.push(this.awayTeamScore);
+      let awayTeamScore =({matchEventsId:this.matchEventsId,teamId:this.awayTeamId,points:1,playerId:3,time:this.currentTime}) 
+      this.$store.state.scores.push(awayTeamScore);
       console.log(this.$store.state.scores);
     },
 
     removeAwayTeamScore() {
-      let indices = [];
+      console.log('away scores', this.$store.state.scores.filter(s=>s.teamId === 2))
+      let arr = this.$store.state.scores.filter(s=>s.teamId === 2)
+      arr.pop()
+      console.log('arr',arr)
+      this.$store.state.scores.filter(s=>s.teamId === 2).pop();
+      console.log('scores: after remove away team score',this.$store.state.scores);
+      /* let indices = [];
       let scores   =  this.$store.state.scores;
       console.log('awayTeam id',this.awayTeam)
       let element = this.awayTeam.id;
@@ -102,7 +114,7 @@ export default {
       console.log('indices',indices)
       let lastInx = indices[indices.length-1] 
       this.$store.state.scores.splice(lastInx, 1); 
-      console.log(this.$store.state.scores);
+      console.log(this.$store.state.scores); */
     },
 
   }
