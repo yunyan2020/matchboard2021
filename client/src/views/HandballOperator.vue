@@ -6,16 +6,19 @@
     <div class="scoreboard-preview">
       <HandballScoreBoard />
     </div>
+    <div class="handle-penalties">
+      <HandballHandlePenalties />
+    </div>
   </div>
 </template>
 
 <script>
 import TeamSportHandleScore from '../components/TeamSportHandleScore.vue'
-import HandballScoreBoardPreview from '../components/HandballScoreBoardPreview.vue'
 import HandballScoreBoard from '../components/HandballScoreBoard.vue'
+import HandballHandlePenalties from '../components/HandballHandlePenalties.vue'
 
 export default {
-  components: {TeamSportHandleScore, HandballScoreBoardPreview, HandballScoreBoard}
+  components: {TeamSportHandleScore, HandballScoreBoard, HandballHandlePenalties}
 };
 </script>
 
@@ -61,6 +64,10 @@ export default {
   }
   :deep(.penalty-right) {
     margin-top: 14vh;
+  }
+
+  .handle-penalties {
+    margin-top: 30vh;
   }
 
 </style>
