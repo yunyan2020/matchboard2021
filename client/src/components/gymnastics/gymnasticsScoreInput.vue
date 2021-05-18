@@ -8,13 +8,10 @@
           <option v-for= "idx in 9" :key = "idx" v-bind:name="'inputDecimal' + index">{{idx}}</option>        
         </select>    
     </div>  
-    <h2 class="test">{{inputInteger[1]}}</h2>
-    <h4 class="test">{{inputInteger[2]}}</h4>
-    <h2 class="test">{{inputInteger[3]}}</h2>
+    <h1 class="test">{{inputInteger[1]}}.{{inputDecimal[1]}}</h1>
+    <h3 class="test">{{inputInteger[2]}}.{{inputDecimal[2]}}</h3>
 
-    <h1 class="test">{{inputDecimal[1]}}</h1>
-    <h3 class="test">{{inputDecimal[2]}}</h3>
-    <h1 class="test">{{inputDecimal[3]}}</h1>
+
     <button type="submit" @submit = "submit">Submit</button>
   </div>
   
