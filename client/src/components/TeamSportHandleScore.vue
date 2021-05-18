@@ -64,57 +64,20 @@ export default {
   methods: {
     addHomeTeamScore() {    
       let homeTeamScore =({matchEventsId:this.matchEventsId,teamId:this.homeTeamId,points:1,playerId:1,time:this.currentTime}) 
-      this.$store.state.scores.push(homeTeamScore);
-      console.log(this.$store.state.scores);
+      this.$store.commit('addTeamScore', homeTeamScore)
     },
 
     removeHomeTeamScore() {
-      console.log('home team score',this.$store.state.scores.filter(s=>s.teamId === 1));
-       this.$store.state.scores.filter(s=>s.teamId === 1).pop();
-       console.log('scores after remove home team score',this.$store.state.scores);
-     /*  let indices = [];
-      let scores   =  this.$store.state.scores;
-      console.log('homeTeam id',this.homeTeam)
-      let element = this.homeTeam.id;
-      let idx = scores.indexOf(element);
-      while (idx != -1) {
-        indices.push(idx);
-        idx = scores.indexOf(element, idx + 1);
-      } 
-      let lastInx = indices[indices.length-1] 
-      this.$store.state.scores.splice(lastInx, 1); 
-      console.log(this.$store.state.scores); */
-
+       this.$store.commit('removeTeamLatestScore', this.homeTeamId)
     },
 
     addAwayTeamScore() {
       let awayTeamScore =({matchEventsId:this.matchEventsId,teamId:this.awayTeamId,points:1,playerId:3,time:this.currentTime}) 
-      this.$store.state.scores.push(awayTeamScore);
-      console.log(this.$store.state.scores);
+      this.$store.commit('addTeamScore', awayTeamScore)
     },
 
     removeAwayTeamScore() {
-      console.log('away scores', this.$store.state.scores.filter(s=>s.teamId === 2))
-      let arr = this.$store.state.scores.filter(s=>s.teamId === 2)
-      arr.pop()
-      console.log('arr',arr)
-      this.$store.state.scores.filter(s=>s.teamId === 2).pop();
-      console.log('scores: after remove away team score',this.$store.state.scores);
-      /* let indices = [];
-      let scores   =  this.$store.state.scores;
-      console.log('awayTeam id',this.awayTeam)
-      let element = this.awayTeam.id;
-      console.log('element of away team',element)
-      let idx = scores.indexOf(element);
-      console.log('idx',idx)
-      while (idx != -1) {
-        indices.push(idx);
-        idx = scores.indexOf(element, idx + 1);
-      } 
-      console.log('indices',indices)
-      let lastInx = indices[indices.length-1] 
-      this.$store.state.scores.splice(lastInx, 1); 
-      console.log(this.$store.state.scores); */
+      this.$store.commit('removeTeamLatestScore', this.awayTeamId)
     },
 
   }

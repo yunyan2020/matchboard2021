@@ -490,8 +490,23 @@ const state = {
 
 }
 
-//matates state
+//mutates state
 const mutations = {
+  addTeamScore(state, score){
+    state.scores.push(score)
+  },
+  removeTeamLatestScore(state, teamId){
+    console.log('t score b4', state.scores)
+    for(let i=state.scores.length; i>0; i--){
+      let score = state.scores[i-1]      
+      if(score.teamId !== undefined && score.teamId === teamId){
+        console.log('to remove', state.scores[i-1])
+        state.scores.splice(i-1,1)
+        break;
+      }
+    }
+    console.log('t score', state.scores)
+  }
 }
 
 //async network requests
