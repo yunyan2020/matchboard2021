@@ -4,7 +4,9 @@
     <button v-if="paused" @click="pause">Pause Match</button>
     <button v-if="!paused" @click="unpause">unpause Match</button>
     <button @click="end">End Match</button>
-    <p>Time: {{Math.floor(time/60)}} {{time%60}}</p>
+    <div class="score-timer">
+    <p>{{Math.floor(time/60)}} : {{time%60}}</p>
+    </div>
     <router-link to="/">Home</router-link>
   </div>
 </template>
@@ -55,6 +57,10 @@ methods:{
   }
 </script>
 
-<style>
-
+<style scoped>
+.score-timer{
+  font-size: 30px;
+  color: white;
+  padding-left: 10px;
+}
 </style>
