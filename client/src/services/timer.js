@@ -1,8 +1,10 @@
 export default class Timer {
 
   #startTime
+  #pausedTime
   #endTime
   #ticking = false
+  timeEvents = []
 
   get now() {
     return new Date().getTime()
@@ -20,6 +22,9 @@ export default class Timer {
   }
   pause() {
     this.ticking = false
+    //array med objekt som innehåller pausad tid och startad tid 
+    this.timeEvents.push({ pausedTime, startTime })
+    console.table(timeEvents)
   }
   unpause(callback) {
     this.ticking = true
