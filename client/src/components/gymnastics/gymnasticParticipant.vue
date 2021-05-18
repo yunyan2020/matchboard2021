@@ -13,9 +13,9 @@
           <!-- <option v-for="p in eventDetails[i].participants" :key="p">
             {{p.number}} {{p.firstName}} {{p.lastName}}
           </option> -->
-          <option v-for="participant in events[0].participants" :key="participant">
+          <!-- <option v-for="participant in events[0].participants" :key="participant">
             {{events[0].name}}  {{participant.firstName}}
-          </option>
+          </option> -->
         </select>
         <span>Selected: {{current}}</span>
       </div>
