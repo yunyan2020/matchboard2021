@@ -18,7 +18,10 @@ export default {
   // created() {
   //   this.$store.commit('updatePenaltiesHash')
   // }, 
-  components: {Home, HandballScoreBoard, HandballOperator, HandballUserView }
+  components: {Home, HandballScoreBoard, HandballOperator, HandballUserView },
+  created(){
+    this.$store.dispatch('restoreStateFromStorage')
+  }
 }
 
 
