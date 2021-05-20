@@ -1,147 +1,54 @@
 import { createStore } from 'vuex'
 
-export default createStore({
-  state: {
-    penaltiesHash: {},
-    match: {
-      id: 1,
-      time: '18:32',
-      teams: [
-        {
-          id: 1,
-          homeTeam: true,
-          name: 'Lugi',
-          logo: "src/assets/logo_lugi.png"
-        },
-        {
-          id: 2,
-          homeTeam: false,
-          name: 'H43',
-          logo: "src/assets/logo_h43.png"
-        },
-      ],
-      matchEvents: [
-        {
-          id: 1,
-          name: "Första halvlek",
-          length: 30,
-          homeTeamScore: [
-            {
-              teamId: 1,
-              points: 1,
-              player: "Karl Johan",
-              time: "17:45"
-            },
-            {
-              teamId: 1,
-              points: 1,
-              player: "Karl Johan",
-              time: "09:45"
-            },
-            {
-              teamId: 1,
-              points: 1,
-              player: "Karl Johan",
-              time: "07:45"
-            },
-            {
-              teamId: 1,
-              points: 1,
-              player: "Johan Karl",
-              time: "15:45"
-            },
-            {
-              teamId: 1,
-              points: 1,
-              player: "Johan Karl",
-              time: "18:21"
-            },
-            {
-              teamId: 1,
-              points: 1,
-              player: "Karl Johan",
-              time: "14:33"
-            }
-          ],
-          awayTeamScore: [
-            {
-              teamId: 1,
-              points: 1,
-              player: "Karl Johan",
-              time: "17:45"
-            },
-            {
-              teamId: 1,
-              points: 1,
-              player: "Karl Johan",
-              time: "09:45"
-            },
-            {
-              teamId: 1,
-              points: 1,
-              player: "Karl Johan",
-              time: "07:45"
-            },
-            {
-              teamId: 1,
-              points: 1,
-              player: "Johan Karl",
-              time: "15:45"
-            },
-            {
-              teamId: 1,
-              points: 1,
-              player: "Johan Karl",
-              time: "18:21"
-            },
-          ],
-          penalties: [
-            {
-              id: 1,
-              teamId: 1,
-              playerId: '11',
-              matchTime: '10:24',
-              penaltyTime: '1:00',
-              type: 'Gult kort',
-            },
-            {
-              id: 2,
-              teamId: 1,
-              playerId: '11',
-              matchTime: '10:24',
-              penaltyTime: '2:00',
-              type: 'Gult kort',
-            },
-            {
-              id: 3,
-              teamId: 2,
-              playerId: '8',
-              matchTime: '8:14',
-              penaltyTime: '1:00',
-              type: 'Gult kort',
-            },
+// inital State is set in this file:
+import initalState from '/src/storeInitialState.js'
 
-          ],
-        },
-        
-      ]
+// state is initialized and loaded in the restoreStateFromStorage action, modify initial state in the initialState.js file
+// NOTE that you must clear localStorage for the initalState to update
+const state = {}
+
+//mutates state (USE THIS TO CHANGE ANY VALUES IN state!!! No direct changes in the components!)
+const mutations = {
+  restoreState(state, stateToRestore){
+    for(let key in stateToRestore){
+      state[key] = stateToRestore[key]
     }
   },
-  mutations: {
-    // updatePenaltiesHash(state) {
-    //   state.penaltiesHash = {}
-    //   for (let matchEvent of state.match.matchEvents) {
-    //     for (let penalty of matchEvent.penalties) {
-    //       state.penaltiesHash[penalty.id] = penalty
-    //       state.penaltiesHash[penalty.id].matchEvent = matchEvent
-
-          
-    //     }
-    //   }
-    // },
+  addTeamScore(state, score){
+    state.scores.push(score)
+    this.dispatch('saveStateToStorage') // put last in any mutation that changes state that should be kept between reloads
   },
-  actions: {
+  removeTeamLatestScore(state, teamId){
+    for(let i=state.scores.length; i>0; i--){
+      let score = state.scores[i-1]      
+      if(score.teamId !== undefined && score.teamId === teamId){
+        state.scores.splice(i-1,1)
+        break;
+      }
+    }
+    this.dispatch('saveStateToStorage')
   },
-  modules: {
+  addPenalty(state, penalty) {
+    console.log(state, penalty)
+    this.dispatch('saveStateToStorage')
   }
-})
+}
+
+//async network requests
+const actions = {
+  saveStateToStorage({state}){
+    localStorage.setItem('store', JSON.stringify(state));
+  },
+  restoreStateFromStorage({commit}){
+    let savedState = localStorage.getItem('store')
+    if(savedState){
+      savedState = JSON.parse(savedState)
+    }else{
+      savedState = initalState
+    }
+    commit('restoreState', savedState)
+  }
+}
+
+export default createStore({ state, mutations, actions })
+
