@@ -49,7 +49,8 @@ export default {
           let player = {
             Name: allPlayers[i].firstName + ' ' + allPlayers[i].lastName,
             Number: allPlayers[i].playNumber,
-            Warnings: 0
+            Warnings: 0,
+            SentOffs: 0
           };
           players.push(player);
         }
