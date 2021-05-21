@@ -12,6 +12,9 @@
     <div class="navigation">
       <router-link to="/HandballUserView">HandballUserView</router-link>
     </div>
+    <div class="navigation">
+      <router-link to="/HandballOperator2">HandballOperator2</router-link>
+    </div>
   </div>
 </template>
 

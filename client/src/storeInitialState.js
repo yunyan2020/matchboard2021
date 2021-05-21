@@ -42,6 +42,13 @@ export default {
       playNumber: "10"
     },
     {
+      id: 4,
+      teamId: 2,
+      firstName: "Erik",
+      lastName: "Nilsson",
+      playNumber: "23"
+    },
+    {
       id: 11,
       teamId: 2,
       firstName: "Erik",

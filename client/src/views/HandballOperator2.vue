@@ -1,0 +1,129 @@
+<template>
+  <div class="handball-operator-container">
+    <div class="descriptions-container">
+      <div class="description-wrap">
+        <p class="description-p">Hemmalag | Poäng</p>
+      </div>
+      <div class="description-wrap">
+        <p class="description-p">Tid | Halvlek</p>
+      </div>
+      <div class="description-wrap">
+        <p class="description-p">Poäng | Bortalag</p>
+      </div>
+    </div>
+    <div class="match-scoreboard-container">
+      <ScoreboardPreview :hometeam="homeTeam" :awayteam="awayTeam" v-if="homeTeam && awayTeam"/>
+    </div>
+    <div class="match-operation-container">
+      <HandballOperatorBtns />
+    </div>
+    <div class="player-operations-container" v-if="homeTeam && awayTeam">
+      <PlayerListOperator :team="homeTeam"/>
+      <PlayerListOperator :team="awayTeam"/>
+    </div>
+  </div>
+</template>
+
+<script>
+import ScoreboardPreview from '../components/handballOperatorComps/ScoreboardPreview.vue'
+import HandballOperatorBtns from '../components/handballOperatorComps/HandballOperatorBtns.vue'
+import PlayerListOperator from '../components/handballOperatorComps/PlayerListOperator.vue'
+
+export default {
+  components: {
+    ScoreboardPreview, HandballOperatorBtns, PlayerListOperator
+  },
+  data() {
+    return {
+      homeTeam: null,
+      awayTeam: null
+    }
+  },
+  methods: {
+    getPlayers(teamId) {
+      let allPlayers = this.$store.state.players;
+      let players = [];
+      console.log(allPlayers);
+      for(let i = 0; i < allPlayers.length; i++) {
+        if(allPlayers[i].teamId == teamId) {
+          let player = {
+            Name: allPlayers[i].firstName + ' ' + allPlayers[i].lastName,
+            Number: allPlayers[i].playNumber,
+            Warnings: 0
+          };
+          players.push(player);
+        }
+      }
+      return players;
+    }
+  },
+  computed: {
+    hometeam() {
+      let teamIds = this.$store.state.match.teamId;
+      let teams = this.$store.state.teams;
+      let teamObj;
+      for(let i = 0; i < teamIds.length; i++) {
+        for(let j = 0; j < teams.length; j++) {
+          if(teamIds[i] == teams[j].id && teams[j].homeTeam == true) {
+            teamObj = {
+              TeamName: teams[j].name,
+              TeamPlayers: this.getPlayers(teams[j].id),
+              Logo: teams[j].logo
+            };
+          }
+        }
+      }
+      return teamObj;
+    },
+    awayteam() {
+      let teamIds = this.$store.state.match.teamId;
+      let teams = this.$store.state.teams;
+      let teamObj;
+      for(let i = 0; i < teamIds.length; i++) {
+        for(let j = 0; j < teams.length; j++) {
+          if(teamIds[i] == teams[j].id && teams[j].homeTeam == false) {
+            teamObj = {
+              TeamName: teams[j].name,
+              TeamPlayers: this.getPlayers(teams[j].id),
+              Logo: teams[j].logo
+            };
+          }
+        }
+      }
+      return teamObj;
+    }
+  },
+  mounted() {
+    this.homeTeam = this.hometeam;
+    this.awayTeam = this.awayteam;
+  }
+}
+</script>
+
+<style scoped>
+  @import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
+
+  * {
+    font-family: 'PT Sans', sans-serif;
+  }
+
+  .descriptions-container {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 18em;
+  }
+
+  .description-p {
+    font-size: 13px;
+    font-weight: 900;
+    opacity: 0.65;
+    /* margin: auto 5em; */
+  }
+
+  .player-operations-container {
+    width: 95vw;
+    margin: 4em auto auto auto;
+    display: flex;
+    justify-content: space-evenly;
+  }
+</style>
