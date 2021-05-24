@@ -6,7 +6,7 @@
           <img :src="`${hometeam.Logo}`" class="teamlogo-img" alt="">
         </div>
         <div class="score-container">
-          <h3 class="score">{{hometeamScore}}</h3>
+          <h3 @addHometeamScore="addScore" class="score">{{hometeamScore}}</h3>
         </div>
       </div>
       <div class="hometeamname-container">
@@ -46,11 +46,20 @@ export default {
       hometeamScore: 0,
       awayteamScore: 0
     }
+  },
+  methods: {
+    addScore(data) {
+      this.hometeamScore += data;
+    },
+    removeScore(team) {
+      
+    }
   }
 }
 </script>
 
 <style scoped>
+
   .teamscontainer {
     margin-top: 1em;
   }

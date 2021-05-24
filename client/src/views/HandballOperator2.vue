@@ -36,7 +36,11 @@ export default {
   data() {
     return {
       homeTeam: null,
-      awayTeam: null
+      awayTeam: null,
+      match: {
+        rounds: 2,
+
+      }
     }
   },
   methods: {
@@ -47,6 +51,7 @@ export default {
       for(let i = 0; i < allPlayers.length; i++) {
         if(allPlayers[i].teamId == teamId) {
           let player = {
+            id: allPlayers[i].id, 
             Name: allPlayers[i].firstName + ' ' + allPlayers[i].lastName,
             Number: allPlayers[i].playNumber,
             Warnings: 0,
@@ -69,6 +74,7 @@ export default {
             teamObj = {
               TeamName: teams[j].name,
               TeamPlayers: this.getPlayers(teams[j].id),
+              SentOffs: [],
               Logo: teams[j].logo
             };
           }

@@ -1,7 +1,7 @@
 <template>
   <div class="operator-btns-container">
     <div class="score-btns-container">
-      <button class="score-btn green">+</button>
+      <button @click="hometeamScored" class="score-btn green">+</button>
       <button class="score-btn red">-</button>
     </div>
     <div class="timemngmt-btns-container">
@@ -23,7 +23,11 @@
 
 <script>
 export default {
-
+  methods: {
+    hometeamScored() {
+      this.$emit('addHometeamScore', 1);
+    }
+  }
 }
 </script>
 
