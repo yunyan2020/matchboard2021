@@ -1,11 +1,9 @@
 <template>
-  <div class="app-container">
-    <!-- <Home /> -->
-    <HandballOperator />
-    <!-- <HandballUserView />  -->
-        <!-- <router-view /> -->
-    
- 
+  <div class="container">
+    <Home />
+    <!-- <HandballScoreBoard /> -->
+    <!-- <GymnasticsScoreBoard /> -->
+    <router-view /> 
   </div>
 </template>
 
@@ -13,19 +11,26 @@
 import Home from './views/Home.vue'
 import HandballScoreBoard from './views/HandballUserView.vue'
 import HandballOperator from './views/HandballOperator.vue'
+import GymnasticsScoreBoard from './views/GymnasticsScoreBoard.vue'
 import HandballUserView from './views/HandballUserView.vue'
 
 export default { 
   // created() {
   //   this.$store.commit('updatePenaltiesHash')
   // }, 
-  components: {Home, HandballScoreBoard, HandballOperator, HandballUserView }
+  components: {Home, HandballScoreBoard, HandballOperator, HandballUserView },
+  created(){
+    this.$store.dispatch('restoreStateFromStorage')
+  }
 }
 
 
 </script>
 
 <style>
+* {
+  box-sizing: border-box;
+}
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
 
 #app {
