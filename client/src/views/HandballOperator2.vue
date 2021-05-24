@@ -12,10 +12,15 @@
       </div>
     </div>
     <div class="match-scoreboard-container">
-      <ScoreboardPreview :hometeam="homeTeam" :awayteam="awayTeam" v-if="homeTeam && awayTeam"/>
+      <ScoreboardPreview 
+        :hometeamScore="match.score.hometeam" 
+        :awayteamScore="match.score.awayteam" 
+        :hometeam="homeTeam" 
+        :awayteam="awayTeam" 
+        v-if="homeTeam && awayTeam && match"/>
     </div>
     <div class="match-operation-container">
-      <HandballOperatorBtns />
+      <HandballOperatorBtns v-if="match"/>
     </div>
     <div class="player-operations-container" v-if="homeTeam && awayTeam">
       <PlayerListOperator :team="homeTeam"/>
@@ -37,10 +42,7 @@ export default {
     return {
       homeTeam: null,
       awayTeam: null,
-      match: {
-        rounds: 2,
-
-      }
+      match: null
     }
   },
   methods: {
@@ -75,7 +77,8 @@ export default {
               TeamName: teams[j].name,
               TeamPlayers: this.getPlayers(teams[j].id),
               SentOffs: [],
-              Logo: teams[j].logo
+              Logo: teams[j].logo,
+              Hometeam: true
             };
           }
         }
@@ -92,7 +95,8 @@ export default {
             teamObj = {
               TeamName: teams[j].name,
               TeamPlayers: this.getPlayers(teams[j].id),
-              Logo: teams[j].logo
+              Logo: teams[j].logo,
+              Hometeam: false
             };
           }
         }
@@ -103,6 +107,7 @@ export default {
   mounted() {
     this.homeTeam = this.hometeam;
     this.awayTeam = this.awayteam;
+    this.match = this.$store.state.match;
   }
 }
 </script>

@@ -40,11 +40,11 @@
 
 <script>
 export default {
-  props: ['hometeam', 'awayteam'],
+  props: ['hometeam', 'awayteam', 'hometeamScore', 'awayteamScore'],
   data() {
     return {
-      hometeamScore: 0,
-      awayteamScore: 0
+      /* hometeamScore: 0,
+      awayteamScore: 0 */
     }
   },
   methods: {

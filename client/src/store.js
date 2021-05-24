@@ -14,6 +14,30 @@ const mutations = {
       state[key] = stateToRestore[key]
     }
   },
+  addScore(state, team) {
+    switch(team) {
+      case 'hometeam':
+        state.match.score.hometeam = state.match.score.hometeam + 1; 
+        this.dispatch('saveStateToStorage');
+        break;
+      case 'awayteam':
+        state.match.score.awayteam = state.match.score.awayteam + 1; 
+        this.dispatch('saveStateToStorage');
+        break;  
+    }
+  },
+  removeScore(state, team) {
+    switch(team) {
+      case 'hometeam':
+        state.match.score.hometeam = state.match.score.hometeam - 1; 
+        this.dispatch('saveStateToStorage');
+        break;
+      case 'awayteam':
+        state.match.score.awayteam = state.match.score.awayteam - 1; 
+        this.dispatch('saveStateToStorage');
+        break;  
+    }
+  },
   addTeamScore(state, score){
     state.scores.push(score)
     this.dispatch('saveStateToStorage') // put last in any mutation that changes state that should be kept between reloads

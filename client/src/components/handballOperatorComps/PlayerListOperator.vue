@@ -1,5 +1,5 @@
 <template>
-  <div class="playerlist-operator-container">
+  <div :class="`playerlist-operator-container playerlist-operator-container-hometeam-${team.Hometeam}`">
     <div class="playerlist-operator-btns">
       <button @click="setPenalty($event)" class="penalty-btn penalty-btn-warning">Varning</button>
       <button @click="setPenalty($event)" class="penalty-btn">Gult kort</button>
@@ -16,7 +16,8 @@
       <div class="player" v-for="player in playerlist" :key="player" @click="penalize(chosenPenalty, player)">
         <div class="player-number-name">
           <p class="player-number">{{player.Number}}</p>
-          <p>{{player.Name}}</p>
+          <p class="player-name">{{player.Name}}</p>
+          <p class="player-id hide">{{player.id}}</p>
         </div>
         <div class="player-penalty-container">
           <!-- <p>{{player.Warnings}}</p> 
@@ -182,6 +183,14 @@ export default {
 
 <style scoped>
 
+  * {
+    box-sizing: border-box;
+  }
+
+  .hide {
+    opacity: 0;
+  }
+
   .disqualified-p {
     color: lightgray;
     font-weight: 900;
@@ -228,6 +237,10 @@ export default {
     width: 45vw;
     border: 1px solid lightgray;
     border-radius: 5px;
+  }
+
+  .active {
+    border: 4px solid lightblue !important;
   }
 
   .playerlist-operator-btns {

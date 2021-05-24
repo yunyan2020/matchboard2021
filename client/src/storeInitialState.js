@@ -1,6 +1,10 @@
 export default {
     match: {
       id: 1,
+      score: {
+        hometeam: 0,
+        awayteam: 0
+      },
       time: '18:32',
       teamId: [1, 2],
       team: {},
