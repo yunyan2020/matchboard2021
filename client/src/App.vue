@@ -12,6 +12,7 @@
 import Home from './views/Home.vue'
 import HandballScoreBoard from './views/HandballUserView.vue'
 import HandballOperator from './views/HandballOperator.vue'
+
 import HandballOperator2 from './views/HandballOperator2.vue'
 import GymnasticsScoreBoard from './views/GymnasticsScoreBoard.vue'
 import HandballUserView from './views/HandballUserView.vue'

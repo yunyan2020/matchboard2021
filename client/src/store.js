@@ -42,6 +42,10 @@ const mutations = {
     state.scores.push(score)
     this.dispatch('saveStateToStorage') // put last in any mutation that changes state that should be kept between reloads
   },
+  addTeamScore(state, score){
+    state.scores.push(score)
+    this.dispatch('saveStateToStorage') // put last in any mutation that changes state that should be kept between reloads
+  },
   removeTeamLatestScore(state, teamId){
     for(let i=state.scores.length; i>0; i--){
       let score = state.scores[i-1]      
