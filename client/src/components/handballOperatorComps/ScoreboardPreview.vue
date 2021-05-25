@@ -15,7 +15,7 @@
     </div>
     <div class="time-period-container">
       <div class="time-container">
-        <h1 class="time">21:32</h1>
+        <h1 class="time">{{time()}}</h1>
       </div>
       <div class="period-container">
         <div class="period"></div>
@@ -43,8 +43,7 @@ export default {
   props: ['hometeam', 'awayteam', 'hometeamScore', 'awayteamScore'],
   data() {
     return {
-      /* hometeamScore: 0,
-      awayteamScore: 0 */
+    /*  time:""  */
     }
   },
   methods: {
@@ -53,8 +52,15 @@ export default {
     },
     removeScore(team) {
       
+    },
+    time(){
+      let matchId = this.$store.state.match.id
+      return this.$store.state.matchEvents.filter((e) => e.matchId = matchId && e.currentMatchEvent === true)[0].time
     }
-  }
+  },
+ /*  mounted(){
+     this.time = this.time();
+  } */
 }
 </script>
 

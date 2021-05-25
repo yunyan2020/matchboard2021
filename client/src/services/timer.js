@@ -5,6 +5,8 @@ export default class Timer {
   #endTime
   #ticking = false
   timeEvents = []
+  stopSeq = 0
+  matchTime = this.now
 
   get now() {
     return new Date().getTime()
@@ -18,17 +20,42 @@ export default class Timer {
     this.reset()
     this.startTime = this.now
     this.ticking = true
+    this.timeEvents = []    
     this.tick(callback)
   }
-  pause() {
+  stop() {
     this.ticking = false
+    this.stopSeq++ 
     //array med objekt som innehåller pausad tid och startad tid 
-    this.timeEvents.push({ pausedTime, startTime })
-    console.table(timeEvents)
+    this.timeEvents.push({stopSeq:this.stopSeq, startStopTime:this.now})
+    console.log(this.timeEvents)
   }
-  unpause(callback) {
+  nonStop(callback) {    
+    let idx = this.timeEvents.length -1
+    if (idx >= 0){
+      let stopSeq = this.timeEvents[idx].stopSeq
+      let startStopTime = this.timeEvents[idx].startStopTime
+      let endStopTime = this.now
+      let stopTime = endStopTime-startStopTime      
+      this.timeEvents[idx] = ({stopSeq:stopSeq, startStopTime:startStopTime,endStopTime:endStopTime,stopTime:stopTime})
+    } 
+    console.log('this.timeEvents',this.timeEvents)
+    console.log('befor for loop match time',Math.floor(((this.endTime ) - this.startTime ) / 1000) )
+    if (this.timeEvents.length > 0) {
+      this.endTime = this.now     
+      console.log('befor for loop this.endTime',this.endTime )
+      for(let i = 0; i < this.timeEvents.length; i++) {
+        this.endTime = this.endTime  -  this.timeEvents[i].stopTime
+        console.log('this.timeEvents[i].stopTime',this.timeEvents[i].stopTime)
+      }
+    } 
+    console.log('this.endTime',this.endTime )
+    console.log('startTime',this.startTime )
+    let matchTime = Math.floor(((this.endTime ) - this.startTime ) / 1000)
+    console.log('match time',matchTime)
+    console.log('minutes:second',Math.floor(matchTime/60),matchTime%60)
+   // this.startTime = this.now + this.startTime
     this.ticking = true
-    this.startTime = this.now + this.startTime
     this.tick(callback)
   }
 
@@ -49,7 +76,7 @@ export default class Timer {
     let prevTick
     
     if (sec !== prevTick) { // we only animate on every whole second
-      console.log(callback)
+     // console.log(callback) 
       callback()
       prevTick = sec
     }

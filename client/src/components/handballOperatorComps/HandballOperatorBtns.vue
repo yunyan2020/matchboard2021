@@ -6,9 +6,13 @@
     </div>
     <div class="timemngmt-btns-container">
       <div class="upper-timemngmt">
-        <button class="timemngmt-btn green-start green">Starta</button>
-        <button class="timemngmt-btn yellow-pause">Pausa</button>
-        <button class="timemngmt-btn orange-reset">Återställ</button>
+        <button  @click="start" class="timemngmt-btn green-start green">Starta</button>
+        <button  @click="stop" v-if="stopped" class="timemngmt-btn yellow-pause">Pausa</button>
+        <button  @click="nonStop" v-if="!stopped" class="timemngmt-btn yellow-pause">UnPausa</button>
+        <button  @click="end" class="timemngmt-btn orange-reset">Återställ</button>
+        <div class="match-timer">
+        <p>{{Math.floor(time/60)}} : {{time%60}}</p>
+        </div>
       </div>
       <div class="lower-timemngmt">
         <button class="halftime-btn">Halvlek</button>
@@ -22,9 +26,43 @@
 </template>
 
 <script>
+import Timer from '/src/services/timer.js'
 export default {
+  data(){
+    return {
+      matchTimer: new Timer(),
+      trigger: 0,
+      stopped: true
+    }
+  },
+  computed:{    
+    time(){
+      this.trigger
+      return this.matchTimer.time
+    }
+  }, 
   props: ['hometeamScore', 'awayteamScore'],
   methods: {
+    start(){
+      this.matchTimer.start(this.tick)   
+      this.stopped = true;    
+    },
+    stop(){
+      this.matchTimer.stop(this.tick)
+      this.stopped = false;      
+    },
+    nonStop(){
+      this.matchTimer.nonStop(this.tick)
+      this.stopped = true;      
+
+    },
+    end(){
+      this.matchTimer.end()    
+       
+    },
+    tick(){
+      this.trigger++
+    },
     addScore(team) {
       /* let player = this.choosePlayer(); */
       /* const player = async () => {
@@ -65,7 +103,13 @@ export default {
           break; 
       }
     }
-  }
+  },
+  mounted(){
+    // Timer.startTicking(this.tick)
+  },
+  unmounted(){
+    // Timer.stopTicking()
+   } 
 }
 </script>
 
