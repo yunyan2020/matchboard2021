@@ -13,7 +13,7 @@ export default class Timer {
   }
 
   get time() {
-    return Math.floor(((this.endTime || this.now) - this.startTime ) / 1000)
+   return Math.floor(((this.endTime || this.now) - this.startTime ) / 1000) 
   }
 
   start(callback) {
@@ -66,6 +66,14 @@ export default class Timer {
 
   reset() {
     this.endTime = null
+  }
+
+  startTicking(callback){
+    this.ticking = true
+    this.tick(callback)
+  }
+  stopTicking(){
+    this.ticking = false
   }
 
   tick(callback) {

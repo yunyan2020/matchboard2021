@@ -57,7 +57,7 @@ export default {
 
     },
     end(){
-      this.matchTimer.end()    
+      this.matchTimer.reset()   
        
     },
     tick(){
@@ -105,10 +105,10 @@ export default {
     }
   },
   mounted(){
-    // Timer.startTicking(this.tick)
+    this.matchTimer.startTicking(this.tick)
   },
   unmounted(){
-    // Timer.stopTicking()
+    this.matchTimer.stopTicking()
    } 
 }
 </script>
