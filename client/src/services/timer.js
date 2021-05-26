@@ -19,43 +19,25 @@ export default class Timer {
   start(callback) {
     this.reset()
     this.startTime = this.now
-    this.ticking = true
-    this.timeEvents = []    
+    this.ticking = true   
     this.tick(callback)
   }
   stop() {
     this.ticking = false
-    this.stopSeq++ 
     //array med objekt som innehåller pausad tid och startad tid 
-    this.timeEvents.push({stopSeq:this.stopSeq, startStopTime:this.now})
-    console.log(this.timeEvents)
+    // this.pausedTime = this.now
+    this.timeEvents = []
+    this.timeEvents.push({ pausedTime: this.now, startTime: this.startTime })    
+    console.table(timeEvents)
   }
   nonStop(callback) {    
-    let idx = this.timeEvents.length -1
-    if (idx >= 0){
-      let stopSeq = this.timeEvents[idx].stopSeq
-      let startStopTime = this.timeEvents[idx].startStopTime
-      let endStopTime = this.now
-      let stopTime = endStopTime-startStopTime      
-      this.timeEvents[idx] = ({stopSeq:stopSeq, startStopTime:startStopTime,endStopTime:endStopTime,stopTime:stopTime})
-    } 
-    console.log('this.timeEvents',this.timeEvents)
-    console.log('befor for loop match time',Math.floor(((this.endTime ) - this.startTime ) / 1000) )
-    if (this.timeEvents.length > 0) {
-      this.endTime = this.now     
-      console.log('befor for loop this.endTime',this.endTime )
-      for(let i = 0; i < this.timeEvents.length; i++) {
-        this.endTime = this.endTime  -  this.timeEvents[i].stopTime
-        console.log('this.timeEvents[i].stopTime',this.timeEvents[i].stopTime)
-      }
-    } 
-    console.log('this.endTime',this.endTime )
-    console.log('startTime',this.startTime )
-    let matchTime = Math.floor(((this.endTime ) - this.startTime ) / 1000)
-    console.log('match time',matchTime)
-    console.log('minutes:second',Math.floor(matchTime/60),matchTime%60)
-   // this.startTime = this.now + this.startTime
     this.ticking = true
+    //this.startTime = this.now + this.startTime
+    let time = 0;
+    this.timeEvents.forEach(event => {
+      time += (event.startTime - event.pausedTime)
+    })
+    this.startTime = this.now + time
     this.tick(callback)
   }
 

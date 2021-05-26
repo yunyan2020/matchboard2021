@@ -59,6 +59,15 @@ const mutations = {
   addPenalty(state, penalty) {
     console.log(state, penalty)
     this.dispatch('saveStateToStorage')
+  },
+  setMatchEventsTime(state,time){
+    for(let i=0;i<state.matchEvents.length;i++){
+      if (state.matchEvents[i].currentMatchEvent == true){
+        state.matchEvents[i].time = time
+        break;
+      }
+    }
+    this.dispatch('saveStateToStorage')
   }
 }
 

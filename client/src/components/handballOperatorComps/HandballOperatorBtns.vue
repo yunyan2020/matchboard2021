@@ -6,9 +6,9 @@
     </div>
     <div class="timemngmt-btns-container">
       <div class="upper-timemngmt">
-        <button  @click="start" class="timemngmt-btn green-start green">Starta</button>
-        <button  @click="stop" v-if="stopped" class="timemngmt-btn yellow-pause">Pausa</button>
-        <button  @click="nonStop" v-if="!stopped" class="timemngmt-btn yellow-pause">UnPausa</button>
+        <button  @click="start(),updateTime()" class="timemngmt-btn green-start green">Starta</button>
+        <button  @click="stop"  class="timemngmt-btn yellow-pause">Pausa</button>
+        <button  @click="nonStop"  class="timemngmt-btn yellow-pause">UnPausa</button>
         <button  @click="end" class="timemngmt-btn orange-reset">Återställ</button>
         <div class="match-timer">
         <p>{{Math.floor(time/60)}} : {{time%60}}</p>
@@ -32,7 +32,7 @@ export default {
     return {
       matchTimer: new Timer(),
       trigger: 0,
-      stopped: true
+      stopped: true,
     }
   },
   computed:{    
@@ -45,23 +45,30 @@ export default {
   methods: {
     start(){
       this.matchTimer.start(this.tick)   
-      this.stopped = true;    
+      this.stopped = true;        
     },
     stop(){
       this.matchTimer.stop(this.tick)
-      this.stopped = false;      
+      this.stopped = false  
     },
     nonStop(){
       this.matchTimer.nonStop(this.tick)
-      this.stopped = true;      
-
+      this.stopped = true
     },
     end(){
-      this.matchTimer.reset()   
+      this.matchTimer.end()   
        
     },
     tick(){
       this.trigger++
+    },
+    updateTime(){
+      let Minutes = Math.floor(this.time/60) 
+      let senconds = this.time%60
+      console.log('this.time',this.time)
+      let time = Minutes + ':' + senconds
+      console.log('time',time)
+      this.$store.commit('setMatchEventsTime',time) 
     },
     addScore(team) {
       /* let player = this.choosePlayer(); */
@@ -104,11 +111,11 @@ export default {
       }
     }
   },
-  mounted(){
-    this.matchTimer.startTicking(this.tick)
+  mounted(){      
+   //  this.matchTimer.startTicking(this.tick)
   },
   unmounted(){
-    this.matchTimer.stopTicking()
+   // this.matchTimer.stopTicking()
    } 
 }
 </script>
