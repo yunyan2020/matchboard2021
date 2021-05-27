@@ -55,7 +55,12 @@ export default {
     },
     time(){
       let matchId = this.$store.state.match.id
-      return this.$store.state.matchEvents.filter((e) => e.matchId = matchId && e.currentMatchEvent === true)[0].time
+      let currentMatchEvent = this.$store.state.matchEvents.find((e) => e.matchId = matchId && e.currentMatchEvent === true)
+      if(currentMatchEvent && currentMatchEvent.time){
+        return currentMatchEvent.time
+      }else{
+        return 0
+      }
     }
   },
  /*  mounted(){
