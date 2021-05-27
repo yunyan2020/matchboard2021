@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import HandballScoreBoard from '../components/HandballScoreBoard.vue'
+import HandballScoreBoard from '../components/HandballScoreBoard-old.vue'
 
 
 

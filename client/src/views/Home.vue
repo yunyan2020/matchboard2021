@@ -10,7 +10,7 @@
       <router-link to="/HandballOperator">HandballOperator</router-link>
     </div>
     <div class="navigation">
-      <router-link to="/HandballUserView">HandballUserView</router-link>
+      <router-link to="/HandballScoreBoard">HandballScoreBoard</router-link>
     </div>
     <div class="navigation">
       <router-link to="/HandballOperator2">HandballOperator2</router-link>

@@ -15,7 +15,7 @@
 
 <script>
 import TeamSportHandleScore from '../components/TeamSportHandleScore.vue'
-import HandballScoreBoard from '../components/HandballScoreBoard.vue'
+import HandballScoreBoard from '../components/HandballScoreBoard-old.vue'
 import HandballHandlePenalties from '../components/HandballHandlePenalties.vue'
 import PenaltiesComp from '../components/PenaltiesComp.vue'
 
