@@ -95,6 +95,7 @@ export default {
       playNumber: "10"
     },
     ],
+    currentMatchEvent: null,
     matchEvents: [
       {
         id: 1,

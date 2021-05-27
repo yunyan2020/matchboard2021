@@ -69,6 +69,9 @@ const mutations = {
     }
     this.dispatch('saveStateToStorage')
   },
+  setCurrentMatchEvent(state, matchEvent){
+    state.currentMatchEvent = matchEvent
+  },
   setNextMatchEvent(state){
     let i = 0
     let foundAt = -1
@@ -81,11 +84,11 @@ const mutations = {
     }
     if(foundAt > -1 && state.matchEvents[foundAt+1]){
       state.matchEvents[foundAt+1].currentMatchEvent = true
+      this.commit('setCurrentMatchEvent', state.matchEvents[foundAt+1].currentMatchEvent)
     }else{
       // match is not started or match is over?
       // state.matchEvents[0].currentMatchEvent = true // toggles back to first.. maybe not perfect
-    }
-    
+    }    
     this.dispatch('saveStateToStorage')
   }
 }
