@@ -13,8 +13,10 @@
           <p class="player-name">{{player.Name}}</p>
           <p class="player-id hide">{{player.id}}</p>         
           <p class="penalty" v-for="(penalty,index) in playerPenalties[player.id]" :key="index" >                         
-              <span :class="penaltyIcons[penalty.type]" ><span class="hidden" >  {{penalty.type}}</span></span>
-              {{penalty.penaltyTime}}   
+            <span :class="penaltyIcons[penalty.type]" >
+              <span class="hidden">{{penalty.type}}</span>
+            </span>
+            {{penalty.penaltyTime}}   
           </p>
         </div>        
       </div>   
@@ -50,7 +52,7 @@ export default {
      let hashPenalties = {}
      for (let penalty of this.penalties){
        if (!hashPenalties[penalty.playerId])  {
-          hashPenalties[penalty.playerId] = [] 
+        hashPenalties[penalty.playerId] = [] 
        }      
        hashPenalties[penalty.playerId].push(penalty)    
      }
@@ -78,25 +80,20 @@ export default {
     font-weight: 900;
   }
   .yellowCard{
-    background: yellow;
+    background: yellow;    
+    padding: 1em 2em;
+    border-radius: 3px;    
     height:5vh;
     width:1vh;
-    padding: 1em 2em;
-    border-radius: 3px;
-    border: 1px solid rgba(37, 37, 37, 0.123);
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;    
   }
   .redCard{
     background: red; 
-    height:5vh;
-    width:0.05vh;
     padding: 1em 2em;
     border-radius: 3px;
-    border: 1px solid rgba(37, 37, 37, 0.123);
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-       
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;       
   }
+  
   .hidden{
     display:none
   }
