@@ -6,7 +6,13 @@ export default class Timer {
   #ticking = false
   timeEvents = []
   stopSeq = 0
-  matchTime = this.now
+  matchTime = this.now // hmm... vad gör denna? som tar tiden vid instansiering
+  started = false
+  ended = false
+
+  get running(){
+    return this.ticking
+  }
 
   get now() {
     return new Date().getTime()
@@ -20,6 +26,7 @@ export default class Timer {
     this.reset()
     this.startTime = this.now
     this.ticking = true   
+    this.started = true
     this.tick(callback)
   }
   stop() {
@@ -43,6 +50,7 @@ export default class Timer {
   end() {
     this.endTime = this.now
     this.ticking = false
+    this.ended = true
   }
 
   reset() {
