@@ -34,11 +34,19 @@
           <span class="help-text">Pausa</span> 
         </span>
 
-        <span v-if="matchTimer.started && !matchTimer.ended && matchTimer.running" >
-          <button @click="end" class="timemngmt-btn orange-reset">
-            <span class="material-icons">stop</span>            
-          </button>
-          <span class="help-text">Avsluta {{matchEvents.name}}</span> 
+        <span v-if="matchTimer.started && !matchTimer.ended" >
+          <span v-if="confirm">
+            <button @click="end" class="timemngmt-btn red-reset">
+              <span class="material-icons">error</span>            
+            </button>
+            <span class="help-text">Avsluta {{matchEvents.name}}</span> 
+          </span>
+          <span v-else>
+            <button @click="confirmEnd" class="timemngmt-btn orange-reset">
+              <span class="material-icons">stop</span>            
+            </button>
+            <span class="help-text">Avsluta {{matchEvents.name}}</span> 
+          </span>
         </span>
 
         <div class="match-timer" style="visibility:hidden">
@@ -69,7 +77,8 @@ export default {
       matchTimer: new Timer(),
       trigger: 0,
       stopped: true,
-      time:0
+      time:0,
+      confirm:''
     }
   },
   computed:{    
@@ -97,9 +106,14 @@ export default {
       this.stopped = true
     },
     end(){
+      this.confirm = ''
       this.matchTimer.end()   
       // next match event (if there is any) shall be pulled (activated)
       //this.$store.commit('setNextMatchEvent')
+    },
+    confirmEnd(){
+      this.confirm = "Är du säker?"
+      setTimeout(()=>this.confirm='',3000)
     },
     tick(){
       this.trigger++
@@ -183,7 +197,11 @@ export default {
   }
 
   .orange-reset {
-    background-color: #ff7b00cc;
+    background-color: #ff7b00cc;    
+  }
+
+  .red-reset {
+    background-color: #ff0000cb;
   }
 
   .yellow-pause {
