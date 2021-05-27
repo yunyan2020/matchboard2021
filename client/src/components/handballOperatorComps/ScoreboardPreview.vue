@@ -40,7 +40,7 @@
 
 <script>
 export default {
-  props: ['hometeam', 'awayteam', 'hometeamScore', 'awayteamScore','showTime'],
+  props: ['hometeam', 'awayteam', 'hometeamScore', 'awayteamScore'],
   data() {
     return {
     /*  time:""  */

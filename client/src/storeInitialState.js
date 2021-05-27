@@ -107,7 +107,7 @@ export default {
       },
       {
         id: 2,
-        matchID: 1,
+        matchId: 1,
         name: "Andra halvlek",
         time: '00:00',
         length: 30,

@@ -19,6 +19,9 @@
         :awayteam="awayTeam" 
         v-if="homeTeam && awayTeam && match"/>
     </div>
+   <!--  <div class="match-operation-container">
+      <HandballOperatorBtns   style="visibility:hidden" v-if="match"/>
+    </div> -->
     <div class="player-operations-container" v-if="homeTeam && awayTeam">
       <PenaltiesList :team="homeTeam"/>
       <PenaltiesList :team="awayTeam"/>
@@ -29,10 +32,12 @@
 <script>
 import ScoreboardPreview from '../components/handballOperatorComps/ScoreboardPreview.vue'
 import PenaltiesList from '../components/handballOperatorComps/penaltiesList.vue'
+import HandballOperatorBtns from '../components/handballOperatorComps/HandballOperatorBtns.vue'
 
 export default {
   components: {
-    ScoreboardPreview,  PenaltiesList
+     /* ScoreboardPreview, PenaltiesList */
+    ScoreboardPreview,HandballOperatorBtns, PenaltiesList
   },
   data() {
     return {

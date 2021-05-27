@@ -118,7 +118,7 @@ export default {
   * {
     font-family: 'PT Sans', sans-serif;
   }
-
+ 
   .descriptions-container {
     display: flex;
     justify-content: space-evenly;

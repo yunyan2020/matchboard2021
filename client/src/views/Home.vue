@@ -1,6 +1,6 @@
 <template>
   <div class="container-home">
-    <div class="navigation">
+   <!--  <div class="navigation">
       <router-link to="/GymnasticsOperator">GymnasticsOperator</router-link>
     </div>
     <div class="navigation">
@@ -8,12 +8,12 @@
     </div>
     <div class="navigation">
       <router-link to="/HandballOperator">HandballOperator</router-link>
+    </div> -->
+    <div class="navigation">
+      <router-link to="/HandballScoreBoard">ScoreBoard</router-link>
     </div>
     <div class="navigation">
-      <router-link to="/HandballScoreBoard">HandballScoreBoard</router-link>
-    </div>
-    <div class="navigation">
-      <router-link to="/HandballOperator2">HandballOperator2</router-link>
+      <router-link to="/HandballOperator2">Operator</router-link>
     </div>
   </div>
 </template>
@@ -26,6 +26,7 @@ export default {
 
 <style scoped>
   .container-home {
+    margin-top: 20px;
     width: 75%;
     margin: 0 auto;
   }
