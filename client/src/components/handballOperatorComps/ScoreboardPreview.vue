@@ -6,7 +6,7 @@
           <img :src="`${hometeam.Logo}`" class="teamlogo-img" alt="">
         </div>
         <div class="score-container">
-          <h3 @addHometeamScore="addScore" class="score">{{hometeamScore}}</h3>
+          <h3 class="score">{{match.score.hometeam}}</h3>
         </div>
       </div>
       <div class="hometeamname-container">
@@ -25,7 +25,7 @@
     <div class="teamlogo-score-teamname-away-container teamscontainer">
       <div class="teamlogo-score-container">
         <div class="score-container-away">
-          <h3 class="score">{{awayteamScore}}</h3>
+          <h3 class="score">{{match.score.awayteam}}</h3>
         </div>
         <div class="teamlogo-container">
           <img :src="`${awayteam.Logo}`" alt="" class="teamlogo-img">
@@ -44,6 +44,11 @@ export default {
   data() {
     return {
     /*  time:""  */
+    }
+  },
+  computed:{
+    match(){
+      return this.$store.state.match
     }
   },
   methods: {

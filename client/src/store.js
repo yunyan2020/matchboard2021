@@ -17,26 +17,24 @@ const mutations = {
   addScore(state, team) {
     switch(team) {
       case 'hometeam':
-        state.match.score.hometeam = state.match.score.hometeam + 1; 
-        this.dispatch('saveStateToStorage');
+        state.match.score.hometeam = state.match.score.hometeam + 1;         
         break;
       case 'awayteam':
         state.match.score.awayteam = state.match.score.awayteam + 1; 
-        this.dispatch('saveStateToStorage');
         break;  
     }
+    this.dispatch('saveStateToStorage');
   },
   removeScore(state, team) {
     switch(team) {
       case 'hometeam':
-        state.match.score.hometeam = state.match.score.hometeam - 1; 
-        this.dispatch('saveStateToStorage');
+        state.match.score.hometeam = state.match.score.hometeam - 1;         
         break;
       case 'awayteam':
         state.match.score.awayteam = state.match.score.awayteam - 1; 
-        this.dispatch('saveStateToStorage');
         break;  
     }
+    this.dispatch('saveStateToStorage');
   },
   addTeamScore(state, score){
     state.scores.push(score)
@@ -71,6 +69,7 @@ const mutations = {
   },
   setCurrentMatchEvent(state, matchEvent){
     state.currentMatchEvent = matchEvent
+    this.dispatch('saveStateToStorage');
   },
   setNextMatchEvent(state){
     let i = 0

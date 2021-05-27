@@ -25,6 +25,12 @@ export default {
   components: {Home, HandballScoreBoard, HandballOperator, HandballOperator2 },
   created(){
     this.$store.dispatch('restoreStateFromStorage')
+    window.onstorage = () => {
+      // When local storage changes, dump the list to
+      // the console.
+      console.log(JSON.parse(window.localStorage.getItem('store')))
+      this.$store.dispatch('restoreStateFromStorage')
+    }
   }
 }
 

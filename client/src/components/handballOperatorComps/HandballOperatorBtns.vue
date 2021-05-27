@@ -146,6 +146,7 @@ export default {
       })(); */
       // lägg in i följande metod?
       /* this.$store.commit('addScore', team); */
+      this.$store.commit('addScore', team);
       this.choosePlayer(team);
     },
     removeScore(team) {
@@ -164,14 +165,13 @@ export default {
               let chosenPlayerId = players[i].children[0].querySelectorAll('.player-id')[0].innerText;
               console.log(chosenPlayerId);
             });
-          }
-          this.$store.commit('addScore', team);
+          }          
           break;
         case 'awayteam':
           element = document.getElementsByClassName('playerlist-operator-container')[1];
           console.log(element);
           break; 
-      }
+      }      
     }
   },
   mounted(){      
