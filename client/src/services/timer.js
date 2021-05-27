@@ -7,8 +7,8 @@ export default class Timer {
   timeEvents = []
   stopSeq = 0
   matchTime = this.now // hmm... vad gör denna? som tar tiden vid instansiering
-  started = false
-  ended = false
+  started = false // on match event: timer first start
+  ended = false // on end match event
 
   get running(){
     return this.ticking

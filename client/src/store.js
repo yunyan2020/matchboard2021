@@ -68,6 +68,21 @@ const mutations = {
       }
     }
     this.dispatch('saveStateToStorage')
+  },
+  setNextMatchEvent(state){
+    let found = false    
+    for(let event of state.matchEvents){
+      if(found){
+        event.currentMatchEvent = true
+      }
+      if(event.currentMatchEvent){
+        found = true        
+        event.currentMatchEvent = false
+      }
+    }
+    if(!found){
+      state.matchEvents[0].currentMatchEvent = true
+    }
   }
 }
 

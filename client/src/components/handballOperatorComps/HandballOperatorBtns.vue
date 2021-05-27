@@ -98,7 +98,8 @@ export default {
     },
     end(){
       this.matchTimer.end()   
-       
+      // next match event (if there is any) shall be pulled (activated)
+      //this.$store.commit('setNextMatchEvent')
     },
     tick(){
       this.trigger++
