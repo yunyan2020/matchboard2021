@@ -9,9 +9,9 @@
         <button  @click="start(),updateTime()" class="timemngmt-btn green-start green">Starta</button>
         <button  @click="stop"  class="timemngmt-btn yellow-pause">Pausa</button>
         <button  @click="nonStop"  class="timemngmt-btn yellow-pause">UnPausa</button>
-        <button  @click="end" class="timemngmt-btn orange-reset">Slut</button>
+        <button  @click="end" class="timemngmt-btn orange-reset">Avslut</button>
         <div class="match-timer">
-        <p>{{Math.floor(time/60)}} : {{time%60}}</p>
+        <!-- <p>{{Math.floor(time/60)}} : {{time%60}}</p> -->
         <p>{{updateTime()}}</p>
         </div>
       </div>
