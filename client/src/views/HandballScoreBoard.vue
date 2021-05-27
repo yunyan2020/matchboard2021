@@ -19,24 +19,25 @@
         :awayteam="awayTeam" 
         v-if="homeTeam && awayTeam && match"/>
     </div>
-    <div class="match-operation-container">
-      <HandballOperatorBtns v-if="match"/>
-    </div>
+   <!--  <div class="match-operation-container">
+      <HandballOperatorBtns   style="visibility:hidden" v-if="match"/>
+    </div> -->
     <div class="player-operations-container" v-if="homeTeam && awayTeam">
-      <PlayerListOperator :team="homeTeam"/>
-      <PlayerListOperator :team="awayTeam"/>
+      <PenaltiesList :team="homeTeam"/>
+      <PenaltiesList :team="awayTeam"/>
     </div>
   </div>
 </template>
 
 <script>
 import ScoreboardPreview from '../components/handballOperatorComps/ScoreboardPreview.vue'
+import PenaltiesList from '../components/handballOperatorComps/penaltiesList.vue'
 import HandballOperatorBtns from '../components/handballOperatorComps/HandballOperatorBtns.vue'
-import PlayerListOperator from '../components/handballOperatorComps/PlayerListOperator.vue'
 
 export default {
   components: {
-    ScoreboardPreview, HandballOperatorBtns, PlayerListOperator
+     /* ScoreboardPreview, PenaltiesList */
+    ScoreboardPreview,HandballOperatorBtns, PenaltiesList
   },
   data() {
     return {
@@ -74,6 +75,7 @@ export default {
         for(let j = 0; j < teams.length; j++) {
           if(teamIds[i] == teams[j].id && teams[j].homeTeam == true) {
             teamObj = {
+              TeamId :teams[j].id,
               TeamName: teams[j].name,
               TeamPlayers: this.getPlayers(teams[j].id),
               SentOffs: [],
@@ -93,6 +95,7 @@ export default {
         for(let j = 0; j < teams.length; j++) {
           if(teamIds[i] == teams[j].id && teams[j].homeTeam == false) {
             teamObj = {
+              TeamId :teams[j].id,
               TeamName: teams[j].name,
               TeamPlayers: this.getPlayers(teams[j].id),
               Logo: teams[j].logo,
@@ -118,7 +121,7 @@ export default {
   * {
     font-family: 'PT Sans', sans-serif;
   }
- 
+
   .descriptions-container {
     display: flex;
     justify-content: space-evenly;

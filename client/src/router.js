@@ -4,7 +4,7 @@ import GymansticsOperator from './views/GymnasticsOperator.vue'
 import GymansticsScoreBoard from './views/GymnasticsScoreBoard.vue'
 import HandballOperator from './views/HandballOperator.vue'
 import HandballOperator2 from './views/HandballOperator2.vue'
-import HandballUserView from './views/HandballUserView.vue'
+import HandballScoreBoard from './views/HandballScoreBoard.vue'
 
 const routes = [
   {
@@ -24,13 +24,13 @@ const routes = [
   },
   {
     name: 'HandballOperator2',
-    path: '/',
+    path: '/HandballOperator2',
     component: HandballOperator2
   },
   {
-    name: 'HandballUserView',
-    path: '/HandballUserView',
-    component: HandballUserView
+    name: 'HandballScoreBoard',
+    path: '/HandballScoreBoard',
+    component: HandballScoreBoard
   }
 ]
 

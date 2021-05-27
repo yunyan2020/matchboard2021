@@ -15,11 +15,11 @@
     </div>
     <div class="time-period-container">
       <div class="time-container">
-        <h1 class="time">{{time() !='NaN:NaN'?time():"0:0"}}</h1>
+        <h1 class="time" >{{time() !='NaN:NaN'?time():"0:0"}}</h1>
       </div>
       <div class="period-container">
-        <div class="period"></div>
-        <div class="period"></div>
+        <div class="period" ></div>
+        <div class="period" ></div>
       </div>
     </div>
     <div class="teamlogo-score-teamname-away-container teamscontainer">

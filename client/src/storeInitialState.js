@@ -107,7 +107,7 @@ export default {
       },
       {
         id: 2,
-        matchID: 1,
+        matchId: 1,
         name: "Andra halvlek",
         time: '00:00',
         length: 30,
@@ -232,7 +232,7 @@ export default {
         playerId: 2,
         matchTime: '10:24',
         penaltyTime: '2:00',
-        type: 'Gult kort',
+        type: 'Rött kort',
       },
       {
         id: 3,
@@ -240,6 +240,15 @@ export default {
         matchEventsId: 1,
         playerId: 11,
         matchTime: '8:14',
+        penaltyTime: '1:00',
+        type: 'Gult kort',
+      },
+      {
+        id: 4,
+        teamId: 1,
+        matchEventsId: 1,
+        playerId: 1,
+        matchTime: '15:24',
         penaltyTime: '1:00',
         type: 'Gult kort',
       },
