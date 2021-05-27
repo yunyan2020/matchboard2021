@@ -27,8 +27,7 @@ export default class Timer {
     //array med objekt som innehåller pausad tid och startad tid 
     // this.pausedTime = this.now
     this.timeEvents = []
-    this.timeEvents.push({ pausedTime: this.now, startTime: this.startTime })    
-    console.table(timeEvents)
+    this.timeEvents.push({ pausedTime: this.now, startTime: this.startTime })  
   }
   nonStop(callback) {    
     this.ticking = true

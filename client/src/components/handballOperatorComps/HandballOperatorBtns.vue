@@ -9,13 +9,14 @@
         <button  @click="start(),updateTime()" class="timemngmt-btn green-start green">Starta</button>
         <button  @click="stop"  class="timemngmt-btn yellow-pause">Pausa</button>
         <button  @click="nonStop"  class="timemngmt-btn yellow-pause">UnPausa</button>
-        <button  @click="end" class="timemngmt-btn orange-reset">Återställ</button>
+        <button  @click="end" class="timemngmt-btn orange-reset">Slut</button>
         <div class="match-timer">
         <p>{{Math.floor(time/60)}} : {{time%60}}</p>
+        <p>{{updateTime()}}</p>
         </div>
       </div>
       <div class="lower-timemngmt">
-        <button class="halftime-btn">Halvlek</button>
+        <button class="halftime-btn">{{matchEvents.name}}</button>
       </div>
     </div>
     <div class="score-btns-container">
@@ -33,12 +34,17 @@ export default {
       matchTimer: new Timer(),
       trigger: 0,
       stopped: true,
+      time:0
     }
   },
   computed:{    
     time(){
       this.trigger
       return this.matchTimer.time
+    },
+    matchEvents(){
+      let matchId = this.$store.state.match.id
+      return this.$store.state.matchEvents.filter((e) => e.matchId = matchId && e.currentMatchEvent === true)[0]
     }
   }, 
   props: ['hometeamScore', 'awayteamScore'],
@@ -63,11 +69,13 @@ export default {
       this.trigger++
     },
     updateTime(){
-      let Minutes = Math.floor(this.time/60) 
-      let senconds = this.time%60
-      console.log('this.time',this.time)
-      let time = Minutes + ':' + senconds
-      console.log('time',time)
+      let matchTime = this.matchTimer.time
+      let time = Math.floor(matchTime/60)  + ':' + matchTime%60
+      let length = this.matchEvents.length
+      if  (Math.floor(matchTime/60) === length){
+         this.matchTimer.end()  
+      //   this.$store.commit('setCurrentMatchEvent',true)  
+      }
       this.$store.commit('setMatchEventsTime',time) 
     },
     addScore(team) {
