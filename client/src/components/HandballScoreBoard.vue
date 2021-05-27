@@ -16,7 +16,7 @@
     </div>
     <div class="middle">
       <TeamSportScoring />
-      <PeriodTimer /> 
+      <PeriodTimerNew /> 
     </div>
     <div class="cont right">
       <div class="logo-right">
@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import PeriodTimer from './PeriodTimer.vue'
+import PeriodTimerNew from './PeriodTimerNew.vue'
 import TeamSportScoring from './TeamSportScoring.vue'
 
 
@@ -102,7 +102,7 @@ export default {
      return awayTeamPenaltyInfo;
     },
   },
-  components: {PeriodTimer, TeamSportScoring}
+  components: {PeriodTimerNew, TeamSportScoring}
 }
 </script>
 

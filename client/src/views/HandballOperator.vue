@@ -7,7 +7,8 @@
       <HandballScoreBoard />
     </div>
     <div class="handle-penalties">
-      <HandballHandlePenalties />
+      <PenaltiesComp />
+      <!-- <HandballHandlePenalties /> -->
     </div>
   </div>
 </template>
@@ -16,9 +17,10 @@
 import TeamSportHandleScore from '../components/TeamSportHandleScore.vue'
 import HandballScoreBoard from '../components/HandballScoreBoard.vue'
 import HandballHandlePenalties from '../components/HandballHandlePenalties.vue'
+import PenaltiesComp from '../components/PenaltiesComp.vue'
 
 export default {
-  components: {TeamSportHandleScore, HandballScoreBoard, HandballHandlePenalties}
+  components: {TeamSportHandleScore, HandballScoreBoard, PenaltiesComp}
 };
 </script>
 

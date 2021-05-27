@@ -14,6 +14,34 @@ const mutations = {
       state[key] = stateToRestore[key]
     }
   },
+  addScore(state, team) {
+    switch(team) {
+      case 'hometeam':
+        state.match.score.hometeam = state.match.score.hometeam + 1; 
+        this.dispatch('saveStateToStorage');
+        break;
+      case 'awayteam':
+        state.match.score.awayteam = state.match.score.awayteam + 1; 
+        this.dispatch('saveStateToStorage');
+        break;  
+    }
+  },
+  removeScore(state, team) {
+    switch(team) {
+      case 'hometeam':
+        state.match.score.hometeam = state.match.score.hometeam - 1; 
+        this.dispatch('saveStateToStorage');
+        break;
+      case 'awayteam':
+        state.match.score.awayteam = state.match.score.awayteam - 1; 
+        this.dispatch('saveStateToStorage');
+        break;  
+    }
+  },
+  addTeamScore(state, score){
+    state.scores.push(score)
+    this.dispatch('saveStateToStorage') // put last in any mutation that changes state that should be kept between reloads
+  },
   addTeamScore(state, score){
     state.scores.push(score)
     this.dispatch('saveStateToStorage') // put last in any mutation that changes state that should be kept between reloads
@@ -31,6 +59,30 @@ const mutations = {
   addPenalty(state, penalty) {
     console.log(state, penalty)
     this.dispatch('saveStateToStorage')
+  },
+  setMatchEventsTime(state,time){
+    for(let i=0;i<state.matchEvents.length;i++){
+      if (state.matchEvents[i].currentMatchEvent == true){
+        state.matchEvents[i].time = time
+        break;
+      }
+    }
+    this.dispatch('saveStateToStorage')
+  },
+  setNextMatchEvent(state){
+    let found = false    
+    for(let event of state.matchEvents){
+      if(found){
+        event.currentMatchEvent = true
+      }
+      if(event.currentMatchEvent){
+        found = true        
+        event.currentMatchEvent = false
+      }
+    }
+    if(!found){
+      state.matchEvents[0].currentMatchEvent = true
+    }
   }
 }
 

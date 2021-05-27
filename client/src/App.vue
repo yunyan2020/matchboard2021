@@ -1,9 +1,10 @@
 <template>
   <div class="container">
-    <Home />
+    <!-- <Home /> -->
     <!-- <HandballScoreBoard /> -->
     <!-- <GymnasticsScoreBoard /> -->
-    <router-view /> 
+    <!-- <router-view />  -->
+    <HandballOperator2 />
   </div>
 </template>
 
@@ -11,6 +12,8 @@
 import Home from './views/Home.vue'
 import HandballScoreBoard from './views/HandballUserView.vue'
 import HandballOperator from './views/HandballOperator.vue'
+
+import HandballOperator2 from './views/HandballOperator2.vue'
 import GymnasticsScoreBoard from './views/GymnasticsScoreBoard.vue'
 import HandballUserView from './views/HandballUserView.vue'
 
@@ -18,7 +21,7 @@ export default {
   // created() {
   //   this.$store.commit('updatePenaltiesHash')
   // }, 
-  components: {Home, HandballScoreBoard, HandballOperator, HandballUserView },
+  components: {Home, HandballScoreBoard, HandballOperator, HandballOperator2, HandballUserView },
   created(){
     this.$store.dispatch('restoreStateFromStorage')
   }

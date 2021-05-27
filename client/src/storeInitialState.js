@@ -1,6 +1,10 @@
 export default {
     match: {
       id: 1,
+      score: {
+        hometeam: 0,
+        awayteam: 0
+      },
       time: '18:32',
       teamId: [1, 2],
       team: {},
@@ -42,6 +46,34 @@ export default {
       playNumber: "10"
     },
     {
+      id: 4,
+      teamId: 2,
+      firstName: "Erik",
+      lastName: "Nilsson",
+      playNumber: "23"
+    },
+    {
+      id: 5,
+      teamId: 2,
+      firstName: "Jonn",
+      lastName: "Karlsson",
+      playNumber: "12"
+    },
+    {
+      id: 6,
+      teamId: 1,
+      firstName: "Jacob",
+      lastName: "Jacobsson",
+      playNumber: "2"
+    },
+    {
+      id: 7,
+      teamId: 1,
+      firstName: "George",
+      lastName: "Jergsson",
+      playNumber: "15"
+    },
+    {
       id: 11,
       teamId: 2,
       firstName: "Erik",
@@ -68,6 +100,7 @@ export default {
         id: 1,
         matchId: 1,
         name: "Första halvlek",
+        time: '18:32',
         length: 30,
         currentMatchEvent: true,
       },
@@ -75,6 +108,7 @@ export default {
         id: 2,
         matchID: 1,
         name: "Andra halvlek",
+        time: '00:00',
         length: 30,
         currentMatchEvent: false,
       },
