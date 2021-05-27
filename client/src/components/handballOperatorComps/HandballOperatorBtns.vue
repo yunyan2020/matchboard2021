@@ -17,7 +17,7 @@
           <button  @click="start(),updateTime()" class="timemngmt-btn green-start green">
             <span class="material-icons">play_arrow</span>          
           </button>
-          <span class="help-text">Starta {{matchEvents.name}}</span> 
+          <span class="help-text">Starta {{matchEvent.name}}</span> 
         </span>
 
         <span v-if="matchTimer.started && !matchTimer.ended && !matchTimer.running">
@@ -39,13 +39,13 @@
             <button @click="end" class="timemngmt-btn red-reset">
               <span class="material-icons">error</span>            
             </button>
-            <span class="help-text">Avsluta {{matchEvents.name}}</span> 
+            <span class="help-text">Avsluta {{matchEvent.name}}</span> 
           </span>
           <span v-else>
             <button @click="confirmEnd" class="timemngmt-btn orange-reset">
               <span class="material-icons">stop</span>            
             </button>
-            <span class="help-text">Avsluta {{matchEvents.name}}</span> 
+            <span class="help-text">Avsluta {{matchEvent.name}}</span> 
           </span>
         </span>
 
@@ -86,9 +86,14 @@ export default {
       this.trigger
       return this.matchTimer.time
     },
-    matchEvents(){
+    matchEvent(){
       let matchId = this.$store.state.match.id
-      return this.$store.state.matchEvents.filter((e) => e.matchId = matchId && e.currentMatchEvent === true)[0]
+      let currentMatchEvent = this.$store.state.matchEvents.find((e) => e.matchId = matchId && e.currentMatchEvent === true)
+      if(currentMatchEvent){
+        return currentMatchEvent
+      }else{
+        return {}
+      }
     }
   }, 
   props: ['hometeamScore', 'awayteamScore'],
@@ -109,7 +114,7 @@ export default {
       this.confirm = ''
       this.matchTimer.end()   
       // next match event (if there is any) shall be pulled (activated)
-      //this.$store.commit('setNextMatchEvent')
+      this.$store.commit('setNextMatchEvent')
     },
     confirmEnd(){
       this.confirm = "Är du säker?"
@@ -121,12 +126,12 @@ export default {
     updateTime(){
       let matchTime = this.matchTimer.time
       let time = Math.floor(matchTime/60)  + ':' + matchTime%60
-      let length = this.matchEvents.length
+      let length = this.matchEvent.length
       if  (Math.floor(matchTime/60) === length){
          this.matchTimer.end()  
       //   this.$store.commit('setCurrentMatchEvent',true)  
       }
-      this.$store.commit('setMatchEventsTime',time) 
+      this.$store.commit('setMatchEventTime',time) 
     },
     addScore(team) {
       /* let player = this.choosePlayer(); */

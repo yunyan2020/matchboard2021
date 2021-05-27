@@ -60,7 +60,7 @@ const mutations = {
     console.log(state, penalty)
     this.dispatch('saveStateToStorage')
   },
-  setMatchEventsTime(state,time){
+  setMatchEventTime(state,time){
     for(let i=0;i<state.matchEvents.length;i++){
       if (state.matchEvents[i].currentMatchEvent == true){
         state.matchEvents[i].time = time
@@ -70,19 +70,23 @@ const mutations = {
     this.dispatch('saveStateToStorage')
   },
   setNextMatchEvent(state){
-    let found = false    
+    let i = 0
+    let foundAt = -1
     for(let event of state.matchEvents){
-      if(found){
-        event.currentMatchEvent = true
-      }
       if(event.currentMatchEvent){
-        found = true        
-        event.currentMatchEvent = false
+        foundAt = i
       }
+      event.currentMatchEvent = false
+      i++
     }
-    if(!found){
-      state.matchEvents[0].currentMatchEvent = true
+    if(foundAt > -1 && state.matchEvents[foundAt+1]){
+      state.matchEvents[foundAt+1].currentMatchEvent = true
+    }else{
+      // match is not started or match is over?
+      // state.matchEvents[0].currentMatchEvent = true // toggles back to first.. maybe not perfect
     }
+    
+    this.dispatch('saveStateToStorage')
   }
 }
 
