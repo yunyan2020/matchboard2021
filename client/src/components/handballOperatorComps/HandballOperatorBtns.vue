@@ -1,27 +1,62 @@
 <template>
-  <div class="operator-btns-container">
+  <div class="operator-btns-container">    
     <div class="score-btns-container">
-      <button @click="addScore('hometeam')" class="score-btn green">+</button>
-      <button @click="removeScore('hometeam')" class="score-btn red">-</button>
-    </div>
+      <span>
+        <button @click="addScore('hometeam')" class="score-btn green">+</button>
+        <span class="help-text">Lägg till mål</span> 
+      </span>
+      <span>
+        <button @click="removeScore('hometeam')" class="score-btn red">-</button>
+        <span class="help-text">ta bort mål</span> 
+      </span>
+    </div>    
     <div class="timemngmt-btns-container">
       <div class="upper-timemngmt">
-        <button  @click="start(),updateTime()" class="timemngmt-btn green-start green">Starta</button>
-        <button  @click="stop"  class="timemngmt-btn yellow-pause">Pausa</button>
-        <button  @click="nonStop"  class="timemngmt-btn yellow-pause">UnPausa</button>
-        <button  @click="end" class="timemngmt-btn orange-reset">Slut</button>
-        <div class="match-timer">
-        <p>{{Math.floor(time/60)}} : {{time%60}}</p>
-        <p>{{updateTime()}}</p>
+
+        <span v-if="!matchTimer.started || matchTimer.ended">
+          <button  @click="start(),updateTime()" class="timemngmt-btn green-start green">
+            <span class="material-icons">play_arrow</span>          
+          </button>
+          <span class="help-text">Starta {{matchEvents.name}}</span> 
+        </span>
+
+        <span v-if="matchTimer.started && !matchTimer.ended && !matchTimer.running">
+          <button @click="nonStop" class="timemngmt-btn green-start green">
+            <span class="material-icons">play_arrow</span>            
+          </button>
+          <span class="help-text">Återuppta</span> 
+        </span>
+
+        <span v-if="matchTimer.started && !matchTimer.ended && matchTimer.running">
+          <button  @click="stop"  class="timemngmt-btn yellow-pause">
+            <span class="material-icons">pause</span>            
+          </button>
+          <span class="help-text">Pausa</span> 
+        </span>
+
+        <span v-if="matchTimer.started && !matchTimer.ended && matchTimer.running" >
+          <button @click="end" class="timemngmt-btn orange-reset">
+            <span class="material-icons">stop</span>            
+          </button>
+          <span class="help-text">Avsluta {{matchEvents.name}}</span> 
+        </span>
+
+        <div class="match-timer" style="visibility:hidden">
+          <p>{{Math.floor(time/60)}} : {{time%60}}</p>
+          <p>{{updateTime()}}</p>
         </div>
-      </div>
-      <div class="lower-timemngmt">
-        <button class="halftime-btn">{{matchEvents.name}}</button>
+
       </div>
     </div>
     <div class="score-btns-container">
-      <button @click="removeScore('awayteam')" class="score-btn red">-</button>
-      <button @click="addScore('awayteam')" class="score-btn green">+</button>
+      <span>
+        <button @click="removeScore('awayteam')" class="score-btn red">-</button>
+        <span class="help-text">ta bort mål</span> 
+      </span>
+      <span>
+        <button @click="addScore('awayteam')" class="score-btn green">+</button>
+        <span class="help-text">Lägg till mål</span> 
+      </span>
     </div>
   </div>
 </template>
@@ -168,11 +203,12 @@ export default {
     display: flex;
     flex-direction: row;
     gap: 2em;
+    width:30%;
   }
 
   .score-btn {
-    width: 100px;
-    height: 100px;
+    width: 10vh;
+    height:10vh;
     border-radius: 50%;
     outline: none;
     border: 1px solid rgb(136, 136, 136);
@@ -184,11 +220,12 @@ export default {
 
   .timemngmt-btns-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
     gap: 2em;
-    background-color: rgba(211, 211, 211, 0.25);
-    padding: 10px 20px;
+    padding: 0 20px;
     border-radius: 5px;
+    width:40%;
   }
 
   .upper-timemngmt {
@@ -198,12 +235,13 @@ export default {
   }
 
   .timemngmt-btn {
+    height:10vh;
+    min-width:10vh;
     padding: 1em 2em;
     border-radius: 30px;
     border: 1px solid rgba(37, 37, 37, 0.123);
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     font-weight: 900;
-    font-size: 20px;
   }
 
   .halftime-btn {
@@ -215,4 +253,17 @@ export default {
     font-size: 20px;
     background-color: #097be6c2;
   }
+
+  .material-icons{
+    font-size:400%;
+  }
+
+  .help-text{
+    display: block;
+    font-size:100%;
+    text-transform: lowercase;
+    font-style: italic;
+    margin-top:1vh;
+  }
+  
 </style>
