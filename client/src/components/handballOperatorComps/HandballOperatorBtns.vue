@@ -135,15 +135,7 @@ export default {
     },
     addScore(team) {
       /* let type = event.target.innerText; */
-      let arg = {
-        type: event.target.innerText,
-        team: team
-      }
-
-      ;(async () => {
-        let test = await player();
-        console.log(test);
-      })(); 
+     c
       // lägg in i följande metod?
       /* this.$store.commit('addScore', team); */
       this.$store.commit('addScore', team);
