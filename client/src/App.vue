@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Home />
+    <Home v-if="this.$route.name !== 'HandballScoreBoard'"/>
     <router-view /> 
     
     <!-- <HandballScoreBoard /> -->    

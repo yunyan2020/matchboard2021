@@ -161,6 +161,7 @@ const mutations = {
     } else {
       console.warn('Unhandled action', arguments);
     } */
+    this.dispatch('saveStateToStorage');
   },
   setPlayer(state, arg) {
     let player = arg.player;
@@ -270,6 +271,7 @@ const mutations = {
         time: "17:45"
       });
     } */
+    this.dispatch('saveStateToStorage');
   },
   addScore(state, team, player) {
     switch(team) {
