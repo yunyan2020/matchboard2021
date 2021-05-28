@@ -1,25 +1,20 @@
 <template>
   <div :class="`playerlist-operator-container playerlist-operator-container-hometeam-${team.Hometeam}`">
-    <hr />
-    <div class="description-container">
-      <p class="description-p">Nummer | Namn</p>
-      <p class="description-p">Varningar | Utvisningar</p>
-    </div>
-    <hr />
     <div class="playerlist-container" v-if="team">
-      <div class="player" v-for="player in playerlist" :key="player" >
-        <div class="player-number-name">
-          <p class="player-number">{{player.Number}}</p>
-          <p class="player-name">{{player.Name}}</p>
-          <p class="player-id hide">{{player.id}}</p>         
-          <p class="penalty" v-for="(penalty,index) in playerPenalties[player.id]" :key="index" >                         
-            <span :class="penaltyIcons[penalty.type]" >
-              <span class="hidden">{{penalty.type}}</span>
-            </span>
-            {{penalty.penaltyTime}}   
-          </p>
-        </div>        
-      </div>   
+      <span v-for="(player, index) in playerlist" :key="index">
+        <div v-if="playerHasPenalties(player.id)" class="player">
+          <div class="player-number-name">
+            <p class="player-number">{{player.Number}}</p>
+            <p class="player-name">{{player.Name}}</p>
+            <p class="player-id hide">{{player.id}}</p>         
+            <p class="penalty" v-for="(penalty,index2) in playerPenalties[player.id]" :key="index2" >                         
+              <span :class="penaltyIcons[penalty.type]" >
+                {{penalty.penaltyTime}}  
+              </span>               
+            </p>
+          </div>        
+        </div>  
+      </span> 
     </div>
   </div>  
 </template>
@@ -46,7 +41,11 @@ export default {
       return this.team.TeamPlayers;
     },
     penalties(){
-      return  this.$store.state.penalties.filter(t => t.teamId == this.team.TeamId && t.matchEventsId === this.matchEvents[0].id)
+      let p = []
+      if(this.team && this.team.TeamId && this.matchEvents && this.matchEvents[0] && this.matchEvents[0].id){
+        p = this.$store.state.penalties.filter(t => t.teamId == this.team.TeamId && t.matchEventsId === this.matchEvents[0].id)
+      }
+      return p
     }, 
     playerPenalties(){
      let hashPenalties = {}
@@ -60,7 +59,9 @@ export default {
     },   
   },
   methods: {  
-    
+    playerHasPenalties(id){
+      return (this.playerPenalties[id] !== undefined)
+    }
   }
 }
 </script>
@@ -79,17 +80,24 @@ export default {
     color: lightgray;
     font-weight: 900;
   }
+  .playerlist-container p{
+    margin:0;
+  }
+  p.penalty{
+    margin-bottom:0.25vh;
+    font-size:80%;
+  }
+  .penalty>span{
+    display:block;
+    padding: 2vh 0.25vw;
+  }
   .yellowCard{
-    background: yellow;    
-    padding: 1em 2em;
+    background: yellow;        
     border-radius: 3px;    
-    height:5vh;
-    width:1vh;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;    
   }
   .redCard{
     background: red; 
-    padding: 1em 2em;
     border-radius: 3px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;       
   }
@@ -178,6 +186,7 @@ export default {
   .player-number-name {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     flex-direction: row;
     gap: 1em;
   }
@@ -194,17 +203,17 @@ export default {
   }
 
   .player {
-    border: 1px solid lightgray;
+    /*border: 1px solid lightgray;*/
     border-radius: 5px;
     padding: 2px 18px;
     justify-content: space-between;
-    background-color: rgba(117, 230, 117, 0.25);
+    /*background-color: rgba(117, 230, 117, 0.25);*/
     cursor: pointer;
     text-align: left;
   }
 
   .player-name{
-    flex-grow:1 ;
+    flex-grow:1;
   }
 
   .sentoff-player {
@@ -230,9 +239,9 @@ export default {
     font-weight: 900;
   }
 
-  .player:hover {
+  /*.player:hover {
     background-color: rgba(117, 230, 117, 0.5);
-  }
+  }*/
 
   .player-penalty-container {
     display: flex;

@@ -162,12 +162,12 @@ export default {
 
   .hometeamname-container {
     float: left;
-    border-left: 3px solid lightskyblue;
+    /*border-left: 3px solid lightskyblue;*/
   }
 
   .awayteamname-container {
     float: right;
-    border-right: 3px solid lightskyblue;
+    /*border-right: 3px solid lightskyblue;*/
   }
 
   .teamname {
@@ -196,6 +196,7 @@ export default {
     display: flex;
     flex-direction: row;
     gap: 1em;
+    display:none;
   }
 
   .period {
