@@ -135,7 +135,7 @@ export default {
     },
     addScore(team) {
       /* let type = event.target.innerText; */
-     c
+     
       // lägg in i följande metod?
       /* this.$store.commit('addScore', team); */
       this.$store.commit('addScore', team);
