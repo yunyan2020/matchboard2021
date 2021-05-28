@@ -9,12 +9,269 @@ const state = {}
 
 //mutates state (USE THIS TO CHANGE ANY VALUES IN state!!! No direct changes in the components!)
 const mutations = {
+  startTimer(state) {
+    state.startTimer = true;
+    this.dispatch('saveStateToStorage');
+  },
   restoreState(state, stateToRestore){
     for(let key in stateToRestore){
       state[key] = stateToRestore[key]
     }
   },
-  addScore(state, team) {
+  setActionType(state, arg) {
+    console.log(arg);
+    let player = arg.player;
+    let type = arg.type;
+    switch(type) {
+      case '+':
+        if(arg.team == 'hometeam') {
+          state.match.score.hometeam++;
+          state.score.push({
+            matchEventsId: 1,
+            teamId: player.teamId,
+            points: 1,
+            playerId: player.id,
+            player: player,
+            time: "17:45"
+          });
+          break;
+        }else {
+          state.match.score.awayteam++;
+          state.score.push({
+            matchEventsId: 1,
+            teamId: player.teamId,
+            points: 1,
+            playerId: player.id,
+            player: player,
+            time: "17:45"
+          });
+          break;
+        }
+      case '-':
+        if(arg.team == 'hometeam') {
+          state.match.score.hometeam--;
+          break;
+        }else {
+          state.match.score.awayteam--;
+          break;
+        }
+      case 'Varning':
+        if(player.Warnings.length == 2 && arg.team == 'hometeam') {
+          state.penalties.push({
+            teamId: player.teamId,
+            matchEventsId: 1, // change to actual later on
+            playerId: player.id,
+            matchTime: '10:24', // matchEvents.timer.time
+            penaltyTime: '1:00', // change to actual
+            type: type,
+          });
+          state.match.penalties.sentoffs.home.push(player);
+          break;
+        }else if(player.Warnings.length == 2 && arg.team == 'awayteam'){
+          state.penalties.push({
+            teamId: player.teamId,
+            matchEventsId: 1, // change to actual later on
+            playerId: player.id,
+            matchTime: '10:24', // matchEvents.timer.time
+            penaltyTime: '1:00', // change to actual
+            type: type,
+          });
+          state.match.penalties.sentoffs.away.push(player);
+          break;
+        }else {
+          state.penalties.push({
+            teamId: player.teamId,
+            matchEventsId: 1, // change to actual later on
+            playerId: player.id,
+            matchTime: '10:24', // matchEvents.timer.time
+            penaltyTime: '1:00', // change to actual
+            type: type,
+          });
+          break;
+        }
+      case 'Gult kort':
+        if(player.Warnings.length == 2 && arg.team == 'hometeam') {
+          state.penalties.push({
+            teamId: player.teamId,
+            matchEventsId: 1, // change to actual later on
+            playerId: player.id,
+            matchTime: '10:24', // matchEvents.timer.time
+            penaltyTime: '1:00', // change to actual
+            type: type,
+          });
+          state.match.penalties.sentoffs.home.push(player);
+          break;
+        }else if(player.Warnings.length == 2 && arg.team == 'awayteam'){
+          state.penalties.push({
+            teamId: player.teamId,
+            matchEventsId: 1, // change to actual later on
+            playerId: player.id,
+            matchTime: '10:24', // matchEvents.timer.time
+            penaltyTime: '1:00', // change to actual
+            type: type,
+          });
+          state.match.penalties.sentoffs.away.push(player);
+          break;
+        }else {
+          state.penalties.push({
+            teamId: player.teamId,
+            matchEventsId: 1, // change to actual later on
+            playerId: player.id,
+            matchTime: '10:24', // matchEvents.timer.time
+            penaltyTime: '1:00', // change to actual
+            type: type,
+          });
+          break;
+        }
+      case 'Rött kort':
+        if(arg.team == 'hometeam') {
+          state.match.penalties.disqed.home.push(player);
+          break;
+        } else {
+          state.match.penalties.disqed.awayhome.push(player);
+          break;
+        }
+      case 'Utvisning':
+        if(arg.team == 'hometeam') {
+          state.match.penalties.sentoffs.home.push(player);
+          break;
+        } else {
+          state.match.penalties.sentoffs.awayhome.push(player);
+          break;
+        }
+    }
+    /* if(['Varning', 'Gult kort', 'Rött kort', 'Utvisning'].includes(type)) {
+      state.penalties.push({
+        teamId: player.teamId,
+        matchEventsId: 1, // change to actual later on
+        playerId: player.id,
+        matchTime: '10:24', // matchEvents.timer.time
+        penaltyTime: '1:00', // change to actual
+        type: type,
+      });
+    } else if(['+', '-'].includes(type)) {
+      state.score.push({
+        matchEventsId: 1,
+        teamId: player.teamId,
+        points: 1,
+        playerId: player.id,
+        player: player,
+        time: "17:45"
+      });
+    } else {
+      console.warn('Unhandled action', arguments);
+    } */
+  },
+  setPlayer(state, arg) {
+    let player = arg.player;
+    let type = arg.type;
+    switch(type) {
+      case 'Varning':
+        if(player.Warnings.length == 2 && arg.team == 'hometeam') {
+          state.penalties.push({
+            teamId: player.teamId,
+            matchEventsId: 1, // change to actual later on
+            playerId: player.id,
+            matchTime: '10:24', // matchEvents.timer.time
+            penaltyTime: '1:00', // change to actual
+            type: type,
+          });
+          state.match.penalties.sentoffs.home.push(player);
+          break;
+        }else if(player.Warnings.length == 2 && arg.team == 'awayteam'){
+          state.penalties.push({
+            teamId: player.teamId,
+            matchEventsId: 1, // change to actual later on
+            playerId: player.id,
+            matchTime: '10:24', // matchEvents.timer.time
+            penaltyTime: '1:00', // change to actual
+            type: type,
+          });
+          state.match.penalties.sentoffs.away.push(player);
+          break;
+        }else {
+          state.penalties.push({
+            teamId: player.teamId,
+            matchEventsId: 1, // change to actual later on
+            playerId: player.id,
+            matchTime: '10:24', // matchEvents.timer.time
+            penaltyTime: '1:00', // change to actual
+            type: type,
+          });
+          break;
+        }
+      case 'Gult kort':
+        if(player.Warnings.length == 2 && arg.team == 'hometeam') {
+          state.penalties.push({
+            teamId: player.teamId,
+            matchEventsId: 1, // change to actual later on
+            playerId: player.id,
+            matchTime: '10:24', // matchEvents.timer.time
+            penaltyTime: '1:00', // change to actual
+            type: type,
+          });
+          state.match.penalties.sentoffs.home.push(player);
+          break;
+        }else if(player.Warnings.length == 2 && arg.team == 'awayteam'){
+          state.penalties.push({
+            teamId: player.teamId,
+            matchEventsId: 1, // change to actual later on
+            playerId: player.id,
+            matchTime: '10:24', // matchEvents.timer.time
+            penaltyTime: '1:00', // change to actual
+            type: type,
+          });
+          state.match.penalties.sentoffs.away.push(player);
+          break;
+        }else {
+          state.penalties.push({
+            teamId: player.teamId,
+            matchEventsId: 1, // change to actual later on
+            playerId: player.id,
+            matchTime: '10:24', // matchEvents.timer.time
+            penaltyTime: '1:00', // change to actual
+            type: type,
+          });
+          break;
+        }
+      case 'Rött kort':
+        if(arg.team == 'hometeam') {
+          state.match.penalties.disqed.home.push(player);
+          break;
+        } else {
+          state.match.penalties.disqed.awayhome.push(player);
+          break;
+        }
+      case 'Utvisning':
+        if(arg.team == 'hometeam') {
+          state.match.penalties.sentoffs.home.push(player);
+          break;
+        } else {
+          state.match.penalties.sentoffs.awayhome.push(player);
+          break;
+        }
+    }
+    /* if(['Varning', 'Gult kort', 'Rött kort', 'Utvisning'].includes(type)) {
+      state.penalties.push({
+        teamId: player.teamId,
+        matchEventsId: 1, 
+        playerId: player.id,
+        matchTime: '10:24', 
+        penaltyTime: '1:00', 
+        type: type,
+      });
+    } else if(['+', '-'].includes(type)) {
+      state.score.push({
+        matchEventsId: 1,
+        teamId: player.teamId,
+        points: 1,
+        playerId: player.id,
+        player: player,
+        time: "17:45"
+      });
+    } */
+  },
+  addScore(state, team, player) {
     switch(team) {
       case 'hometeam':
         state.match.score.hometeam = state.match.score.hometeam + 1;         

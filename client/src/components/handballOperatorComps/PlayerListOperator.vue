@@ -1,10 +1,10 @@
 <template>
   <div :class="`playerlist-operator-container playerlist-operator-container-hometeam-${team.Hometeam}`">
     <div class="playerlist-operator-btns">
-      <button @click="setPenalty($event)" class="penalty-btn penalty-btn-warning">Varning</button>
-      <button @click="setPenalty($event)" class="penalty-btn">Gult kort</button>
-      <button @click="setPenalty($event)" class="penalty-btn">Rött kort</button>
-      <button @click="setPenalty($event)" class="penalty-btn">Utvisning</button>
+      <button @click="setPenalty('Varning')" class="penalty-btn penalty-btn-warning" :class="activePenalty == 'Varning' ? ' warning-selected': ''">Varning</button>
+      <button @click="setPenalty('Gult kort')" class="penalty-btn" :class="activePenalty == 'Gult kort' ? ' warning-selected': ''">Gult kort</button>
+      <button @click="setPenalty('Rött kort')" class="penalty-btn" :class="activePenalty == 'Rött kort' ? ' redCard-selected': ''">Rött kort</button>
+      <button @click="setPenalty('Utvisning')" class="penalty-btn" :class="activePenalty == 'Utvisning' ? ' disq-selected': ''">Utvisning</button>
     </div>
     <hr />
     <div class="description-container">
@@ -13,7 +13,7 @@
     </div>
     <hr />
     <div class="playerlist-container" v-if="team">
-      <div class="player" v-for="player in playerlist" :key="player" @click="penalize(chosenPenalty, player)">
+      <div class="player" :class="activePlayer == player ? ' player-selected' : ''" v-for="player in playerlist" :key="player" @click="setPlayer(player)">
         <div class="player-number-name">
           <p class="player-number">{{player.Number}}</p>
           <p class="player-name">{{player.Name}}</p>
@@ -23,15 +23,15 @@
           <!-- <p>{{player.Warnings}}</p> 
           <p>{{player.SentOffs}}</p> -->
           <div class="warning-container">
-            <div v-for="(warning, index) in 3" :key="index" :class="'warning warning-' + `${index + 1}-` + `${player.Name}`"></div>
+            <div v-for="(warning, index) in 3" :key="index" :class="'warning warning-' + `${index + 1}-` + `${player.Name}` + (player.Warnings[index] != null ? ' marked' : '')"></div>
           </div>
           <div class="sentoffs-container">
-            <div v-for="(sentoff, index) in 3" :key="index" :class="'sentoff sentoff-' + `${index + 1}-${player.Name}`"></div>
+            <div v-for="(sentoff, index) in 3" :key="index" :class="'sentoff sentoff-' + `${index + 1}-${player.Name}` + (player.SentOffs[index] != null ? ' marked' : '')"></div>
           </div>
         </div>
       </div>
-      <div class="sentoffs-player-container" v-if="sentOffs">
-        <div class="sentoff-player" v-for="sentoff in sentOffs" :key="sentoff">
+      <div class="sentoffs-player-container" v-if="sentoffs">
+        <div class="sentoff-player" v-for="sentoff in sentoffs" :key="sentoff">
           <div class="player-number-name">
             <p class="player-number">{{sentoff.Number}}</p>
             <p>{{sentoff.Name}}</p>
@@ -62,126 +62,150 @@ export default {
   data() {
     return {
       chosenPenalty: '',
-      sentOffs: [],
-      disqualified: [],
-      disqulifiedTimer: []
+      /* sentOffs: [],
+      disqualified: [], */
+      disqulifiedTimer: [],
+      selectedBtn: false,
+      activePenalty: '',
+      activePlayer: null
     }
   },
   computed: {
     playerlist() {
       return this.team.TeamPlayers;
+    },
+    sentoffs() {
+      /* return this.$store.state.match.penalties.sentoffs; */
+      if(this.team.Hometeam) {
+        return this.$store.state.match.penalties.sentoffs.home;
+      } else {
+        return this.$store.state.match.penalties.sentoffs.away;
+      }
+    },
+    disqualified() {
+      /* return this.$store.state.match.penalties.disqed; */
+      if(this.team.Hometeam) {
+        return this.$store.state.match.penalties.disqed.home;
+      } else {
+        return this.$store.state.match.penalties.disqed.away;
+      }
     }
   },
   methods: {
-    setPenalty(event) {
-      switch(event.target.innerText) {
-        case 'Varning': 
-          this.chosenPenalty = 'Varning';
-          /* let chosen = document.getElementsByClassName('penalty-btn-warning');
-          console.log(chosen); */
-          break;
-        case 'Gult kort':
-          this.chosenPenalty = 'Gult kort';
-          break;
-        case 'Rött kort':
-          this.chosenPenalty = 'Rött kort';
-          break;
-        case 'Utvisning':
-          this.chosenPenalty = 'Utvisning';
-          break;
+    activateBtn() {
+      this.selectedBtn = true;
+    },
+    setPenalty(type) {
+      this.activePenalty = type;
+      let team;
+      if(this.team.Hometeam) {
+        team = 'hometeam';
+      } else {
+        team = 'awayteam';
+      }
+      if(this.activePlayer && this.activePenalty) {
+        /* console.log('setActionType', this.activePlayer, this.activePenalty); */
+        switch(this.activePenalty) {
+          case 'Varning':
+            this.$store.commit('setActionType', {player: this.activePlayer, type: this.activePenalty, team: team});
+            this.activePlayer.Warnings.push('*');
+            if(this.activePlayer.Warnings.length == 3) {
+              this.playerlist.splice((this.playerlist.findIndex(player => player === this.activePlayer)), 1);
+              this.disqulifiedTimer.push(this.activePlayer);
+              console.log(this.disqulifiedTimer);
+            }
+            this.activePenalty = '';
+            this.activePlayer = null;
+            break;
+          case 'Gult kort':
+            this.$store.commit('setActionType', {player: this.activePlayer, type: this.activePenalty, team: team});
+            this.activePlayer.Warnings.push('*');
+            if(this.activePlayer.Warnings.length == 3) {
+              this.playerlist.splice((this.playerlist.findIndex(player => player === this.activePlayer)), 1);
+            }
+            this.activePenalty = '';
+            this.activePlayer = null;
+            break;
+          case 'Rött kort':
+            this.$store.commit('setActionType', {player: this.activePlayer, type: this.activePenalty, team: team});
+            this.playerlist.splice((this.playerlist.findIndex(player => player === this.activePlayer)), 1);
+            this.activePenalty = '';
+            this.activePlayer = null;
+            break;
+          case 'Utvisning':
+            this.$store.commit('setActionType', {player: this.activePlayer, type: this.activePenalty, team: team});
+            this.playerlist.splice((this.playerlist.findIndex(player => player === this.activePlayer)), 1);
+            this.activePenalty = '';
+            this.activePlayer = null;
+            break;
+        }
+        /* this.$store.commit('setActionType', {player: this.activePlayer, type: this.activePenalty, team: this.team.Hometeam ? 'hometeam' : 'awayteam'});
+        this.activePenalty = '';
+        this.activePlayer = null; */
       }
     },
-    penalize(type, player) {
-      switch(type) {
-        case '':
-          break;
-        case 'Varning':
-          if(player.Warnings == 0) {
-            player.Warnings = player.Warnings + 1;
-            let element = document.getElementsByClassName(`warning-1-${player.Name}`)[0];
-            element.classList.add('marked');
-            this.chosenPenalty = '';
+    setPlayer(player) {
+      this.activePlayer = player;
+      /* let arg = {
+        team: this.team.Hometeam ? 'hometeam' : 'awayteam',
+        player: player
+      } */
+      if(this.activePlayer && this.activePenalty) {
+        /* console.log('setActionType', this.activePlayer, this.activePenalty); */
+        /* if(['Varning'].includes(this.activePenalty)) {
+          this.$store.commit('setActionType', {player: this.activePlayer, type: this.activePenalty, team: this.team.Hometeam ? 'hometeam' : 'awayteam'});
+          this.activePlayer.Warnings.push('*');
+          this.activePenalty = '';
+          this.activePlayer = null;
+        } */
+        switch(this.activePenalty) {
+          case 'Varning':
+            this.$store.commit('setActionType', {player: this.activePlayer, type: this.activePenalty, team: this.team.Hometeam ? 'hometeam' : 'awayteam'});
+            this.activePlayer.Warnings.push('*');
+            if(this.activePlayer.Warnings.length == 3) {
+              this.playerlist.splice((this.playerlist.findIndex(player => player === this.activePlayer)), 1);
+            }
+            this.activePenalty = '';
+            this.activePlayer = null;
             break;
-          }else if(player.Warnings == 1) {
-            player.Warnings = player.Warnings + 1;
-            let element = document.getElementsByClassName(`warning-2-${player.Name}`)[0];
-            element.classList.add('marked');
-            this.chosenPenalty = '';
+          case 'Gult kort':
+            this.$store.commit('setActionType', {player: this.activePlayer, type: this.activePenalty, team: this.team.Hometeam ? 'hometeam' : 'awayteam'});
+            this.activePlayer.Warnings.push('*');
+            if(this.activePlayer.Warnings.length == 3) {
+              this.playerlist.splice((this.playerlist.findIndex(player => player === this.activePlayer)), 1);
+            }
+            this.activePenalty = '';
+            this.activePlayer = null;
             break;
-          }else if(player.Warnings == 2) {
-            player.Warnings = player.Warnings + 1;
-            let element = document.getElementsByClassName(`warning-3-${player.Name}`)[0];
-            element.classList.add('marked');
-            this.chosenPenalty = '';
-            this.sentOffs.push(player);
-            player.SentOffs = player.SentOffs + 1;
-            element = document.getElementsByClassName(`sentoff-1-${player.Name}`)[0];
-            element.classList.add('marked');
-            this.playerlist.splice((this.playerlist.indexOf(player)), 1);
+          case 'Rött kort':
+            this.$store.commit('setActionType', {player: this.activePlayer, type: this.activePenalty, team: this.team.Hometeam ? 'hometeam' : 'awayteam'});
+            this.playerlist.splice((this.playerlist.findIndex(player => player === this.activePlayer)), 1);
+            this.activePenalty = '';
+            this.activePlayer = null;
             break;
-          }
-        case 'Gult kort':
-          if(player.Warnings == 0) {
-            player.Warnings = player.Warnings + 1;
-            let element = document.getElementsByClassName(`warning-1-${player.Name}`)[0];
-            element.classList.add('marked');
-            this.chosenPenalty = '';
+          case 'Utvisning':
+            this.$store.commit('setActionType', {player: this.activePlayer, type: this.activePenalty, team: this.team.Hometeam ? 'hometeam' : 'awayteam'});
+            this.playerlist.splice((this.playerlist.findIndex(player => player === this.activePlayer)), 1);
+            this.activePenalty = '';
+            this.activePlayer = null;
             break;
-          }else if(player.Warnings == 1) {
-            player.Warnings = player.Warnings + 1;
-            let element = document.getElementsByClassName(`warning-2-${player.Name}`)[0];
-            element.classList.add('marked');
-            this.chosenPenalty = '';
-            break;
-          }else if(player.Warnings == 2) {
-            player.Warnings = player.Warnings + 1;
-            let element = document.getElementsByClassName(`warning-3-${player.Name}`)[0];
-            element.classList.add('marked');
-            this.chosenPenalty = '';
-            this.sentOffs.push(player);
-            player.SentOffs = player.SentOffs + 1;
-            element = document.getElementsByClassName(`sentoff-1-${player.Name}`)[0];
-            element.classList.add('marked');
-            break;
-          }
-        case 'Rött kort':
-          this.playerlist.splice(this.playerlist.indexOf(player), 1);
-          this.disqualified.push(player);
-          break;
-        case 'Utvisning':
-          if(player.SentOffs == 0) {
-            player.SentOffs = player.SentOffs + 1;
-            let element = document.getElementsByClassName(`sentoff-1-${player.Name}`)[0];
-            element.classList.add('marked');
-            this.chosenPenalty = '';
-            this.sentOffs.push(player);
-            this.playerlist.splice((this.playerlist.indexOf(player)), 1);
-            break;
-          }else if(player.SentOffs == 1) {
-            player.SentOffs = player.SentOffs + 1;
-            let element = document.getElementsByClassName(`sentoff-2-${player.Name}`)[0];
-            element.classList.add('marked');
-            this.chosenPenalty = '';
-            this.sentOffs.push(player);
-            this.playerlist.splice((this.playerlist.indexOf(player)), 1);
-            break;
-          }else if(player.SentOffs == 2) {
-            player.SentOffs = player.SentOffs + 1;
-            let element = document.getElementsByClassName(`sentoff-3-${player.Name}`)[0];
-            element.classList.add('marked');
-            this.chosenPenalty = '';
-            this.sentOffs.push(player);
-            this.playerlist.splice((this.playerlist.indexOf(player)), 1);
-            break;
-          }
-          break;
+        }
       }
+      
     }
   }
 }
 </script>
 
 <style scoped>
+
+  .player-selected {
+    background-color: rgba(117, 230, 117, 0.5) !important;
+  }
+
+  .warning-selected {
+    background-color: rgba(255, 217, 0, 0.801) !important;
+  }
 
   * {
     box-sizing: border-box;

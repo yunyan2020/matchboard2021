@@ -56,8 +56,10 @@ export default {
             id: allPlayers[i].id, 
             Name: allPlayers[i].firstName + ' ' + allPlayers[i].lastName,
             Number: allPlayers[i].playNumber,
-            Warnings: 0,
-            SentOffs: 0
+            /* Warnings: 0,
+            SentOffs: 0, */
+            Warnings: [],
+            SentOffs: []
           };
           players.push(player);
         }
@@ -137,5 +139,6 @@ export default {
     margin: 4em auto auto auto;
     display: flex;
     justify-content: space-evenly;
+    align-items: flex-start;
   }
 </style>

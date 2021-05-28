@@ -7,6 +7,7 @@
         </div>
         <div class="score-container">
           <h3 class="score">{{match.score.hometeam}}</h3>
+          <!-- <h3 class="score">{{hometeamScore}}</h3> -->
         </div>
       </div>
       <div class="hometeamname-container">
@@ -15,7 +16,8 @@
     </div>
     <div class="time-period-container">
       <div class="time-container">
-        <h1 class="time" >{{time() !='NaN:NaN'?time():"0:0"}}</h1>
+        <h1 class="time" >{{time() != 'NaN:NaN'? time(): "0:0"}}</h1>
+        <!-- <h1 class="time">{{timerStarted ? timerStarted : '00:00'}}</h1> -->
       </div>
       <div class="period-container">
         <div class="period" ></div>
@@ -43,7 +45,7 @@ export default {
   props: ['hometeam', 'awayteam', 'hometeamScore', 'awayteamScore'],
   data() {
     return {
-    /*  time:""  */
+     /* time: "" */ 
     }
   },
   computed:{
@@ -52,12 +54,6 @@ export default {
     }
   },
   methods: {
-    addScore(data) {
-      this.hometeamScore += data;
-    },
-    removeScore(team) {
-      
-    },
     time(){
       let matchId = this.$store.state.match.id
       let currentMatchEvent = this.$store.state.matchEvents.find((e) => e.matchId = matchId && e.currentMatchEvent === true)
@@ -68,8 +64,13 @@ export default {
       }
     }
   },
- /*  mounted(){
+  mounted(){
      this.time = this.time();
+  }
+  /* computed: {
+    countdown() {
+      return this.$store.state.startTimer;
+    }
   } */
 }
 </script>
