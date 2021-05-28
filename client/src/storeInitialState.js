@@ -1,5 +1,36 @@
 export default {
+    startTimer: false,
+    chosenPlayer: null,
+    chosenAction: null,
     match: {
+      id: 1,
+      score: {
+        hometeam: 0,
+        awayteam: 0
+      },
+      /* periods: [
+        {
+          id: 1,
+          duration: 30
+        },
+        {
+          id: 2,
+          duration: 30
+        }
+      ], */
+      penalties: {
+        sentoffs: {
+          home: [],
+          away: []
+        },
+        disqed: {
+          home: [],
+          away: []
+        }
+      },
+      teamId: [1, 2]
+    },
+    /* match: {
       id: 1,
       score: {
         hometeam: 0,
@@ -8,7 +39,7 @@ export default {
       time: '18:32',
       teamId: [1, 2],
       team: {},
-    },
+    }, */
     teams: [{
       id: 1,
       matchId: 1,

@@ -26,19 +26,14 @@ export default {
   props: ['hometeamScore', 'awayteamScore'],
   methods: {
     addScore(team) {
-      /* let player = this.choosePlayer(); */
-      /* const player = async () => {
-        let chosenPlayer = await this.choosePlayer(team);
-        return chosenPlayer;
+      /* let type = event.target.innerText; */
+      let arg = {
+        type: event.target.innerText,
+        team: team
       }
-
-      ;(async () => {
-        let test = await player();
-        console.log(test);
-      })(); */
-      // lägg in i följande metod?
-      /* this.$store.commit('addScore', team); */
-      this.choosePlayer(team);
+      /* this.$store.commit('setActionType', team, type); */
+      this.$store.commit('setActionType', arg);
+      /* this.choosePlayer(team); */
     },
     removeScore(team) {
       this.$store.commit('removeScore', team);

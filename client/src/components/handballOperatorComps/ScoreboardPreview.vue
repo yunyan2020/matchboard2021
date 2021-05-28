@@ -6,7 +6,7 @@
           <img :src="`${hometeam.Logo}`" class="teamlogo-img" alt="">
         </div>
         <div class="score-container">
-          <h3 @addHometeamScore="addScore" class="score">{{hometeamScore}}</h3>
+          <h3 class="score">{{hometeamScore}}</h3>
         </div>
       </div>
       <div class="hometeamname-container">
@@ -15,7 +15,7 @@
     </div>
     <div class="time-period-container">
       <div class="time-container">
-        <h1 class="time">21:32</h1>
+        <h1 class="time">{{timerStarted ? timerStarted : '00:00'}}</h1>
       </div>
       <div class="period-container">
         <div class="period"></div>
@@ -47,12 +47,24 @@ export default {
       awayteamScore: 0 */
     }
   },
+  watch: {
+    timerStarted() {
+      if(this.$store.state.startTimer) {
+        this.test();
+      }
+    }
+  },
   methods: {
-    addScore(data) {
-      this.hometeamScore += data;
+    test() {
+      console.log("timer start");
     },
-    removeScore(team) {
+    periodCountdown() {
       
+    }
+  },
+  computed: {
+    countdown() {
+      return this.$store.state.startTimer;
     }
   }
 }
