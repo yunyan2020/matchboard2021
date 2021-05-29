@@ -75,12 +75,12 @@ export default {
         for(let j = 0; j < teams.length; j++) {
           if(teamIds[i] == teams[j].id && teams[j].homeTeam == true) {
             teamObj = {
-              TeamId :teams[j].id,
               TeamName: teams[j].name,
               TeamPlayers: this.getPlayers(teams[j].id),
               SentOffs: [],
               Logo: teams[j].logo,
-              Hometeam: true
+              Hometeam: true,
+              id: teams[j].id
             };
           }
         }
@@ -95,11 +95,11 @@ export default {
         for(let j = 0; j < teams.length; j++) {
           if(teamIds[i] == teams[j].id && teams[j].homeTeam == false) {
             teamObj = {
-              TeamId :teams[j].id,
               TeamName: teams[j].name,
               TeamPlayers: this.getPlayers(teams[j].id),
               Logo: teams[j].logo,
-              Hometeam: false
+              Hometeam: false,
+              id: teams[j].id
             };
           }
         }
