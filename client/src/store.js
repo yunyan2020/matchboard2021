@@ -18,7 +18,18 @@ const mutations = {
       state[key] = stateToRestore[key]
     }
   },
-  setActionType(state, arg) {
+  setActionType(state, args){
+    let {player, type, team} = args
+    state.penalties.push({
+      teamId: team.id,
+      matchEventsId: 'matchEvent.id',
+      playerId: player.id,
+      matchTime: 'matchTime',
+      penaltyTime: '1:00',
+      type: type,
+    })    
+  },
+  setActionTypeOlde(state, arg) {
     console.log(arg);
     let player = arg.player;
     let type = arg.type;
@@ -161,6 +172,7 @@ const mutations = {
     } else {
       console.warn('Unhandled action', arguments);
     } */
+    console.log('state.penalties', state.penalties)
     this.dispatch('saveStateToStorage');
   },
   setPlayer(state, arg) {
@@ -364,6 +376,7 @@ const actions = {
       savedState = initalState
     }
     commit('restoreState', savedState)
+    console.log('savedState', savedState)
   }
 }
 

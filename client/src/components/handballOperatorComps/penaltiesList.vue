@@ -24,8 +24,7 @@ export default {
   props: ['team'],
   data() {
     return {
-     penaltyIcons:{"Gult kort":"yellowCard","Rött kort":"redCard",}
-
+      penaltyIcons:{"Gult kort":"yellowCard","Rött kort":"redCard"}
     }
   },
   computed: {

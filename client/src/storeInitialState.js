@@ -1,4 +1,13 @@
 export default {
+    /*config per sport type data*/
+    penaltyTypes:{
+      warning: {name: 'Varning'},
+      yellowCard: {name: 'Gult kort'},
+      redCard: {name: 'Rött kort'},
+      suspension: {name: 'Utvisning', time: 120},
+      disqualification: {name: 'Matchstraff'}
+    },
+    /* result type data */
     /* chosenPlayer: null,
     chosenAction: null, */
     match: {
@@ -253,7 +262,7 @@ export default {
         playerId: 1,
         matchTime: '10:24',
         penaltyTime: '1:00',
-        type: 'Gult kort',
+        type: 'yellowCard',
       },
       {
         id: 2,
@@ -262,7 +271,7 @@ export default {
         playerId: 2,
         matchTime: '10:24',
         penaltyTime: '2:00',
-        type: 'Rött kort',
+        type: 'redCard',
       },
       {
         id: 3,
@@ -271,7 +280,7 @@ export default {
         playerId: 11,
         matchTime: '8:14',
         penaltyTime: '1:00',
-        type: 'Gult kort',
+        type: 'yellowCard',
       },
       {
         id: 4,
@@ -279,8 +288,17 @@ export default {
         matchEventsId: 1,
         playerId: 1,
         matchTime: '15:24',
+        penaltyTime: '2:00',
+        type: 'suspension',
+      },
+      {
+        id: 5,
+        teamId: 1,
+        matchEventsId: 1,
+        playerId: 5,
+        matchTime: '15:24',
         penaltyTime: '1:00',
-        type: 'Gult kort',
+        type: 'disqualification',
       },
     ],
     gymnasticsMatch: {

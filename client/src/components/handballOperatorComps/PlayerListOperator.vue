@@ -104,10 +104,11 @@ export default {
         team = 'awayteam';
       }
       if(this.activePlayer && this.activePenalty) {
-        /* console.log('setActionType', this.activePlayer, this.activePenalty); */
+        console.log('setActionType', this.activePlayer, this.activePenalty);
+        this.$store.commit('setActionType', {player: this.activePlayer, type: this.activePenalty, team: team});
+
         switch(this.activePenalty) {
           case 'Varning':
-            this.$store.commit('setActionType', {player: this.activePlayer, type: this.activePenalty, team: team});
             this.activePlayer.Warnings.push('*');
             if(this.activePlayer.Warnings.length == 3) {
               this.playerlist.splice((this.playerlist.findIndex(player => player === this.activePlayer)), 1);
@@ -118,7 +119,6 @@ export default {
             this.activePlayer = null;
             break;
           case 'Gult kort':
-            this.$store.commit('setActionType', {player: this.activePlayer, type: this.activePenalty, team: team});
             this.activePlayer.Warnings.push('*');
             if(this.activePlayer.Warnings.length == 3) {
               this.playerlist.splice((this.playerlist.findIndex(player => player === this.activePlayer)), 1);
@@ -127,13 +127,11 @@ export default {
             this.activePlayer = null;
             break;
           case 'Rött kort':
-            this.$store.commit('setActionType', {player: this.activePlayer, type: this.activePenalty, team: team});
             this.playerlist.splice((this.playerlist.findIndex(player => player === this.activePlayer)), 1);
             this.activePenalty = '';
             this.activePlayer = null;
             break;
           case 'Utvisning':
-            this.$store.commit('setActionType', {player: this.activePlayer, type: this.activePenalty, team: team});
             this.playerlist.splice((this.playerlist.findIndex(player => player === this.activePlayer)), 1);
             this.activePenalty = '';
             this.activePlayer = null;
@@ -151,6 +149,9 @@ export default {
         player: player
       } */
       if(this.activePlayer && this.activePenalty) {
+        console.log('setActionType', this.activePlayer, this.activePenalty);
+        this.$store.commit('setActionType', {player: this.activePlayer, type: this.activePenalty, team: this.team.Hometeam ? 'hometeam' : 'awayteam'});
+
         /* console.log('setActionType', this.activePlayer, this.activePenalty); */
         /* if(['Varning'].includes(this.activePenalty)) {
           this.$store.commit('setActionType', {player: this.activePlayer, type: this.activePenalty, team: this.team.Hometeam ? 'hometeam' : 'awayteam'});
@@ -160,7 +161,6 @@ export default {
         } */
         switch(this.activePenalty) {
           case 'Varning':
-            this.$store.commit('setActionType', {player: this.activePlayer, type: this.activePenalty, team: this.team.Hometeam ? 'hometeam' : 'awayteam'});
             this.activePlayer.Warnings.push('*');
             if(this.activePlayer.Warnings.length == 3) {
               this.playerlist.splice((this.playerlist.findIndex(player => player === this.activePlayer)), 1);
@@ -169,7 +169,6 @@ export default {
             this.activePlayer = null;
             break;
           case 'Gult kort':
-            this.$store.commit('setActionType', {player: this.activePlayer, type: this.activePenalty, team: this.team.Hometeam ? 'hometeam' : 'awayteam'});
             this.activePlayer.Warnings.push('*');
             if(this.activePlayer.Warnings.length == 3) {
               this.playerlist.splice((this.playerlist.findIndex(player => player === this.activePlayer)), 1);
@@ -178,13 +177,11 @@ export default {
             this.activePlayer = null;
             break;
           case 'Rött kort':
-            this.$store.commit('setActionType', {player: this.activePlayer, type: this.activePenalty, team: this.team.Hometeam ? 'hometeam' : 'awayteam'});
             this.playerlist.splice((this.playerlist.findIndex(player => player === this.activePlayer)), 1);
             this.activePenalty = '';
             this.activePlayer = null;
             break;
           case 'Utvisning':
-            this.$store.commit('setActionType', {player: this.activePlayer, type: this.activePenalty, team: this.team.Hometeam ? 'hometeam' : 'awayteam'});
             this.playerlist.splice((this.playerlist.findIndex(player => player === this.activePlayer)), 1);
             this.activePenalty = '';
             this.activePlayer = null;

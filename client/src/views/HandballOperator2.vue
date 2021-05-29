@@ -32,7 +32,7 @@
 <script>
 import ScoreboardPreview from '../components/handballOperatorComps/ScoreboardPreview.vue'
 import HandballOperatorBtns from '../components/handballOperatorComps/HandballOperatorBtns.vue'
-import PlayerListOperator from '../components/handballOperatorComps/PlayerListOperator.vue'
+import PlayerListOperator from '../components/handballOperatorComps/PlayerListOperator2.vue'
 
 export default {
   components: {
@@ -80,7 +80,8 @@ export default {
               TeamPlayers: this.getPlayers(teams[j].id),
               SentOffs: [],
               Logo: teams[j].logo,
-              Hometeam: true
+              Hometeam: true,
+              id: teams[j].id
             };
           }
         }
@@ -98,7 +99,8 @@ export default {
               TeamName: teams[j].name,
               TeamPlayers: this.getPlayers(teams[j].id),
               Logo: teams[j].logo,
-              Hometeam: false
+              Hometeam: false,
+              id: teams[j].id
             };
           }
         }

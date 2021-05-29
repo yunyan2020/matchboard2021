@@ -46,9 +46,11 @@ export default {
     margin-top: 5vh; 
     box-shadow: 0px 0px 10px 7px rgb(74, 213, 255);
   }
+  /*
   :deep(.sb-container) {
-     /* height: 40vh;  */
+     height: 40vh;
   }
+  */
 
   :deep(.logo-left img){
     /* margin-top: 2vh; */
