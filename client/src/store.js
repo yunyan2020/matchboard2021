@@ -22,46 +22,73 @@ const mutations = {
     console.log(arg);
     let player = arg.player;
     let type = arg.type;
+    let teamId =""
+    let matchEventsId =""
+    if (arg.team == 'hometeam'){
+      teamId = state.teams.filter(t=>t.homeTeam ==true)[0].id
+    }
+    else{
+      teamId = state.teams.filter(t=>t.homeTeam ==false)[0].id
+    }
+    matchEventsId = state.matchEvents.filter(m=>m.currentMatchEvent==true)[0].id
+    matchTime = state.matchevents.filter(m=>m.currentMatchEvent==true)[0].time
+    console.log('matchTime',matchTime)
     switch(type) {
       case '+':
         if(arg.team == 'hometeam') {
           state.match.score.hometeam++;
           state.score.push({
-            matchEventsId: 1,
-            teamId: player.teamId,
+            matchEventsId: matchEventsId,
+            teamId: teamId,
             points: 1,
             playerId: player.id,
             player: player,
-            time: "17:45"
+            time: matchTime
           });
           break;
         }else {
           state.match.score.awayteam++;
           state.score.push({
             matchEventsId: 1,
-            teamId: player.teamId,
+            teamId: teamId,
             points: 1,
             playerId: player.id,
             player: player,
-            time: "17:45"
+            time: matchTime
           });
           break;
         }
       case '-':
         if(arg.team == 'hometeam') {
-          state.match.score.hometeam--;
+          state.match.score.hometeam--; 
+          for(let i=state.scores.length; i>0; i--){
+            let score = state.scores[i-1]      
+            if(score.teamId !== undefined && score.teamId === teamId){
+              state.scores.splice(i-1,1)
+              break;
+            }
+          }
+          this.dispatch('saveStateToStorage')        
           break;
         }else {
-          state.match.score.awayteam--;
+          state.match.score.awayteam--; 
+          for(let i=state.scores.length; i>0; i--){
+            let score = state.scores[i-1]      
+            if(score.teamId !== undefined && score.teamId === teamId){
+              state.scores.splice(i-1,1)
+              break;
+            }
+          }
+          this.dispatch('saveStateToStorage')         
           break;
         }
       case 'Varning':
         if(player.Warnings.length == 2 && arg.team == 'hometeam') {
           state.penalties.push({
-            teamId: player.teamId,
-            matchEventsId: 1, // change to actual later on
+            teamId:teamId,
+            matchEventsId: matchEventsId, // change to actual later on
             playerId: player.id,
-            matchTime: '10:24', // matchEvents.timer.time
+            matchTime: matchTime, // matchEvents.timer.time
             penaltyTime: '1:00', // change to actual
             type: type,
           });
@@ -69,10 +96,10 @@ const mutations = {
           break;
         }else if(player.Warnings.length == 2 && arg.team == 'awayteam'){
           state.penalties.push({
-            teamId: player.teamId,
-            matchEventsId: 1, // change to actual later on
+            teamId: teamId,
+            matchEventsId: matchEventsId, // change to actual later on
             playerId: player.id,
-            matchTime: '10:24', // matchEvents.timer.time
+            matchTime: matchTime, // matchEvents.timer.time
             penaltyTime: '1:00', // change to actual
             type: type,
           });
@@ -80,10 +107,10 @@ const mutations = {
           break;
         }else {
           state.penalties.push({
-            teamId: player.teamId,
-            matchEventsId: 1, // change to actual later on
+            teamId: teamId,
+            matchEventsId: matchEventsId, // change to actual later on
             playerId: player.id,
-            matchTime: '10:24', // matchEvents.timer.time
+            matchTime: matchTime, // matchEvents.timer.time
             penaltyTime: '1:00', // change to actual
             type: type,
           });
@@ -92,10 +119,10 @@ const mutations = {
       case 'Gult kort':
         if(player.Warnings.length == 2 && arg.team == 'hometeam') {
           state.penalties.push({
-            teamId: player.teamId,
-            matchEventsId: 1, // change to actual later on
+            teamId: teamId,
+            matchEventsId: matchEventsId, // change to actual later on
             playerId: player.id,
-            matchTime: '10:24', // matchEvents.timer.time
+            matchTime: matchTime, // matchEvents.timer.time
             penaltyTime: '1:00', // change to actual
             type: type,
           });
@@ -103,10 +130,10 @@ const mutations = {
           break;
         }else if(player.Warnings.length == 2 && arg.team == 'awayteam'){
           state.penalties.push({
-            teamId: player.teamId,
-            matchEventsId: 1, // change to actual later on
+            teamId: teamId,
+            matchEventsId: matchEventsId, // change to actual later on
             playerId: player.id,
-            matchTime: '10:24', // matchEvents.timer.time
+            matchTime: matchTime, // matchEvents.timer.time
             penaltyTime: '1:00', // change to actual
             type: type,
           });
@@ -114,10 +141,10 @@ const mutations = {
           break;
         }else {
           state.penalties.push({
-            teamId: player.teamId,
-            matchEventsId: 1, // change to actual later on
+            teamId: teamId,
+            matchEventsId: matchEventsId, // change to actual later on
             playerId: player.id,
-            matchTime: '10:24', // matchEvents.timer.time
+            matchTime: matchTime, // matchEvents.timer.time
             penaltyTime: '1:00', // change to actual
             type: type,
           });
@@ -165,14 +192,24 @@ const mutations = {
   setPlayer(state, arg) {
     let player = arg.player;
     let type = arg.type;
+    let teamId =""
+    let matchEventsId =""
+    if (arg.team == 'hometeam'){
+      teamId = state.teams.filter(t=>t.homeTeam ==true)[0].id
+    }
+    else{
+      teamId = state.teams.filter(t=>t.homeTeam ==false)[0].id
+    }
+    matchEventsId = state.matchEvents.filter(m=>m.currentMatchEvent==true)[0].id
+    matchTime = state.matchevents.filter(m=>m.currentMatchEvent==true)[0].time
     switch(type) {
       case 'Varning':
         if(player.Warnings.length == 2 && arg.team == 'hometeam') {
           state.penalties.push({
-            teamId: player.teamId,
-            matchEventsId: 1, // change to actual later on
+            teamId: teamId,
+            matchEventsId: matchEventsId, // change to actual later on
             playerId: player.id,
-            matchTime: '10:24', // matchEvents.timer.time
+            matchTime: matchTime, // matchEvents.timer.time
             penaltyTime: '1:00', // change to actual
             type: type,
           });
@@ -180,10 +217,10 @@ const mutations = {
           break;
         }else if(player.Warnings.length == 2 && arg.team == 'awayteam'){
           state.penalties.push({
-            teamId: player.teamId,
-            matchEventsId: 1, // change to actual later on
+            teamId: teamId,
+            matchEventsId: matchEventsId, // change to actual later on
             playerId: player.id,
-            matchTime: '10:24', // matchEvents.timer.time
+            matchTime: matchTime, // matchEvents.timer.time
             penaltyTime: '1:00', // change to actual
             type: type,
           });
@@ -191,10 +228,10 @@ const mutations = {
           break;
         }else {
           state.penalties.push({
-            teamId: player.teamId,
-            matchEventsId: 1, // change to actual later on
+            teamId: teamId,
+            matchEventsId: matchEventsId, // change to actual later on
             playerId: player.id,
-            matchTime: '10:24', // matchEvents.timer.time
+            matchTime: matchTime, // matchEvents.timer.time
             penaltyTime: '1:00', // change to actual
             type: type,
           });
@@ -203,10 +240,10 @@ const mutations = {
       case 'Gult kort':
         if(player.Warnings.length == 2 && arg.team == 'hometeam') {
           state.penalties.push({
-            teamId: player.teamId,
-            matchEventsId: 1, // change to actual later on
+            teamId: teamId,
+            matchEventsId: matchEventsId, // change to actual later on
             playerId: player.id,
-            matchTime: '10:24', // matchEvents.timer.time
+            matchTime: matchTime, // matchEvents.timer.time
             penaltyTime: '1:00', // change to actual
             type: type,
           });
@@ -214,10 +251,10 @@ const mutations = {
           break;
         }else if(player.Warnings.length == 2 && arg.team == 'awayteam'){
           state.penalties.push({
-            teamId: player.teamId,
-            matchEventsId: 1, // change to actual later on
+            teamId: teamId,
+            matchEventsId: matchEventsId, // change to actual later on
             playerId: player.id,
-            matchTime: '10:24', // matchEvents.timer.time
+            matchTime: matchTime, // matchEvents.timer.time
             penaltyTime: '1:00', // change to actual
             type: type,
           });
@@ -225,10 +262,10 @@ const mutations = {
           break;
         }else {
           state.penalties.push({
-            teamId: player.teamId,
-            matchEventsId: 1, // change to actual later on
+            teamId: teamId,
+            matchEventsId: matchEventsId, // change to actual later on
             playerId: player.id,
-            matchTime: '10:24', // matchEvents.timer.time
+            matchTime: matchTime, // matchEvents.timer.time
             penaltyTime: '1:00', // change to actual
             type: type,
           });
